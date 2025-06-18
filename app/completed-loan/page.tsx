@@ -79,7 +79,7 @@ export default function CompletedLoanPage() {
 
         {/* Loan Progress Section */}
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Loan Progress</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Loan Progress</h2>
           
           <div className="bg-white border border-gray-200 rounded-xl p-8">
             <div className="flex items-center justify-between mb-6">
@@ -123,7 +123,7 @@ export default function CompletedLoanPage() {
 
         {/* Loan Overview Section */}
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Loan Overview</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Loan Overview</h2>
 
           {/* Loan Details Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -424,7 +424,7 @@ export default function CompletedLoanPage() {
 
         {/* Debit Order Details Section */}
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Debit Order Details</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Debit Order Details</h2>
           
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -497,7 +497,7 @@ export default function CompletedLoanPage() {
 
         {/* Audit Trail Section */}
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Audit Trail</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Audit Trail</h2>
           
           <div className="relative">
             {/* Timeline line - connects through all icons */}
@@ -600,7 +600,7 @@ export default function CompletedLoanPage() {
 
         {/* Contract Document Section */}
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Contract Document</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Contract Document</h2>
           
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
             <div className="flex items-center justify-between">

@@ -23,6 +23,27 @@ export default function PendingBidPage() {
           <p className="text-gray-500">You have 5 offers for your pending bid</p>
         </div>
 
+        {/* Status Card */}
+        <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 mb-10">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mr-4">
+                <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">Reviewing Offers</h3>
+                <p className="text-sm text-orange-600">Your bid is receiving offers from multiple lenders</p>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className="text-2xl font-bold text-gray-900">5</p>
+              <p className="text-sm text-gray-500">Offers Received</p>
+            </div>
+          </div>
+        </div>
+
         {/* Bid Details Section */}
         <div className="mb-10">
           <h2 className="text-lg font-semibold text-gray-900 mb-6">Bid Details</h2>

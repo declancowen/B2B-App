@@ -60,31 +60,31 @@ export default function ApprovedBidPage() {
           <p className="text-gray-600">View the details of your approved bid.</p>
         </div>
 
+        {/* Status Card */}
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-10">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">Awaiting Dispersement</h3>
+                <p className="text-sm text-blue-600">Your loan is approved and ready for disbursement</p>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className="text-2xl font-bold text-gray-900">R10,000,000</p>
+              <p className="text-sm text-gray-500">Loan Amount</p>
+            </div>
+          </div>
+        </div>
+
         {/* Bid Overview Section */}
         <div className="mb-10">
           <h2 className="text-lg font-semibold text-gray-900 mb-6">Bid Overview</h2>
           
-          {/* Status Card */}
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900">Awaiting Dispersement</h3>
-                  <p className="text-sm text-blue-600">Your loan is approved and ready for disbursement</p>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="text-2xl font-bold text-gray-900">R10,000,000</p>
-                <p className="text-sm text-gray-500">Loan Amount</p>
-              </div>
-            </div>
-          </div>
-
           {/* Loan Details Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <div className="bg-white border border-gray-200 rounded-lg p-6">
@@ -395,93 +395,66 @@ export default function ApprovedBidPage() {
           
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Bank Account Information */}
+              {/* Bank Details */}
               <div>
-                <h3 className="text-base font-semibold text-gray-900 mb-4 flex items-center">
-                  <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center mr-3">
-                    <svg className="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                    </svg>
-                  </div>
-                  Bank Account Information
-                </h3>
+                <h3 className="text-base font-semibold text-gray-900 mb-4">Bank Account Details</h3>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-sm font-medium text-gray-500">Bank</p>
-                    <p className="text-base text-gray-900">Standard Bank</p>
+                    <p className="text-sm text-gray-500">Account Holder</p>
+                    <p className="text-base font-medium text-gray-900">ABC Construction (Pty) Ltd</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-500">Branch Code</p>
-                    <p className="text-base text-gray-900 font-mono">051001</p>
+                    <p className="text-sm text-gray-500">Bank</p>
+                    <p className="text-base font-medium text-gray-900">Standard Bank</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-500">Account Holder</p>
-                    <p className="text-base text-gray-900">ABC Construction (Pty) Ltd</p>
+                    <p className="text-sm text-gray-500">Account Number</p>
+                    <p className="text-base font-medium text-gray-900">••••••••••1234</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-500">Account Number</p>
-                    <p className="text-base text-gray-900">••••••••••1234</p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500">Account Type</p>
-                    <p className="text-base text-gray-900">Business Current Account</p>
+                    <p className="text-sm text-gray-500">Account Type</p>
+                    <p className="text-base font-medium text-gray-900">Business Current Account</p>
                   </div>
                 </div>
               </div>
 
-              {/* Debit Order Information */}
+              {/* Debit Order Details */}
               <div>
-                <h3 className="text-base font-semibold text-gray-900 mb-4 flex items-center">
-                  <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center mr-3">
-                    <svg className="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  Debit Order Information
-                </h3>
+                <h3 className="text-base font-semibold text-gray-900 mb-4">Debit Order Information</h3>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-sm font-medium text-gray-500">Monthly Debit Amount</p>
-                    <p className="text-lg font-bold text-gray-900">R832,572</p>
+                    <p className="text-sm text-gray-500">Monthly Payment</p>
+                    <p className="text-xl font-bold text-gray-900">R872,198</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-500">Debit Date</p>
-                    <p className="text-base text-gray-900">15th of each month</p>
+                    <p className="text-sm text-gray-500">First Debit Date</p>
+                    <p className="text-base font-medium text-gray-900">15 November 2023</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-500">First Debit Date</p>
-                    <p className="text-base text-gray-900">November 15, 2023</p>
+                    <p className="text-sm text-gray-500">Last Debit Date</p>
+                    <p className="text-base font-medium text-gray-900">15 October 2024</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-500">Final Debit Date</p>
-                    <p className="text-base text-gray-900">October 15, 2024</p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500">Status</p>
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full mr-2"></div>
-                      <span className="text-base text-gray-600 font-medium">Pending</span>
-                    </div>
+                    <p className="text-sm text-gray-500">Debit Order Reference</p>
+                    <p className="text-base font-medium text-gray-900">MML-DO-234567</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Important Notice */}
-            <div className="mt-8 p-4 bg-gray-100 border border-gray-300 rounded-lg">
-              <div className="flex items-start">
-                <div className="w-5 h-5 text-gray-600 mr-3 mt-0.5">
-                  <svg fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
+            {/* Status Banner */}
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-gray-400 rounded-full mr-3"></div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">Debit Order Status: Pending</p>
+                    <p className="text-xs text-gray-500">Awaiting disbursement</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-gray-800 mb-1">Important Notice</h4>
-                  <p className="text-sm text-gray-700">
-                    Please ensure sufficient funds are available in your account before each debit date. 
-                    Failed debit orders may result in additional fees and could affect your credit rating.
-                  </p>
-                </div>
+                <button className="bg-black text-white text-sm px-4 py-2 rounded-md hover:bg-gray-800 font-medium">
+                  Manage Debit Order
+                </button>
               </div>
             </div>
           </div>
@@ -489,7 +462,7 @@ export default function ApprovedBidPage() {
 
         {/* Audit Trail Section */}
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Audit Trail</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Audit Trail</h2>
           
           <div className="relative">
             {/* Timeline line - connects through all icons */}
@@ -526,7 +499,7 @@ export default function ApprovedBidPage() {
               <div className="flex items-start">
                 <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
                   <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
                 </div>
                 <div className="pt-2">
@@ -539,12 +512,25 @@ export default function ApprovedBidPage() {
               <div className="flex items-start">
                 <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
                   <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
                 </div>
                 <div className="pt-2">
                   <p className="text-lg font-semibold text-gray-900">Lender Contract Signed</p>
                   <p className="text-gray-500 mt-1">October 17, 2023</p>
+                </div>
+              </div>
+
+              {/* Debit Order Authorization - Pending */}
+              <div className="flex items-start">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
+                  <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <div className="pt-2">
+                  <p className="text-lg font-semibold text-gray-400">Debit Order Authorization</p>
+                  <p className="text-gray-400 mt-1">Pending</p>
                 </div>
               </div>
 
@@ -557,6 +543,32 @@ export default function ApprovedBidPage() {
                 </div>
                 <div className="pt-2">
                   <p className="text-lg font-semibold text-gray-400">Loan Dispersed</p>
+                  <p className="text-gray-400 mt-1">Pending</p>
+                </div>
+              </div>
+
+              {/* Future - Loan in Progress */}
+              <div className="flex items-start">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
+                  <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="pt-2">
+                  <p className="text-lg font-semibold text-gray-400">Loan in Progress</p>
+                  <p className="text-gray-400 mt-1">Pending</p>
+                </div>
+              </div>
+
+              {/* Future - Loan Complete */}
+              <div className="flex items-start">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
+                  <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="pt-2">
+                  <p className="text-lg font-semibold text-gray-400">Loan Complete</p>
                   <p className="text-gray-400 mt-1">Pending</p>
                 </div>
               </div>

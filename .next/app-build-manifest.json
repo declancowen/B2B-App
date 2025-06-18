@@ -25,6 +25,21 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/completed-loan/page.js"
+    ],
+    "/approved-bid/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/approved-bid/page.js"
+    ],
+    "/pending-bid/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/pending-bid/page.js"
+    ],
+    "/bid-offer/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/bid-offer/page.js"
     ]
   }
 }
