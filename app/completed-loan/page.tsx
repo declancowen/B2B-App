@@ -220,16 +220,16 @@ export default function CompletedLoanPage() {
                     bottom: 40,
                   }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                     <XAxis 
                       dataKey="month" 
                       domain={[0, 12]}
                       type="number"
                       ticks={[0, 2, 4, 6, 8, 10, 12]}
-                      axisLine={false}
+                      axisLine={true}
                       tickLine={false}
                       tick={{ fontSize: 14, fill: '#6b7280' }}
                       dy={10}
+                      stroke="#e5e7eb"
                     />
                     <YAxis 
                       domain={[0, 20]}
