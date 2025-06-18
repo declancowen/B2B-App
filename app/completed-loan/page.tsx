@@ -54,12 +54,9 @@ export default function CompletedLoanPage() {
           <p className="text-gray-600">View the details of your completed loan.</p>
         </div>
 
-        {/* Loan Overview Section */}
+        {/* Status Card */}
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Loan Overview</h2>
-          
-          {/* Status Card */}
-          <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-8">
+          <div className="bg-gray-50 border border-gray-200 rounded-xl p-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mr-4">
@@ -78,6 +75,55 @@ export default function CompletedLoanPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Loan Progress Section */}
+        <div className="mb-10">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Loan Progress</h2>
+          
+          <div className="bg-white border border-gray-200 rounded-xl p-8">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">Payment Progress</h3>
+                <p className="text-sm text-gray-600">6 of 6 payments completed</p>
+              </div>
+              <div className="text-right">
+                <p className="text-2xl font-bold text-black">100%</p>
+                <p className="text-sm text-gray-500">Complete</p>
+              </div>
+            </div>
+            
+            {/* Progress Bar */}
+            <div className="mb-6">
+              <div className="w-full bg-gray-200 rounded-full h-3">
+                <div className="bg-black h-3 rounded-full" style={{ width: '100%' }}></div>
+              </div>
+            </div>
+            
+            {/* Progress Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                <p className="text-sm text-gray-600 mb-1">Total Paid</p>
+                <p className="text-xl font-bold text-gray-900">R22,098,184</p>
+                <p className="text-xs text-gray-600">Principal + Interest</p>
+              </div>
+              <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                <p className="text-sm text-gray-600 mb-1">Final Balance</p>
+                <p className="text-xl font-bold text-gray-900">R0</p>
+                <p className="text-xs text-gray-600">Loan Completed</p>
+              </div>
+              <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                <p className="text-sm text-gray-600 mb-1">Completion Date</p>
+                <p className="text-xl font-bold text-gray-900">15 Apr 2024</p>
+                <p className="text-xs text-gray-600">Final Payment</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Loan Overview Section */}
+        <div className="mb-10">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Loan Overview</h2>
 
           {/* Loan Details Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -283,29 +329,29 @@ export default function CompletedLoanPage() {
                     <Line 
                       type="monotone" 
                       dataKey="balance" 
-                      stroke="#000000" 
+                      stroke="#191c2b" 
                       strokeWidth={3}
                       name="Balance"
-                      dot={{ fill: '#000000', strokeWidth: 2, r: 3, stroke: '#000000' }}
-                      activeDot={{ r: 5, fill: '#000000', stroke: '#ffffff', strokeWidth: 2 }}
+                      dot={{ fill: '#191c2b', strokeWidth: 2, r: 3, stroke: '#191c2b' }}
+                      activeDot={{ r: 5, fill: '#191c2b', stroke: '#ffffff', strokeWidth: 2 }}
                     />
                     <Line 
                       type="monotone" 
                       dataKey="interest" 
-                      stroke="#6b7280" 
+                      stroke="#43c149" 
                       strokeWidth={3}
                       name="Interest"
-                      dot={{ fill: '#6b7280', strokeWidth: 2, r: 3, stroke: '#6b7280' }}
-                      activeDot={{ r: 5, fill: '#6b7280', stroke: '#ffffff', strokeWidth: 2 }}
+                      dot={{ fill: '#43c149', strokeWidth: 2, r: 3, stroke: '#43c149' }}
+                      activeDot={{ r: 5, fill: '#43c149', stroke: '#ffffff', strokeWidth: 2 }}
                     />
                     <Line 
                       type="monotone" 
                       dataKey="principal" 
-                      stroke="#d1d5db" 
+                      stroke="#66f770" 
                       strokeWidth={3}
                       name="Principal"
-                      dot={{ fill: '#d1d5db', strokeWidth: 2, r: 3, stroke: '#d1d5db' }}
-                      activeDot={{ r: 5, fill: '#d1d5db', stroke: '#ffffff', strokeWidth: 2 }}
+                      dot={{ fill: '#66f770', strokeWidth: 2, r: 3, stroke: '#66f770' }}
+                      activeDot={{ r: 5, fill: '#66f770', stroke: '#ffffff', strokeWidth: 2 }}
                     />
                 </LineChart>
               </ResponsiveContainer>

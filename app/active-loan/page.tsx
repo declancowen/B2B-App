@@ -21,11 +21,21 @@ export default function ActiveLoanPage() {
   ];
 
   // Prepare data for Recharts (convert to millions)
+  // Split data into paid and remaining periods
+  const paidMonths = 3; // We've paid 3 months
+  
   const chartData = actualSchedule.map(item => ({
     month: item.month,
     balance: item.remainingBalance / 1000000, // Remaining Loan Balance
     interest: item.cumulativeInterest / 1000000, // Cumulative Interest Paid
-    principal: item.cumulativePrincipal / 1000000 // Cumulative Principal Paid
+    principal: item.cumulativePrincipal / 1000000, // Cumulative Principal Paid
+    // Split data for paid vs remaining periods
+    balancePaid: item.month <= paidMonths ? item.remainingBalance / 1000000 : null,
+    interestPaid: item.month <= paidMonths ? item.cumulativeInterest / 1000000 : null,
+    principalPaid: item.month <= paidMonths ? item.cumulativePrincipal / 1000000 : null,
+    balanceRemaining: item.month >= paidMonths ? item.remainingBalance / 1000000 : null,
+    interestRemaining: item.month >= paidMonths ? item.cumulativeInterest / 1000000 : null,
+    principalRemaining: item.month >= paidMonths ? item.cumulativePrincipal / 1000000 : null
   }));
 
   // Calculate schedule for summary statistics (using actual data)
@@ -54,12 +64,9 @@ export default function ActiveLoanPage() {
           <p className="text-gray-600">View the details of your active loan.</p>
         </div>
 
-        {/* Loan Overview Section */}
+        {/* Status Card */}
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Loan Overview</h2>
-          
-          {/* Status Card */}
-          <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
+          <div className="bg-green-50 border border-green-200 rounded-xl p-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4">
@@ -78,6 +85,55 @@ export default function ActiveLoanPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Loan Progress Section */}
+        <div className="mb-10">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Loan Progress</h2>
+          
+          <div className="bg-white border border-gray-200 rounded-xl p-8">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">Payment Progress</h3>
+                <p className="text-sm text-gray-600">3 of 6 payments completed</p>
+              </div>
+              <div className="text-right">
+                <p className="text-2xl font-bold text-black">50%</p>
+                <p className="text-sm text-gray-500">Complete</p>
+              </div>
+            </div>
+            
+            {/* Progress Bar */}
+            <div className="mb-6">
+              <div className="w-full bg-gray-200 rounded-full h-3">
+                <div className="bg-black h-3 rounded-full" style={{ width: '50%' }}></div>
+              </div>
+            </div>
+            
+            {/* Progress Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                <p className="text-sm text-gray-600 mb-1">Amount Paid</p>
+                <p className="text-xl font-bold text-gray-900">R1,048,092</p>
+                <p className="text-xs text-gray-600">Principal + Interest</p>
+              </div>
+              <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                <p className="text-sm text-gray-600 mb-1">Remaining Balance</p>
+                <p className="text-xl font-bold text-gray-900">R980,980</p>
+                <p className="text-xs text-gray-600">After 3 payments</p>
+              </div>
+              <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                <p className="text-sm text-gray-600 mb-1">Next Payment</p>
+                <p className="text-xl font-bold text-gray-900">R349,364</p>
+                <p className="text-xs text-gray-600">Due: 15 Jan 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Loan Overview Section */}
+        <div className="mb-10">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-8">Loan Overview</h2>
 
           {/* Loan Details Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -248,6 +304,10 @@ export default function ActiveLoanPage() {
                       height={36}
                       content={(props) => {
                         const { payload } = props;
+                        // Filter out the "Remaining" entries
+                        const filteredPayload = payload?.filter(entry => 
+                          entry.value && !entry.value.toString().includes('Remaining')
+                        );
                         return (
                           <div style={{ 
                             display: 'flex', 
@@ -255,7 +315,7 @@ export default function ActiveLoanPage() {
                             paddingTop: '20px',
                             gap: '24px'
                           }}>
-                            {payload?.map((entry, index) => (
+                            {filteredPayload?.map((entry, index) => (
                               <div key={index} style={{ 
                                 display: 'flex', 
                                 alignItems: 'center', 
@@ -280,32 +340,68 @@ export default function ActiveLoanPage() {
                         );
                       }}
                     />
+                    {/* Paid period lines (full opacity) */}
                     <Line 
                       type="monotone" 
-                      dataKey="balance" 
-                      stroke="#000000" 
+                      dataKey="balancePaid" 
+                      stroke="#191c2b" 
                       strokeWidth={3}
                       name="Balance"
-                      dot={{ fill: '#000000', strokeWidth: 2, r: 3, stroke: '#000000' }}
-                      activeDot={{ r: 5, fill: '#000000', stroke: '#ffffff', strokeWidth: 2 }}
+                      dot={{ fill: '#191c2b', strokeWidth: 2, r: 3, stroke: '#191c2b' }}
+                      activeDot={{ r: 5, fill: '#191c2b', stroke: '#ffffff', strokeWidth: 2 }}
+                      connectNulls={false}
                     />
                     <Line 
                       type="monotone" 
-                      dataKey="interest" 
-                      stroke="#6b7280" 
+                      dataKey="interestPaid" 
+                      stroke="#43c149" 
                       strokeWidth={3}
                       name="Interest"
-                      dot={{ fill: '#6b7280', strokeWidth: 2, r: 3, stroke: '#6b7280' }}
-                      activeDot={{ r: 5, fill: '#6b7280', stroke: '#ffffff', strokeWidth: 2 }}
+                      dot={{ fill: '#43c149', strokeWidth: 2, r: 3, stroke: '#43c149' }}
+                      activeDot={{ r: 5, fill: '#43c149', stroke: '#ffffff', strokeWidth: 2 }}
+                      connectNulls={false}
                     />
                     <Line 
                       type="monotone" 
-                      dataKey="principal" 
-                      stroke="#d1d5db" 
+                      dataKey="principalPaid" 
+                      stroke="#66f770" 
                       strokeWidth={3}
                       name="Principal"
-                      dot={{ fill: '#d1d5db', strokeWidth: 2, r: 3, stroke: '#d1d5db' }}
-                      activeDot={{ r: 5, fill: '#d1d5db', stroke: '#ffffff', strokeWidth: 2 }}
+                      dot={{ fill: '#66f770', strokeWidth: 2, r: 3, stroke: '#66f770' }}
+                      activeDot={{ r: 5, fill: '#66f770', stroke: '#ffffff', strokeWidth: 2 }}
+                      connectNulls={false}
+                    />
+                    
+                    {/* Remaining period lines (reduced opacity) - no legend entries */}
+                    <Line 
+                      type="monotone" 
+                      dataKey="balanceRemaining" 
+                      stroke="#191c2b" 
+                      strokeWidth={3}
+                      strokeOpacity={0.3}
+                      dot={{ fill: '#191c2b', fillOpacity: 0.3, strokeWidth: 2, r: 3, stroke: '#191c2b', strokeOpacity: 0.3 }}
+                      activeDot={{ r: 5, fill: '#191c2b', fillOpacity: 0.3, stroke: '#ffffff', strokeWidth: 2 }}
+                      connectNulls={false}
+                    />
+                    <Line 
+                      type="monotone" 
+                      dataKey="interestRemaining" 
+                      stroke="#43c149" 
+                      strokeWidth={3}
+                      strokeOpacity={0.3}
+                      dot={{ fill: '#43c149', fillOpacity: 0.3, strokeWidth: 2, r: 3, stroke: '#43c149', strokeOpacity: 0.3 }}
+                      activeDot={{ r: 5, fill: '#43c149', fillOpacity: 0.3, stroke: '#ffffff', strokeWidth: 2 }}
+                      connectNulls={false}
+                    />
+                    <Line 
+                      type="monotone" 
+                      dataKey="principalRemaining" 
+                      stroke="#66f770" 
+                      strokeWidth={3}
+                      strokeOpacity={0.3}
+                      dot={{ fill: '#66f770', fillOpacity: 0.3, strokeWidth: 2, r: 3, stroke: '#66f770', strokeOpacity: 0.3 }}
+                      activeDot={{ r: 5, fill: '#66f770', fillOpacity: 0.3, stroke: '#ffffff', strokeWidth: 2 }}
+                      connectNulls={false}
                     />
                 </LineChart>
               </ResponsiveContainer>
