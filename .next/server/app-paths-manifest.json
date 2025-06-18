@@ -1,7 +1,7 @@
 {
-  "/loan-dashboard/page": "app/loan-dashboard/page.js",
-  "/active-loan/page": "app/active-loan/page.js",
-  "/bid-offer/page": "app/bid-offer/page.js",
   "/company-dashboard/page": "app/company-dashboard/page.js",
-  "/document-dashboard/page": "app/document-dashboard/page.js"
+  "/document-dashboard/page": "app/document-dashboard/page.js",
+  "/bid-dashboard/page": "app/bid-dashboard/page.js",
+  "/approved-bid/page": "app/approved-bid/page.js",
+  "/pending-bid/page": "app/pending-bid/page.js"
 }
