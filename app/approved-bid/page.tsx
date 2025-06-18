@@ -1,27 +1,29 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
 export default function ApprovedBidPage() {
   const router = useRouter()
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Actual amortization schedule data
   const loanAmount = 10000000; // R10M
   const actualSchedule = [
-    { month: 0, remainingBalance: 10000000, cumulativeInterest: 0, cumulativePrincipal: 0 },
-    { month: 1, remainingBalance: 9198635.51, cumulativeInterest: 70833.33, cumulativePrincipal: 801364.49 },
-    { month: 2, remainingBalance: 8391594.69, cumulativeInterest: 135990.33, cumulativePrincipal: 1608405.31 },
-    { month: 3, remainingBalance: 7578837.32, cumulativeInterest: 195430.79, cumulativePrincipal: 2421162.67 },
-    { month: 4, remainingBalance: 6760322.93, cumulativeInterest: 249114.22, cumulativePrincipal: 3239677.06 },
-    { month: 5, remainingBalance: 5936010.73, cumulativeInterest: 296999.84, cumulativePrincipal: 4063989.26 },
-    { month: 6, remainingBalance: 5105859.64, cumulativeInterest: 339046.58, cumulativePrincipal: 4894140.34 },
-    { month: 7, remainingBalance: 4269828.33, cumulativeInterest: 375213.09, cumulativePrincipal: 5730171.66 },
-    { month: 8, remainingBalance: 3427875.12, cumulativeInterest: 405457.71, cumulativePrincipal: 6572124.87 },
-    { month: 9, remainingBalance: 2579958.08, cumulativeInterest: 429738.49, cumulativePrincipal: 7420041.91 },
-    { month: 10, remainingBalance: 1726034.95, cumulativeInterest: 448013.19, cumulativePrincipal: 8273965.03 },
-    { month: 11, remainingBalance: 866063.21, cumulativeInterest: 460239.27, cumulativePrincipal: 9133936.77 },
-    { month: 12, remainingBalance: 0, cumulativeInterest: 466373.88, cumulativePrincipal: 9999999.98 }
+    { month: 0, monthlyPayment: 0, principalPaid: 0, interestPaid: 0, remainingBalance: 10000000, cumulativeInterest: 0, cumulativePrincipal: 0 },
+    { month: 1, monthlyPayment: 872197.82, principalPaid: 801364.49, interestPaid: 70833.33, remainingBalance: 9198635.51, cumulativeInterest: 70833.33, cumulativePrincipal: 801364.49 },
+    { month: 2, monthlyPayment: 872197.82, principalPaid: 807040.82, interestPaid: 65157, remainingBalance: 8391594.69, cumulativeInterest: 135990.33, cumulativePrincipal: 1608405.31 },
+    { month: 3, monthlyPayment: 872197.82, principalPaid: 812757.36, interestPaid: 59440.46, remainingBalance: 7578837.32, cumulativeInterest: 195430.79, cumulativePrincipal: 2421162.67 },
+    { month: 4, monthlyPayment: 872197.82, principalPaid: 818514.39, interestPaid: 53683.43, remainingBalance: 6760322.93, cumulativeInterest: 249114.22, cumulativePrincipal: 3239677.06 },
+    { month: 5, monthlyPayment: 872197.82, principalPaid: 824312.2, interestPaid: 47885.62, remainingBalance: 5936010.73, cumulativeInterest: 296999.84, cumulativePrincipal: 4063989.26 },
+    { month: 6, monthlyPayment: 872197.82, principalPaid: 830151.08, interestPaid: 42046.74, remainingBalance: 5105859.64, cumulativeInterest: 339046.58, cumulativePrincipal: 4894140.34 },
+    { month: 7, monthlyPayment: 872197.82, principalPaid: 836031.32, interestPaid: 36166.51, remainingBalance: 4269828.33, cumulativeInterest: 375213.09, cumulativePrincipal: 5730171.66 },
+    { month: 8, monthlyPayment: 872197.82, principalPaid: 841953.21, interestPaid: 30244.62, remainingBalance: 3427875.12, cumulativeInterest: 405457.71, cumulativePrincipal: 6572124.87 },
+    { month: 9, monthlyPayment: 872197.82, principalPaid: 847917.04, interestPaid: 24280.78, remainingBalance: 2579958.08, cumulativeInterest: 429738.49, cumulativePrincipal: 7420041.91 },
+    { month: 10, monthlyPayment: 872197.82, principalPaid: 853923.12, interestPaid: 18274.7, remainingBalance: 1726034.95, cumulativeInterest: 448013.19, cumulativePrincipal: 8273965.03 },
+    { month: 11, monthlyPayment: 872197.82, principalPaid: 859971.74, interestPaid: 12226.08, remainingBalance: 866063.21, cumulativeInterest: 460239.27, cumulativePrincipal: 9133936.77 },
+    { month: 12, monthlyPayment: 872197.82, principalPaid: 866063.21, interestPaid: 6134.61, remainingBalance: 0, cumulativeInterest: 466373.88, cumulativePrincipal: 9999999.98 }
   ];
 
   // Prepare data for Recharts (convert to millions)
@@ -151,6 +153,12 @@ export default function ApprovedBidPage() {
                   <h3 className="text-base font-semibold text-gray-900">Amortization for R10,000,000 Loan</h3>
                   <p className="text-sm text-gray-600">With 12-Month Term and 8.50% Interest Rate</p>
                 </div>
+                <button 
+                  onClick={() => setIsModalOpen(true)}
+                  className="px-4 py-2 bg-gray-200 text-black text-sm font-medium rounded-lg hover:bg-gray-300 transition-colors"
+                >
+                  Full Breakdown
+                </button>
               </div>
             </div>
               
@@ -583,6 +591,68 @@ export default function ApprovedBidPage() {
           </div>
         </div>
       </div>
+
+      {/* Modal for Full Breakdown */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg max-w-7xl w-full max-h-[90vh] overflow-hidden">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <h2 className="text-xl font-semibold text-gray-900">Full Amortization Breakdown</h2>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="p-6 overflow-auto max-h-[calc(90vh-120px)]">
+              <div className="overflow-x-auto">
+                <table className="min-w-full bg-white border border-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Payment Month</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Monthly Payment Amount (ZAR)</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Principal Paid (ZAR)</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Interest Paid (ZAR)</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Remaining Loan Balance (ZAR)</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Cumulative Interest Paid (ZAR)</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Cumulative Principal Paid (ZAR)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {actualSchedule.map((row, index) => (
+                      <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">{row.month}</td>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">
+                          {row.monthlyPayment.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">
+                          {row.principalPaid.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">
+                          {row.interestPaid.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">
+                          {row.remainingBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">
+                          {row.cumulativeInterest.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">
+                          {row.cumulativePrincipal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 } 

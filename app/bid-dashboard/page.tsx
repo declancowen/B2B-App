@@ -18,7 +18,10 @@ export default function BidDashboardPage() {
           <h1 className="text-xl font-semibold text-gray-900 mb-8">MoMoola</h1>
           
           <nav className="space-y-2">
-            <div className="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+            <div 
+              onClick={() => router.push('/loan-dashboard')}
+              className="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer"
+            >
               <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
@@ -57,9 +60,9 @@ export default function BidDashboardPage() {
       <div className="flex-1 p-8">
         <h1 className="text-2xl font-semibold text-gray-900 mb-8">Bids</h1>
         
-        {/* Approved Loans Section */}
+        {/* Approved Bids Section */}
         <div className="mb-10">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Approved Loans</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Approved Bids</h2>
           <div className="space-y-4">
           {/* Bridging Finance Loan */}
           <div 
@@ -107,13 +110,13 @@ export default function BidDashboardPage() {
           </div>
         </div>
 
-        {/* Pending Loans Section */}
+        {/* Pending Bids Section */}
         <div className="mb-10">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Pending Loans</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Pending Bids</h2>
           <div className="space-y-4">
             {/* Trade Finance Loan */}
           <div 
-            onClick={() => router.push('/pending-loan')}
+            onClick={() => router.push('/pending-bid')}
             className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer"
           >
             <div className="flex justify-between items-center mb-6">

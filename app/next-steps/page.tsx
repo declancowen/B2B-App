@@ -10,8 +10,7 @@ export default function NextStepsPage() {
   }
 
   const handleViewProgress = () => {
-    console.log('View progress clicked')
-    // Add navigation logic here if needed
+    router.push('/approved-bid')
   }
 
   return (
