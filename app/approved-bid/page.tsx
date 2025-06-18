@@ -420,7 +420,7 @@ export default function ApprovedBidPage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-500">Account Number</p>
-                    <p className="text-base text-gray-900 font-mono">****1234</p>
+                    <p className="text-base text-gray-900">••••••••••1234</p>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-500">Account Type</p>

@@ -8,22 +8,16 @@ export default function ActiveLoanPage() {
   const router = useRouter()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Actual amortization schedule data
-  const loanAmount = 10000000; // R10M
+  // Actual amortization schedule data for R2M, 6 months, 7.00% APR
+  const loanAmount = 2000000; // R2M
   const actualSchedule = [
-    { month: 0, monthlyPayment: 0, principalPaid: 0, interestPaid: 0, remainingBalance: 10000000, cumulativeInterest: 0, cumulativePrincipal: 0 },
-    { month: 1, monthlyPayment: 872197.82, principalPaid: 801364.49, interestPaid: 70833.33, remainingBalance: 9198635.51, cumulativeInterest: 70833.33, cumulativePrincipal: 801364.49 },
-    { month: 2, monthlyPayment: 872197.82, principalPaid: 807040.82, interestPaid: 65157, remainingBalance: 8391594.69, cumulativeInterest: 135990.33, cumulativePrincipal: 1608405.31 },
-    { month: 3, monthlyPayment: 872197.82, principalPaid: 812757.36, interestPaid: 59440.46, remainingBalance: 7578837.32, cumulativeInterest: 195430.79, cumulativePrincipal: 2421162.67 },
-    { month: 4, monthlyPayment: 872197.82, principalPaid: 818514.39, interestPaid: 53683.43, remainingBalance: 6760322.93, cumulativeInterest: 249114.22, cumulativePrincipal: 3239677.06 },
-    { month: 5, monthlyPayment: 872197.82, principalPaid: 824312.2, interestPaid: 47885.62, remainingBalance: 5936010.73, cumulativeInterest: 296999.84, cumulativePrincipal: 4063989.26 },
-    { month: 6, monthlyPayment: 872197.82, principalPaid: 830151.08, interestPaid: 42046.74, remainingBalance: 5105859.64, cumulativeInterest: 339046.58, cumulativePrincipal: 4894140.34 },
-    { month: 7, monthlyPayment: 872197.82, principalPaid: 836031.32, interestPaid: 36166.51, remainingBalance: 4269828.33, cumulativeInterest: 375213.09, cumulativePrincipal: 5730171.66 },
-    { month: 8, monthlyPayment: 872197.82, principalPaid: 841953.21, interestPaid: 30244.62, remainingBalance: 3427875.12, cumulativeInterest: 405457.71, cumulativePrincipal: 6572124.87 },
-    { month: 9, monthlyPayment: 872197.82, principalPaid: 847917.04, interestPaid: 24280.78, remainingBalance: 2579958.08, cumulativeInterest: 429738.49, cumulativePrincipal: 7420041.91 },
-    { month: 10, monthlyPayment: 872197.82, principalPaid: 853923.12, interestPaid: 18274.7, remainingBalance: 1726034.95, cumulativeInterest: 448013.19, cumulativePrincipal: 8273965.03 },
-    { month: 11, monthlyPayment: 872197.82, principalPaid: 859971.74, interestPaid: 12226.08, remainingBalance: 866063.21, cumulativeInterest: 460239.27, cumulativePrincipal: 9133936.77 },
-    { month: 12, monthlyPayment: 872197.82, principalPaid: 866063.21, interestPaid: 6134.61, remainingBalance: 0, cumulativeInterest: 466373.88, cumulativePrincipal: 9999999.98 }
+    { month: 0, monthlyPayment: 0, principalPaid: 0, interestPaid: 0, remainingBalance: 2000000, cumulativeInterest: 0, cumulativePrincipal: 0 },
+    { month: 1, monthlyPayment: 349364, principalPaid: 337697, interestPaid: 11667, remainingBalance: 1662303, cumulativeInterest: 11667, cumulativePrincipal: 337697 },
+    { month: 2, monthlyPayment: 349364, principalPaid: 339669, interestPaid: 9695, remainingBalance: 1322634, cumulativeInterest: 21362, cumulativePrincipal: 677366 },
+    { month: 3, monthlyPayment: 349364, principalPaid: 341654, interestPaid: 7710, remainingBalance: 980980, cumulativeInterest: 29072, cumulativePrincipal: 1019020 },
+    { month: 4, monthlyPayment: 349364, principalPaid: 343651, interestPaid: 5713, remainingBalance: 637329, cumulativeInterest: 34785, cumulativePrincipal: 1362671 },
+    { month: 5, monthlyPayment: 349364, principalPaid: 345661, interestPaid: 3703, remainingBalance: 291668, cumulativeInterest: 38488, cumulativePrincipal: 1708332 },
+    { month: 6, monthlyPayment: 349364, principalPaid: 291668, interestPaid: 1701, remainingBalance: 0, cumulativeInterest: 40189, cumulativePrincipal: 2000000 }
   ];
 
   // Prepare data for Recharts (convert to millions)
@@ -56,8 +50,8 @@ export default function ActiveLoanPage() {
 
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-2xl font-semibold text-gray-900 mb-2">Bridge Finance Details</h1>
-          <p className="text-gray-600">View the details of your approved bid.</p>
+          <h1 className="text-2xl font-semibold text-gray-900 mb-2">Bridging Finance Details</h1>
+          <p className="text-gray-600">View the details of your active loan.</p>
         </div>
 
         {/* Loan Overview Section */}
@@ -65,21 +59,21 @@ export default function ActiveLoanPage() {
           <h2 className="text-2xl font-semibold text-gray-900 mb-8">Loan Overview</h2>
           
           {/* Status Card */}
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
+          <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4">
+                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">Awaiting Dispersement</h3>
-                  <p className="text-sm text-blue-600">Your loan is approved and ready for disbursement</p>
+                  <h3 className="text-lg font-semibold text-gray-900">Loan Active</h3>
+                  <p className="text-sm text-green-600">Your loan is active and payments are in progress</p>
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-2xl font-bold text-gray-900">R10,000,000</p>
+                <p className="text-2xl font-bold text-gray-900">R2,000,000</p>
                 <p className="text-sm text-gray-500">Loan Amount</p>
               </div>
             </div>
@@ -96,7 +90,7 @@ export default function ActiveLoanPage() {
                 </div>
                 <h4 className="font-medium text-gray-900">Interest Rate</h4>
               </div>
-              <p className="text-2xl font-bold text-gray-900">8.50%</p>
+              <p className="text-2xl font-bold text-gray-900">7.00%</p>
               <p className="text-sm text-gray-500">per annum</p>
             </div>
 
@@ -109,7 +103,7 @@ export default function ActiveLoanPage() {
                 </div>
                 <h4 className="font-medium text-gray-900">Loan Term</h4>
               </div>
-              <p className="text-2xl font-bold text-gray-900">12</p>
+              <p className="text-2xl font-bold text-gray-900">6</p>
               <p className="text-sm text-gray-500">months</p>
             </div>
 
@@ -122,8 +116,8 @@ export default function ActiveLoanPage() {
                 </div>
                 <h4 className="font-medium text-gray-900">Lender</h4>
               </div>
-              <p className="text-xl font-bold text-gray-900">Standard Bank</p>
-              <p className="text-sm text-gray-500">Bid Provider</p>
+              <p className="text-xl font-bold text-gray-900">ABSA</p>
+              <p className="text-sm text-gray-500">Loan Provider</p>
             </div>
           </div>
 
@@ -150,8 +144,8 @@ export default function ActiveLoanPage() {
             <div className="p-6 pb-0">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="text-base font-semibold text-gray-900">Amortization for R10,000,000 Loan</h3>
-                  <p className="text-sm text-gray-600">With 12-Month Term and 8.50% Interest Rate</p>
+                  <h3 className="text-base font-semibold text-gray-900">Amortization for R2,000,000 Loan</h3>
+                  <p className="text-sm text-gray-600">With 6-Month Term and 7.00% Interest Rate</p>
                 </div>
                 <button 
                   onClick={() => setIsModalOpen(true)}
@@ -177,21 +171,21 @@ export default function ActiveLoanPage() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                     <XAxis 
                       dataKey="month" 
-                      domain={[0, 12]}
+                      domain={[0, 6]}
                       type="number"
-                      ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+                      ticks={[0, 1, 2, 3, 4, 5, 6]}
                       axisLine={false}
                       tickLine={false}
                       tick={{ fontSize: 14, fill: '#6b7280' }}
                       dy={10}
                     />
                     <YAxis 
-                      domain={[0, 10]}
-                      ticks={[0, 2, 4, 6, 8, 10]}
+                      domain={[0, 2]}
+                      ticks={[0, 0.5, 1, 1.5, 2]}
                       axisLine={true}
                       tickLine={false}
                       tick={{ fontSize: 14, fill: '#6b7280' }}
-                      tickFormatter={(value) => `${value.toFixed(0)}M`}
+                      tickFormatter={(value) => `${value.toFixed(1)}M`}
                       stroke="#e5e7eb"
                     />
                     <Tooltip 
@@ -355,7 +349,7 @@ export default function ActiveLoanPage() {
               </div>
             </div>
             <div className="divide-y divide-gray-200">
-              {actualSchedule.slice(1, 7).map((payment, index) => {
+              {actualSchedule.slice(1).map((payment, index) => {
                 const paymentDate = new Date(2023, 10 + index, 15); // Nov 15, 2023 + index months
                 const dateString = paymentDate.toLocaleDateString('en-US', { 
                   month: 'short', 
@@ -378,12 +372,6 @@ export default function ActiveLoanPage() {
                   </div>
                 );
               })}
-              <div className="px-6 py-4 grid grid-cols-4 gap-4 text-sm bg-gray-50">
-                <div className="font-medium text-gray-900">...</div>
-                <div className="text-gray-600 italic">{12 - 6} more payments</div>
-                <div className="text-gray-600 italic">...</div>
-                <div className="font-semibold text-gray-700 cursor-pointer hover:text-gray-900">View Full Schedule</div>
-              </div>
             </div>
                      </div>
          </div>
@@ -408,7 +396,7 @@ export default function ActiveLoanPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Account Number</p>
-                    <p className="text-base font-medium text-gray-900">**********4789</p>
+                    <p className="text-base font-medium text-gray-900">••••••••••4789</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Account Type</p>
@@ -423,7 +411,7 @@ export default function ActiveLoanPage() {
                 <div className="space-y-3">
                   <div>
                     <p className="text-sm text-gray-500">Monthly Payment</p>
-                    <p className="text-xl font-bold text-gray-900">R872,198</p>
+                    <p className="text-xl font-bold text-gray-900">R349,364</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">First Debit Date</p>
@@ -627,50 +615,63 @@ export default function ActiveLoanPage() {
         </div>
       </div>
 
-      {/* Full Breakdown Modal */}
+      {/* Modal for Full Breakdown */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-hidden">
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-gray-900">Complete Amortization Schedule</h3>
-                <button 
-                  onClick={() => setIsModalOpen(false)}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
+          <div className="bg-white rounded-lg max-w-7xl w-full max-h-[90vh] overflow-hidden">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <h2 className="text-xl font-semibold text-gray-900">Full Amortization Breakdown</h2>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
-            <div className="overflow-auto max-h-[calc(90vh-120px)]">
-              <table className="w-full">
-                <thead className="bg-gray-50 sticky top-0">
-                  <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payment Month</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Monthly Payment Amount</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Principal Paid</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Interest Paid</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Remaining Loan Balance</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cumulative Interest Paid</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cumulative Principal Paid</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {actualSchedule.slice(1).map((payment, index) => (
-                    <tr key={index} className="hover:bg-gray-50">
-                      <td className="px-4 py-3 text-sm font-medium text-gray-900">{payment.month}</td>
-                      <td className="px-4 py-3 text-sm text-gray-900">R{payment.monthlyPayment.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td>
-                      <td className="px-4 py-3 text-sm text-gray-900">R{payment.principalPaid.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td>
-                      <td className="px-4 py-3 text-sm text-gray-900">R{payment.interestPaid.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td>
-                      <td className="px-4 py-3 text-sm text-gray-900">R{payment.remainingBalance.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td>
-                      <td className="px-4 py-3 text-sm text-gray-900">R{payment.cumulativeInterest.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td>
-                      <td className="px-4 py-3 text-sm text-gray-900">R{payment.cumulativePrincipal.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td>
+            
+            <div className="p-6 overflow-auto max-h-[calc(90vh-120px)]">
+              <div className="overflow-x-auto">
+                <table className="min-w-full bg-white border border-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Payment Month</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Monthly Payment Amount (ZAR)</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Principal Paid (ZAR)</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Interest Paid (ZAR)</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Remaining Loan Balance (ZAR)</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Cumulative Interest Paid (ZAR)</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">Cumulative Principal Paid (ZAR)</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {actualSchedule.map((row, index) => (
+                      <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">{row.month}</td>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">
+                          {row.monthlyPayment.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">
+                          {row.principalPaid.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">
+                          {row.interestPaid.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">
+                          {row.remainingBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">
+                          {row.cumulativeInterest.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900 border-b border-gray-200">
+                          {row.cumulativePrincipal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

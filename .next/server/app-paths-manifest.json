@@ -1,6 +1,4 @@
 {
-  "/bid-dashboard/page": "app/bid-dashboard/page.js",
-  "/loan-dashboard/page": "app/loan-dashboard/page.js",
-  "/approved-bid/page": "app/approved-bid/page.js",
+  "/completed-loan/page": "app/completed-loan/page.js",
   "/active-loan/page": "app/active-loan/page.js"
 }

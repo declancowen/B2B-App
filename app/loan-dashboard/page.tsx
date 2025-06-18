@@ -25,7 +25,10 @@ export default function LoanDashboardPage() {
               <span className="text-gray-900 font-medium">Loans</span>
             </div>
             
-            <div className="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+            <div 
+              onClick={() => router.push('/bid-dashboard')}
+              className="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer"
+            >
               <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m14.5 12.5-8 8a2.119 2.119 0 0 1-3-3l8-8"/>
                 <path d="m16 16 6-6"/>
