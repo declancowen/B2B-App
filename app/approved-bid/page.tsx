@@ -8,22 +8,22 @@ export default function ApprovedBidPage() {
   const router = useRouter()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Actual amortization schedule data
+  // Actual amortization schedule data for R10M, 12 months, 18.50% APR
   const loanAmount = 10000000; // R10M
   const actualSchedule = [
-    { month: 0, monthlyPayment: 0, principalPaid: 0, interestPaid: 0, remainingBalance: 10000000, cumulativeInterest: 0, cumulativePrincipal: 0 },
-    { month: 1, monthlyPayment: 872197.82, principalPaid: 801364.49, interestPaid: 70833.33, remainingBalance: 9198635.51, cumulativeInterest: 70833.33, cumulativePrincipal: 801364.49 },
-    { month: 2, monthlyPayment: 872197.82, principalPaid: 807040.82, interestPaid: 65157, remainingBalance: 8391594.69, cumulativeInterest: 135990.33, cumulativePrincipal: 1608405.31 },
-    { month: 3, monthlyPayment: 872197.82, principalPaid: 812757.36, interestPaid: 59440.46, remainingBalance: 7578837.32, cumulativeInterest: 195430.79, cumulativePrincipal: 2421162.67 },
-    { month: 4, monthlyPayment: 872197.82, principalPaid: 818514.39, interestPaid: 53683.43, remainingBalance: 6760322.93, cumulativeInterest: 249114.22, cumulativePrincipal: 3239677.06 },
-    { month: 5, monthlyPayment: 872197.82, principalPaid: 824312.2, interestPaid: 47885.62, remainingBalance: 5936010.73, cumulativeInterest: 296999.84, cumulativePrincipal: 4063989.26 },
-    { month: 6, monthlyPayment: 872197.82, principalPaid: 830151.08, interestPaid: 42046.74, remainingBalance: 5105859.64, cumulativeInterest: 339046.58, cumulativePrincipal: 4894140.34 },
-    { month: 7, monthlyPayment: 872197.82, principalPaid: 836031.32, interestPaid: 36166.51, remainingBalance: 4269828.33, cumulativeInterest: 375213.09, cumulativePrincipal: 5730171.66 },
-    { month: 8, monthlyPayment: 872197.82, principalPaid: 841953.21, interestPaid: 30244.62, remainingBalance: 3427875.12, cumulativeInterest: 405457.71, cumulativePrincipal: 6572124.87 },
-    { month: 9, monthlyPayment: 872197.82, principalPaid: 847917.04, interestPaid: 24280.78, remainingBalance: 2579958.08, cumulativeInterest: 429738.49, cumulativePrincipal: 7420041.91 },
-    { month: 10, monthlyPayment: 872197.82, principalPaid: 853923.12, interestPaid: 18274.7, remainingBalance: 1726034.95, cumulativeInterest: 448013.19, cumulativePrincipal: 8273965.03 },
-    { month: 11, monthlyPayment: 872197.82, principalPaid: 859971.74, interestPaid: 12226.08, remainingBalance: 866063.21, cumulativeInterest: 460239.27, cumulativePrincipal: 9133936.77 },
-    { month: 12, monthlyPayment: 872197.82, principalPaid: 866063.21, interestPaid: 6134.61, remainingBalance: 0, cumulativeInterest: 466373.88, cumulativePrincipal: 9999999.98 }
+    { month: 0, monthlyPayment: 0.0, principalPaid: 0.0, interestPaid: 0.0, remainingBalance: 10000000.0, cumulativeInterest: 0.0, cumulativePrincipal: 0.0 },
+    { month: 1, monthlyPayment: 919181.18, principalPaid: 765014.51, interestPaid: 154166.67, remainingBalance: 9234985.49, cumulativeInterest: 154166.67, cumulativePrincipal: 765014.51 },
+    { month: 2, monthlyPayment: 919181.18, principalPaid: 776808.48, interestPaid: 142372.69, remainingBalance: 8458177.01, cumulativeInterest: 296539.36, cumulativePrincipal: 1541822.99 },
+    { month: 3, monthlyPayment: 919181.18, principalPaid: 788784.28, interestPaid: 130396.9, remainingBalance: 7669392.73, cumulativeInterest: 426936.26, cumulativePrincipal: 2330607.27 },
+    { month: 4, monthlyPayment: 919181.18, principalPaid: 800944.71, interestPaid: 118236.47, remainingBalance: 6868448.02, cumulativeInterest: 545172.73, cumulativePrincipal: 3131551.98 },
+    { month: 5, monthlyPayment: 919181.18, principalPaid: 813292.6, interestPaid: 105888.57, remainingBalance: 6055155.42, cumulativeInterest: 651061.3, cumulativePrincipal: 3944844.58 },
+    { month: 6, monthlyPayment: 919181.18, principalPaid: 825830.86, interestPaid: 93350.31, remainingBalance: 5229324.55, cumulativeInterest: 744411.61, cumulativePrincipal: 4770675.45 },
+    { month: 7, monthlyPayment: 919181.18, principalPaid: 838562.42, interestPaid: 80618.75, remainingBalance: 4390762.13, cumulativeInterest: 825030.37, cumulativePrincipal: 5609237.87 },
+    { month: 8, monthlyPayment: 919181.18, principalPaid: 851490.26, interestPaid: 67690.92, remainingBalance: 3539271.87, cumulativeInterest: 892721.28, cumulativePrincipal: 6460728.13 },
+    { month: 9, monthlyPayment: 919181.18, principalPaid: 864617.4, interestPaid: 54563.77, remainingBalance: 2674654.47, cumulativeInterest: 947285.06, cumulativePrincipal: 7325345.53 },
+    { month: 10, monthlyPayment: 919181.18, principalPaid: 877946.92, interestPaid: 41234.26, remainingBalance: 1796707.55, cumulativeInterest: 988519.31, cumulativePrincipal: 8203292.45 },
+    { month: 11, monthlyPayment: 919181.18, principalPaid: 891481.93, interestPaid: 27699.24, remainingBalance: 905225.61, cumulativeInterest: 1016218.55, cumulativePrincipal: 9094774.39 },
+    { month: 12, monthlyPayment: 919181.18, principalPaid: 905225.61, interestPaid: 13955.56, remainingBalance: 0.0, cumulativeInterest: 1030174.12, cumulativePrincipal: 10000000.0 }
   ];
 
   // Prepare data for Recharts (convert to millions)
@@ -56,8 +56,15 @@ export default function ApprovedBidPage() {
 
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-2xl font-semibold text-gray-900 mb-2">Bridge Finance Details</h1>
-          <p className="text-gray-600">View the details of your approved bid.</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Bridge Finance Details</h1>
+              <p className="text-gray-600">View the details of your approved bid.</p>
+            </div>
+            <button className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
+              Cancel Bid
+            </button>
+          </div>
         </div>
 
         {/* Status Card */}
@@ -96,7 +103,7 @@ export default function ApprovedBidPage() {
                 </div>
                 <h4 className="font-medium text-gray-900">Interest Rate</h4>
               </div>
-              <p className="text-2xl font-bold text-gray-900">8.50%</p>
+              <p className="text-2xl font-bold text-gray-900">18.50%</p>
               <p className="text-sm text-gray-500">per annum</p>
             </div>
 
@@ -151,7 +158,7 @@ export default function ApprovedBidPage() {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h3 className="text-base font-semibold text-gray-900">Amortization for R10,000,000 Loan</h3>
-                  <p className="text-sm text-gray-600">With 12-Month Term and 8.50% Interest Rate</p>
+                  <p className="text-sm text-gray-600">With 12-Month Term and 18.50% Interest Rate</p>
                 </div>
                 <button 
                   onClick={() => setIsModalOpen(true)}
@@ -364,11 +371,10 @@ export default function ApprovedBidPage() {
                   year: 'numeric' 
                 });
                 
-                // Calculate monthly values from cumulative data
-                const prevPayment = index === 0 ? actualSchedule[0] : actualSchedule[index];
-                const monthlyPrincipal = payment.cumulativePrincipal - prevPayment.cumulativePrincipal;
-                const monthlyInterest = payment.cumulativeInterest - prevPayment.cumulativeInterest;
-                const monthlyTotal = monthlyPrincipal + monthlyInterest;
+                // Use the actual monthly data from the schedule
+                const monthlyPrincipal = payment.principalPaid;
+                const monthlyInterest = payment.interestPaid;
+                const monthlyTotal = payment.monthlyPayment;
                 
                 return (
                   <div key={index} className="px-6 py-4 grid grid-cols-4 gap-4 text-sm">
@@ -424,7 +430,7 @@ export default function ApprovedBidPage() {
                 <div className="space-y-3">
                   <div>
                     <p className="text-sm text-gray-500">Monthly Payment</p>
-                    <p className="text-xl font-bold text-gray-900">R872,198</p>
+                    <p className="text-xl font-bold text-gray-900">R919,181</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">First Debit Date</p>
@@ -455,6 +461,30 @@ export default function ApprovedBidPage() {
                 <button className="bg-black text-white text-sm px-4 py-2 rounded-md hover:bg-gray-800 font-medium">
                   Manage Debit Order
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Important Information Section */}
+        <div className="mb-10">
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Important Information</h2>
+          
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
+            <div className="flex items-start">
+              <div className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center mr-4 mt-1">
+                <svg className="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-base font-semibold text-gray-900 mb-2">Please Note</h3>
+                <ul className="text-sm text-gray-700 space-y-1">
+                  <li>• Ensure sufficient funds are available in your account before each debit date</li>
+                  <li>• Failed debit orders may incur additional fees and affect your credit rating</li>
+                  <li>• Contact us immediately if you need to change your debit order details</li>
+                  <li>• Early settlement options are available - contact our team for more information</li>
+                </ul>
               </div>
             </div>
           </div>

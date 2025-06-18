@@ -8,16 +8,22 @@ export default function CompletedLoanPage() {
   const router = useRouter()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Actual amortization schedule data for R20M, 6 months, 5.50% APR
+  // Actual amortization schedule data for R20M, 12 months, 12.00% APR
   const loanAmount = 20000000; // R20M
   const actualSchedule = [
-    { month: 0, monthlyPayment: 0, principalPaid: 0, interestPaid: 0, remainingBalance: 20000000, cumulativeInterest: 0, cumulativePrincipal: 0 },
-    { month: 1, monthlyPayment: 3475000, principalPaid: 3383333, interestPaid: 91667, remainingBalance: 16616667, cumulativeInterest: 91667, cumulativePrincipal: 3383333 },
-    { month: 2, monthlyPayment: 3475000, principalPaid: 3398810, interestPaid: 76190, remainingBalance: 13217857, cumulativeInterest: 167857, cumulativePrincipal: 6782143 },
-    { month: 3, monthlyPayment: 3475000, principalPaid: 3414381, interestPaid: 60619, remainingBalance: 9803476, cumulativeInterest: 228476, cumulativePrincipal: 10196524 },
-    { month: 4, monthlyPayment: 3475000, principalPaid: 3430048, interestPaid: 44952, remainingBalance: 6373428, cumulativeInterest: 273428, cumulativePrincipal: 13626572 },
-    { month: 5, monthlyPayment: 3475000, principalPaid: 3445810, interestPaid: 29190, remainingBalance: 2927618, cumulativeInterest: 302618, cumulativePrincipal: 17072382 },
-    { month: 6, monthlyPayment: 3475000, principalPaid: 2927618, interestPaid: 13415, remainingBalance: 0, cumulativeInterest: 316033, cumulativePrincipal: 20000000 }
+    { month: 0, monthlyPayment: 0.0, principalPaid: 0.0, interestPaid: 0.0, remainingBalance: 20000000.0, cumulativeInterest: 0.0, cumulativePrincipal: 0.0 },
+    { month: 1, monthlyPayment: 1776975.77, principalPaid: 1576975.77, interestPaid: 200000.0, remainingBalance: 18423024.23, cumulativeInterest: 200000.0, cumulativePrincipal: 1576975.77 },
+    { month: 2, monthlyPayment: 1776975.77, principalPaid: 1592745.53, interestPaid: 184230.24, remainingBalance: 16830278.7, cumulativeInterest: 384230.24, cumulativePrincipal: 3169721.3 },
+    { month: 3, monthlyPayment: 1776975.77, principalPaid: 1608672.99, interestPaid: 168302.79, remainingBalance: 15221605.71, cumulativeInterest: 552533.03, cumulativePrincipal: 4778394.29 },
+    { month: 4, monthlyPayment: 1776975.77, principalPaid: 1624759.72, interestPaid: 152216.06, remainingBalance: 13596845.99, cumulativeInterest: 704749.09, cumulativePrincipal: 6403154.01 },
+    { month: 5, monthlyPayment: 1776975.77, principalPaid: 1641007.31, interestPaid: 135968.46, remainingBalance: 11955838.68, cumulativeInterest: 840717.55, cumulativePrincipal: 8044161.32 },
+    { month: 6, monthlyPayment: 1776975.77, principalPaid: 1657417.39, interestPaid: 119558.39, remainingBalance: 10298421.29, cumulativeInterest: 960275.93, cumulativePrincipal: 9701578.71 },
+    { month: 7, monthlyPayment: 1776975.77, principalPaid: 1673991.56, interestPaid: 102984.21, remainingBalance: 8624429.73, cumulativeInterest: 1063260.15, cumulativePrincipal: 11375570.27 },
+    { month: 8, monthlyPayment: 1776975.77, principalPaid: 1690731.48, interestPaid: 86244.3, remainingBalance: 6933698.25, cumulativeInterest: 1149504.44, cumulativePrincipal: 13066301.75 },
+    { month: 9, monthlyPayment: 1776975.77, principalPaid: 1707638.79, interestPaid: 69336.98, remainingBalance: 5226059.46, cumulativeInterest: 1218841.43, cumulativePrincipal: 14773940.54 },
+    { month: 10, monthlyPayment: 1776975.77, principalPaid: 1724715.18, interestPaid: 52260.59, remainingBalance: 3501344.28, cumulativeInterest: 1271102.02, cumulativePrincipal: 16498655.72 },
+    { month: 11, monthlyPayment: 1776975.77, principalPaid: 1741962.33, interestPaid: 35013.44, remainingBalance: 1759381.95, cumulativeInterest: 1306115.46, cumulativePrincipal: 18240618.05 },
+    { month: 12, monthlyPayment: 1776975.77, principalPaid: 1759381.95, interestPaid: 17593.82, remainingBalance: 0.0, cumulativeInterest: 1323709.28, cumulativePrincipal: 20000000.0 }
   ];
 
   // Prepare data for Recharts (convert to millions)
@@ -85,7 +91,7 @@ export default function CompletedLoanPage() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">Payment Progress</h3>
-                <p className="text-sm text-gray-600">6 of 6 payments completed</p>
+                <p className="text-sm text-gray-600">12 of 12 payments completed</p>
               </div>
               <div className="text-right">
                 <p className="text-2xl font-bold text-black">100%</p>
@@ -104,7 +110,7 @@ export default function CompletedLoanPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
                 <p className="text-sm text-gray-600 mb-1">Total Paid</p>
-                <p className="text-xl font-bold text-gray-900">R22,098,184</p>
+                <p className="text-xl font-bold text-gray-900">R21,323,709</p>
                 <p className="text-xs text-gray-600">Principal + Interest</p>
               </div>
               <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
@@ -114,7 +120,7 @@ export default function CompletedLoanPage() {
               </div>
               <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
                 <p className="text-sm text-gray-600 mb-1">Completion Date</p>
-                <p className="text-xl font-bold text-gray-900">15 Apr 2024</p>
+                <p className="text-xl font-bold text-gray-900">15 Oct 2024</p>
                 <p className="text-xs text-gray-600">Final Payment</p>
               </div>
             </div>
@@ -136,7 +142,7 @@ export default function CompletedLoanPage() {
                 </div>
                 <h4 className="font-medium text-gray-900">Interest Rate</h4>
               </div>
-              <p className="text-2xl font-bold text-gray-900">5.50%</p>
+              <p className="text-2xl font-bold text-gray-900">12.00%</p>
               <p className="text-sm text-gray-500">per annum</p>
             </div>
 
@@ -149,7 +155,7 @@ export default function CompletedLoanPage() {
                 </div>
                 <h4 className="font-medium text-gray-900">Loan Term</h4>
               </div>
-              <p className="text-2xl font-bold text-gray-900">6</p>
+              <p className="text-2xl font-bold text-gray-900">12</p>
               <p className="text-sm text-gray-500">months</p>
             </div>
 
@@ -191,7 +197,7 @@ export default function CompletedLoanPage() {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h3 className="text-base font-semibold text-gray-900">Amortization for R20,000,000 Loan</h3>
-                  <p className="text-sm text-gray-600">With 6-Month Term and 5.50% Interest Rate</p>
+                  <p className="text-sm text-gray-600">With 12-Month Term and 12.00% Interest Rate</p>
                 </div>
                 <button 
                   onClick={() => setIsModalOpen(true)}
@@ -217,9 +223,9 @@ export default function CompletedLoanPage() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                     <XAxis 
                       dataKey="month" 
-                      domain={[0, 6]}
+                      domain={[0, 12]}
                       type="number"
-                      ticks={[0, 1, 2, 3, 4, 5, 6]}
+                      ticks={[0, 2, 4, 6, 8, 10, 12]}
                       axisLine={false}
                       tickLine={false}
                       tick={{ fontSize: 14, fill: '#6b7280' }}
@@ -395,7 +401,7 @@ export default function CompletedLoanPage() {
               </div>
             </div>
             <div className="divide-y divide-gray-200">
-              {actualSchedule.slice(1).map((payment, index) => {
+              {actualSchedule.slice(1, 7).map((payment, index) => {
                 const paymentDate = new Date(2023, 10 + index, 15); // Nov 15, 2023 + index months
                 const dateString = paymentDate.toLocaleDateString('en-US', { 
                   month: 'short', 
@@ -403,11 +409,10 @@ export default function CompletedLoanPage() {
                   year: 'numeric' 
                 });
                 
-                // Calculate monthly values from cumulative data
-                const prevPayment = index === 0 ? actualSchedule[0] : actualSchedule[index];
-                const monthlyPrincipal = payment.cumulativePrincipal - prevPayment.cumulativePrincipal;
-                const monthlyInterest = payment.cumulativeInterest - prevPayment.cumulativeInterest;
-                const monthlyTotal = monthlyPrincipal + monthlyInterest;
+                // Fix the billing schedule calculation to use the actual monthly data
+                const monthlyPrincipal = payment.principalPaid;
+                const monthlyInterest = payment.interestPaid;
+                const monthlyTotal = payment.monthlyPayment;
                 
                 return (
                   <div key={index} className="px-6 py-4 grid grid-cols-4 gap-4 text-sm">
@@ -418,6 +423,12 @@ export default function CompletedLoanPage() {
                   </div>
                 );
               })}
+              <div className="px-6 py-4 grid grid-cols-4 gap-4 text-sm bg-gray-50">
+                <div className="font-medium text-gray-900">...</div>
+                <div className="text-gray-600 italic">{12 - 6} more payments</div>
+                <div className="text-gray-600 italic">...</div>
+                <div className="font-semibold text-gray-700 cursor-pointer hover:text-gray-900">View Full Schedule</div>
+              </div>
             </div>
                      </div>
          </div>
@@ -457,7 +468,7 @@ export default function CompletedLoanPage() {
                 <div className="space-y-3">
                   <div>
                     <p className="text-sm text-gray-500">Monthly Payment</p>
-                    <p className="text-xl font-bold text-gray-900">R872,198</p>
+                    <p className="text-xl font-bold text-gray-900">R1,776,976</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">First Debit Date</p>

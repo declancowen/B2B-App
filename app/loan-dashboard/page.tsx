@@ -66,7 +66,7 @@ export default function LoanDashboardPage() {
           <div className="space-y-4">
           {/* Bridging Finance Loan */}
           <div 
-                            onClick={() => router.push('/active-loan')}
+            onClick={() => router.push('/active-loan')}
             className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer"
           >
             <div className="flex justify-between items-center mb-6">
@@ -82,31 +82,47 @@ export default function LoanDashboardPage() {
                   <p className="text-3xl font-bold text-gray-900">R2,000,000</p>
                 </div>
               </div>
-                             <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center shadow-sm">
-                 <span className="text-white text-base font-bold">AB</span>
-               </div>
+              <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center shadow-sm">
+                <span className="text-white text-base font-bold">AB</span>
+              </div>
             </div>
+            
+            {/* Progress Section */}
+            <div className="mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-700">Payment Progress</span>
+                <span className="text-sm font-semibold text-gray-900">3 of 6 payments</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                <div className="bg-black h-2 rounded-full" style={{ width: '50%' }}></div>
+              </div>
+              <div className="flex justify-between text-xs text-gray-500">
+                <span>50% Complete</span>
+                <span>Remaining: R1,024,789</span>
+              </div>
+            </div>
+
             <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                             <div className="flex items-center space-x-8">
-                 <div className="min-w-[80px]">
-                   <p className="text-xs text-gray-500 uppercase tracking-wide">Term</p>
-                   <p className="text-sm font-semibold text-gray-900">6 months</p>
-                 </div>
-                 <div className="min-w-[60px]">
-                   <p className="text-xs text-gray-500 uppercase tracking-wide">APR</p>
-                   <p className="text-sm font-semibold text-gray-900">7.00%</p>
-                 </div>
-                 <div className="min-w-[100px]">
-                   <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
-                   <p className="text-sm font-semibold text-gray-900">ABSA</p>
-                 </div>
-               </div>
+              <div className="flex items-center space-x-8">
+                <div className="min-w-[80px]">
+                  <p className="text-xs text-gray-500 uppercase tracking-wide">Term</p>
+                  <p className="text-sm font-semibold text-gray-900">6 months</p>
+                </div>
+                <div className="min-w-[60px]">
+                  <p className="text-xs text-gray-500 uppercase tracking-wide">APR</p>
+                  <p className="text-sm font-semibold text-gray-900">20.00%</p>
+                </div>
+                <div className="min-w-[100px]">
+                  <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
+                  <p className="text-sm font-semibold text-gray-900">ABSA</p>
+                </div>
+              </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
                 <span className="text-sm font-medium text-green-600">Active</span>
               </div>
             </div>
-                      </div>
+          </div>
           </div>
         </div>
 
@@ -138,21 +154,37 @@ export default function LoanDashboardPage() {
                 <span className="text-white text-base font-bold">IN</span>
               </div>
             </div>
-                         <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-               <div className="flex items-center space-x-8">
-                 <div className="min-w-[80px]">
-                   <p className="text-xs text-gray-500 uppercase tracking-wide">Term</p>
-                   <p className="text-sm font-semibold text-gray-900">6 months</p>
-                 </div>
-                 <div className="min-w-[60px]">
-                   <p className="text-xs text-gray-500 uppercase tracking-wide">APR</p>
-                   <p className="text-sm font-semibold text-gray-900">5.50%</p>
-                 </div>
-                 <div className="min-w-[100px]">
-                   <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
-                   <p className="text-sm font-semibold text-gray-900">Investec</p>
-                 </div>
-               </div>
+            
+            {/* Progress Section */}
+            <div className="mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-700">Payment Progress</span>
+                <span className="text-sm font-semibold text-gray-900">12 of 12 payments</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                <div className="bg-black h-2 rounded-full" style={{ width: '100%' }}></div>
+              </div>
+              <div className="flex justify-between text-xs text-gray-500">
+                <span>100% Complete</span>
+                <span>Total Paid: R21,323,709</span>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+              <div className="flex items-center space-x-8">
+                <div className="min-w-[80px]">
+                  <p className="text-xs text-gray-500 uppercase tracking-wide">Term</p>
+                  <p className="text-sm font-semibold text-gray-900">12 months</p>
+                </div>
+                <div className="min-w-[60px]">
+                  <p className="text-xs text-gray-500 uppercase tracking-wide">APR</p>
+                  <p className="text-sm font-semibold text-gray-900">12.00%</p>
+                </div>
+                <div className="min-w-[100px]">
+                  <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
+                  <p className="text-sm font-semibold text-gray-900">Investec</p>
+                </div>
+              </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-gray-400 rounded-full mr-2"></div>
                 <span className="text-sm font-medium text-gray-600">Completed</span>

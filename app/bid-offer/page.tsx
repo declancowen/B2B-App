@@ -8,22 +8,22 @@ export default function BidOfferPage() {
   const router = useRouter()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Actual amortization schedule data for R5M loan (updated from R10M)
+  // Actual amortization schedule data for R5M loan, 12 months, 14.00% APR
   const loanAmount = 5000000; // R5M
   const actualSchedule = [
     { month: 0, monthlyPayment: 0, principalPaid: 0, interestPaid: 0, remainingBalance: 5000000, cumulativeInterest: 0, cumulativePrincipal: 0 },
-    { month: 1, monthlyPayment: 427083, principalPaid: 408750, interestPaid: 18333, remainingBalance: 4591250, cumulativeInterest: 18333, cumulativePrincipal: 408750 },
-    { month: 2, monthlyPayment: 427083, principalPaid: 410246, interestPaid: 16837, remainingBalance: 4181004, cumulativeInterest: 35170, cumulativePrincipal: 818996 },
-    { month: 3, monthlyPayment: 427083, principalPaid: 411750, interestPaid: 15333, remainingBalance: 3769254, cumulativeInterest: 50503, cumulativePrincipal: 1230746 },
-    { month: 4, monthlyPayment: 427083, principalPaid: 413261, interestPaid: 13822, remainingBalance: 3355993, cumulativeInterest: 64325, cumulativePrincipal: 1644007 },
-    { month: 5, monthlyPayment: 427083, principalPaid: 414780, interestPaid: 12303, remainingBalance: 2941213, cumulativeInterest: 76628, cumulativePrincipal: 2058787 },
-    { month: 6, monthlyPayment: 427083, principalPaid: 416307, interestPaid: 10776, remainingBalance: 2524906, cumulativeInterest: 87404, cumulativePrincipal: 2475094 },
-    { month: 7, monthlyPayment: 427083, principalPaid: 417841, interestPaid: 9242, remainingBalance: 2107065, cumulativeInterest: 96646, cumulativePrincipal: 2892935 },
-    { month: 8, monthlyPayment: 427083, principalPaid: 419383, interestPaid: 7700, remainingBalance: 1687682, cumulativeInterest: 104346, cumulativePrincipal: 3312318 },
-    { month: 9, monthlyPayment: 427083, principalPaid: 420933, interestPaid: 6150, remainingBalance: 1266749, cumulativeInterest: 110496, cumulativePrincipal: 3733251 },
-    { month: 10, monthlyPayment: 427083, principalPaid: 422491, interestPaid: 4592, remainingBalance: 844258, cumulativeInterest: 115088, cumulativePrincipal: 4155742 },
-    { month: 11, monthlyPayment: 427083, principalPaid: 424057, interestPaid: 3026, remainingBalance: 420201, cumulativeInterest: 118114, cumulativePrincipal: 4579799 },
-    { month: 12, monthlyPayment: 427083, principalPaid: 420201, interestPaid: 1575, remainingBalance: 0, cumulativeInterest: 119689, cumulativePrincipal: 5000000 }
+    { month: 1, monthlyPayment: 449167, principalPaid: 390833, interestPaid: 58334, remainingBalance: 4609167, cumulativeInterest: 58334, cumulativePrincipal: 390833 },
+    { month: 2, monthlyPayment: 449167, principalPaid: 395397, interestPaid: 53770, remainingBalance: 4213770, cumulativeInterest: 112104, cumulativePrincipal: 786230 },
+    { month: 3, monthlyPayment: 449167, principalPaid: 400027, interestPaid: 49140, remainingBalance: 3813743, cumulativeInterest: 161244, cumulativePrincipal: 1186257 },
+    { month: 4, monthlyPayment: 449167, principalPaid: 404721, interestPaid: 44446, remainingBalance: 3409022, cumulativeInterest: 205690, cumulativePrincipal: 1590978 },
+    { month: 5, monthlyPayment: 449167, principalPaid: 409482, interestPaid: 39685, remainingBalance: 2999540, cumulativeInterest: 245375, cumulativePrincipal: 2000460 },
+    { month: 6, monthlyPayment: 449167, principalPaid: 414310, interestPaid: 34857, remainingBalance: 2585230, cumulativeInterest: 280232, cumulativePrincipal: 2414770 },
+    { month: 7, monthlyPayment: 449167, principalPaid: 419206, interestPaid: 29961, remainingBalance: 2166024, cumulativeInterest: 310193, cumulativePrincipal: 2833976 },
+    { month: 8, monthlyPayment: 449167, principalPaid: 424173, interestPaid: 24994, remainingBalance: 1741851, cumulativeInterest: 335187, cumulativePrincipal: 3258149 },
+    { month: 9, monthlyPayment: 449167, principalPaid: 429211, interestPaid: 19956, remainingBalance: 1312640, cumulativeInterest: 355143, cumulativePrincipal: 3687360 },
+    { month: 10, monthlyPayment: 449167, principalPaid: 434321, interestPaid: 14846, remainingBalance: 878319, cumulativeInterest: 369989, cumulativePrincipal: 4121681 },
+    { month: 11, monthlyPayment: 449167, principalPaid: 439505, interestPaid: 9662, remainingBalance: 438814, cumulativeInterest: 379651, cumulativePrincipal: 4561186 },
+    { month: 12, monthlyPayment: 449167, principalPaid: 438814, interestPaid: 5120, remainingBalance: 0, cumulativeInterest: 384771, cumulativePrincipal: 5000000 }
   ];
 
   // Prepare data for Recharts (convert to millions)
@@ -100,7 +100,7 @@ export default function BidOfferPage() {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h3 className="text-base font-semibold text-gray-900">Amortization for R5,000,000 Loan</h3>
-                  <p className="text-sm text-gray-600">With 12-Month Term and 4.5% Interest Rate</p>
+                  <p className="text-sm text-gray-600">With 12-Month Term and 14.00% Interest Rate</p>
                 </div>
                 <button 
                   onClick={() => setIsModalOpen(true)}
@@ -302,7 +302,7 @@ export default function BidOfferPage() {
               </div>
               <div>
                 <p className="text-sm text-gray-500 mb-1">Interest Rate</p>
-                <p className="text-lg font-semibold text-gray-900">4.5% APR</p>
+                <p className="text-lg font-semibold text-gray-900">14.00% APR</p>
               </div>
               <div>
                 <p className="text-sm text-gray-500 mb-1">Loan Term</p>

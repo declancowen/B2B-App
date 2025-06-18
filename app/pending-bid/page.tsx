@@ -19,8 +19,15 @@ export default function PendingBidPage() {
 
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-2xl font-semibold text-gray-900 mb-2">Bid offers</h1>
-          <p className="text-gray-500">You have 5 offers for your pending bid</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Bid offers</h1>
+              <p className="text-gray-500">You have 5 offers for your pending bid</p>
+            </div>
+            <button className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
+              Cancel Bid
+            </button>
+          </div>
         </div>
 
         {/* Status Card */}
@@ -84,7 +91,7 @@ export default function PendingBidPage() {
                     </span>
                   </div>
                   <div className="mb-4">
-                    <p className="text-4xl font-bold text-gray-900 mb-2">4.5% APR</p>
+                    <p className="text-4xl font-bold text-gray-900 mb-2">14.00% APR</p>
                     <p className="text-base text-gray-600 font-medium">Offered by First National Bank</p>
                   </div>
                   <div className="flex items-center space-x-6 text-sm">
@@ -150,7 +157,7 @@ export default function PendingBidPage() {
                     </div>
                   </div>
                   <div className="col-span-2 text-right">
-                    <p className="text-xl font-bold text-gray-900">4.7%</p>
+                    <p className="text-xl font-bold text-gray-900">14.50%</p>
                     <p className="text-xs text-gray-500">APR</p>
                   </div>
                   <div className="col-span-3 text-right">
@@ -174,7 +181,7 @@ export default function PendingBidPage() {
                     </div>
                   </div>
                   <div className="col-span-2 text-right">
-                    <p className="text-xl font-bold text-gray-900">4.8%</p>
+                    <p className="text-xl font-bold text-gray-900">14.75%</p>
                     <p className="text-xs text-gray-500">APR</p>
                   </div>
                   <div className="col-span-3 text-right">
@@ -198,7 +205,7 @@ export default function PendingBidPage() {
                     </div>
                   </div>
                   <div className="col-span-2 text-right">
-                    <p className="text-xl font-bold text-gray-900">4.9%</p>
+                    <p className="text-xl font-bold text-gray-900">15.25%</p>
                     <p className="text-xs text-gray-500">APR</p>
                   </div>
                   <div className="col-span-3 text-right">
@@ -222,7 +229,7 @@ export default function PendingBidPage() {
                     </div>
                   </div>
                   <div className="col-span-2 text-right">
-                    <p className="text-xl font-bold text-gray-900">5.0%</p>
+                    <p className="text-xl font-bold text-gray-900">16.00%</p>
                     <p className="text-xs text-gray-500">APR</p>
                   </div>
                   <div className="col-span-3 text-right">

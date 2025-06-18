@@ -8,16 +8,16 @@ export default function ActiveLoanPage() {
   const router = useRouter()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Actual amortization schedule data for R2M, 6 months, 7.00% APR
+  // Actual amortization schedule data for R2M, 6 months, 20.00% APR
   const loanAmount = 2000000; // R2M
   const actualSchedule = [
     { month: 0, monthlyPayment: 0, principalPaid: 0, interestPaid: 0, remainingBalance: 2000000, cumulativeInterest: 0, cumulativePrincipal: 0 },
-    { month: 1, monthlyPayment: 349364, principalPaid: 337697, interestPaid: 11667, remainingBalance: 1662303, cumulativeInterest: 11667, cumulativePrincipal: 337697 },
-    { month: 2, monthlyPayment: 349364, principalPaid: 339669, interestPaid: 9695, remainingBalance: 1322634, cumulativeInterest: 21362, cumulativePrincipal: 677366 },
-    { month: 3, monthlyPayment: 349364, principalPaid: 341654, interestPaid: 7710, remainingBalance: 980980, cumulativeInterest: 29072, cumulativePrincipal: 1019020 },
-    { month: 4, monthlyPayment: 349364, principalPaid: 343651, interestPaid: 5713, remainingBalance: 637329, cumulativeInterest: 34785, cumulativePrincipal: 1362671 },
-    { month: 5, monthlyPayment: 349364, principalPaid: 345661, interestPaid: 3703, remainingBalance: 291668, cumulativeInterest: 38488, cumulativePrincipal: 1708332 },
-    { month: 6, monthlyPayment: 349364, principalPaid: 291668, interestPaid: 1701, remainingBalance: 0, cumulativeInterest: 40189, cumulativePrincipal: 2000000 }
+    { month: 1, monthlyPayment: 353046, principalPaid: 319712, interestPaid: 33333, remainingBalance: 1680288, cumulativeInterest: 33333.33, cumulativePrincipal: 319712.24 },
+    { month: 2, monthlyPayment: 353046, principalPaid: 325041, interestPaid: 28005, remainingBalance: 1355247, cumulativeInterest: 61338.13, cumulativePrincipal: 644753.01 },
+    { month: 3, monthlyPayment: 353046, principalPaid: 330458, interestPaid: 22588, remainingBalance: 1024789, cumulativeInterest: 83925.58, cumulativePrincipal: 975211.13 },
+    { month: 4, monthlyPayment: 353046, principalPaid: 335966, interestPaid: 17080, remainingBalance: 688823, cumulativeInterest: 101005.39, cumulativePrincipal: 1311176.88 },
+    { month: 5, monthlyPayment: 353046, principalPaid: 341565, interestPaid: 11480, remainingBalance: 347258, cumulativeInterest: 112485.78, cumulativePrincipal: 1652742.06 },
+    { month: 6, monthlyPayment: 353046, principalPaid: 347258, interestPaid: 5788, remainingBalance: 0, cumulativeInterest: 118273.41, cumulativePrincipal: 2000000.0 }
   ];
 
   // Prepare data for Recharts (convert to millions)
@@ -114,17 +114,17 @@ export default function ActiveLoanPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
                 <p className="text-sm text-gray-600 mb-1">Amount Paid</p>
-                <p className="text-xl font-bold text-gray-900">R1,048,092</p>
+                <p className="text-xl font-bold text-gray-900">R1,059,138</p>
                 <p className="text-xs text-gray-600">Principal + Interest</p>
               </div>
               <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
                 <p className="text-sm text-gray-600 mb-1">Remaining Balance</p>
-                <p className="text-xl font-bold text-gray-900">R980,980</p>
+                <p className="text-xl font-bold text-gray-900">R1,024,789</p>
                 <p className="text-xs text-gray-600">After 3 payments</p>
               </div>
               <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
                 <p className="text-sm text-gray-600 mb-1">Next Payment</p>
-                <p className="text-xl font-bold text-gray-900">R349,364</p>
+                <p className="text-xl font-bold text-gray-900">R353,046</p>
                 <p className="text-xs text-gray-600">Due: 15 Jan 2024</p>
               </div>
             </div>
@@ -146,7 +146,7 @@ export default function ActiveLoanPage() {
                 </div>
                 <h4 className="font-medium text-gray-900">Interest Rate</h4>
               </div>
-              <p className="text-2xl font-bold text-gray-900">7.00%</p>
+              <p className="text-2xl font-bold text-gray-900">20.00%</p>
               <p className="text-sm text-gray-500">per annum</p>
             </div>
 
@@ -201,7 +201,7 @@ export default function ActiveLoanPage() {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h3 className="text-base font-semibold text-gray-900">Amortization for R2,000,000 Loan</h3>
-                  <p className="text-sm text-gray-600">With 6-Month Term and 7.00% Interest Rate</p>
+                  <p className="text-sm text-gray-600">With 6-Month Term and 20.00% Interest Rate</p>
                 </div>
                 <button 
                   onClick={() => setIsModalOpen(true)}
@@ -248,6 +248,36 @@ export default function ActiveLoanPage() {
                       content={(props) => {
                         const { active, payload, label } = props;
                         if (active && payload && payload.length) {
+                          // Filter out duplicate entries and only show the main data keys
+                          const uniqueEntries = payload.filter(entry => {
+                            const dataKey = entry.dataKey;
+                            return dataKey === 'balance' || dataKey === 'balancePaid' || dataKey === 'balanceRemaining' ||
+                                   dataKey === 'interest' || dataKey === 'interestPaid' || dataKey === 'interestRemaining' ||
+                                   dataKey === 'principal' || dataKey === 'principalPaid' || dataKey === 'principalRemaining';
+                          });
+
+                          // Group by type and take the first non-null value
+                          const consolidatedEntries: any[] = [];
+                          const seenTypes = new Set<string>();
+
+                          uniqueEntries.forEach(entry => {
+                            const dataKey = entry.dataKey;
+                            let type = '';
+                            
+                            if ((dataKey === 'balance' || dataKey === 'balancePaid' || dataKey === 'balanceRemaining') && !seenTypes.has('balance')) {
+                              type = 'balance';
+                            } else if ((dataKey === 'interest' || dataKey === 'interestPaid' || dataKey === 'interestRemaining') && !seenTypes.has('interest')) {
+                              type = 'interest';
+                            } else if ((dataKey === 'principal' || dataKey === 'principalPaid' || dataKey === 'principalRemaining') && !seenTypes.has('principal')) {
+                              type = 'principal';
+                            }
+
+                            if (type && entry.value !== null && entry.value !== undefined) {
+                              seenTypes.add(type);
+                              consolidatedEntries.push(entry);
+                            }
+                          });
+
                           return (
                             <div style={{
                               backgroundColor: 'white',
@@ -264,11 +294,18 @@ export default function ActiveLoanPage() {
                               }}>
                                 Month {label}
                               </p>
-                              {payload.map((entry, index) => {
+                              {consolidatedEntries.map((entry, index) => {
                                 let displayName = 'Unknown';
-                                if (entry.dataKey === 'balance') displayName = 'Balance';
-                                else if (entry.dataKey === 'interest') displayName = 'Interest';
-                                else if (entry.dataKey === 'principal') displayName = 'Principal';
+                                const dataKey = entry.dataKey;
+                                
+                                // Match legend labels exactly
+                                if (dataKey === 'balance' || dataKey === 'balancePaid' || dataKey === 'balanceRemaining') {
+                                  displayName = 'Balance';
+                                } else if (dataKey === 'interest' || dataKey === 'interestPaid' || dataKey === 'interestRemaining') {
+                                  displayName = 'Interest';
+                                } else if (dataKey === 'principal' || dataKey === 'principalPaid' || dataKey === 'principalRemaining') {
+                                  displayName = 'Principal';
+                                }
                                 
                                 return (
                                   <div key={index} style={{ 
@@ -453,11 +490,10 @@ export default function ActiveLoanPage() {
                   year: 'numeric' 
                 });
                 
-                // Calculate monthly values from cumulative data
-                const prevPayment = index === 0 ? actualSchedule[0] : actualSchedule[index];
-                const monthlyPrincipal = payment.cumulativePrincipal - prevPayment.cumulativePrincipal;
-                const monthlyInterest = payment.cumulativeInterest - prevPayment.cumulativeInterest;
-                const monthlyTotal = monthlyPrincipal + monthlyInterest;
+                // Fix the billing schedule calculation to use the actual monthly data
+                const monthlyPrincipal = payment.principalPaid;
+                const monthlyInterest = payment.interestPaid;
+                const monthlyTotal = payment.monthlyPayment;
                 
                 return (
                   <div key={index} className="px-6 py-4 grid grid-cols-4 gap-4 text-sm">
@@ -507,7 +543,7 @@ export default function ActiveLoanPage() {
                 <div className="space-y-3">
                   <div>
                     <p className="text-sm text-gray-500">Monthly Payment</p>
-                    <p className="text-xl font-bold text-gray-900">R349,364</p>
+                    <p className="text-xl font-bold text-gray-900">R353,046</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">First Debit Date</p>

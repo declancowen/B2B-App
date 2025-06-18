@@ -94,7 +94,7 @@ export default function BidDashboardPage() {
                 </div>
                 <div className="min-w-[60px]">
                   <p className="text-xs text-gray-500 uppercase tracking-wide">APR</p>
-                  <p className="text-sm font-semibold text-gray-900">8.50%</p>
+                  <p className="text-sm font-semibold text-gray-900">18.50%</p>
                 </div>
                 <div className="min-w-[100px]">
                   <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
