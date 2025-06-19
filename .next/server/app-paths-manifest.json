@@ -1,7 +1,8 @@
 {
-  "/lend/submission/page": "app/lend/submission/page.js",
-  "/borrow/request/page": "app/borrow/request/page.js",
-  "/lend/bid-dashboard/page": "app/lend/bid-dashboard/page.js",
-  "/lend/active-offer/page": "app/lend/active-offer/page.js",
-  "/lend/accepted-offer/page": "app/lend/accepted-offer/page.js"
+  "/borrow/pending-bid/page": "app/borrow/pending-bid/page.js",
+  "/borrow/bid-offer/page": "app/borrow/bid-offer/page.js",
+  "/borrow/bid-dashboard/page": "app/borrow/bid-dashboard/page.js",
+  "/borrow/next-steps/page": "app/borrow/next-steps/page.js",
+  "/borrow/debit-order/page": "app/borrow/debit-order/page.js",
+  "/borrow/contract/page": "app/borrow/contract/page.js"
 }

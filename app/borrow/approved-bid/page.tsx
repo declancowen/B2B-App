@@ -143,7 +143,15 @@ export default function ApprovedBidPage() {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Date Approved</p>
-                <p className="text-lg font-semibold text-gray-900">October 15, 2023</p>
+                <p className="text-lg font-semibold text-gray-900">15 October 2023</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500 mb-1">Due Date</p>
+                <p className="text-lg font-semibold text-gray-900">15 January 2024</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500 mb-1">Funds Required</p>
+                <p className="text-lg font-semibold text-gray-900">7 days</p>
               </div>
             </div>
           </div>
@@ -364,11 +372,11 @@ export default function ApprovedBidPage() {
             </div>
             <div className="divide-y divide-gray-200">
               {actualSchedule.slice(1, 7).map((payment, index) => {
-                const paymentDate = new Date(2023, 10 + index, 15); // Nov 15, 2023 + index months
-                const dateString = paymentDate.toLocaleDateString('en-US', { 
-                  month: 'short', 
-                  day: 'numeric', 
-                  year: 'numeric' 
+                const paymentDate = new Date(2024, 0 + index, 15); // Jan 15, 2024 + index months
+                const dateString = paymentDate.toLocaleDateString('en-GB', { 
+                  day: '2-digit', 
+                  month: '2-digit', 
+                  year: '2-digit' 
                 });
                 
                 // Use the actual monthly data from the schedule
@@ -392,8 +400,10 @@ export default function ApprovedBidPage() {
                 <div className="font-semibold text-gray-700 cursor-pointer hover:text-gray-900">View Full Schedule</div>
               </div>
             </div>
-                     </div>
-         </div>
+          </div>
+        </div>
+
+
 
         {/* Debit Order Details Section */}
         <div className="mb-10">

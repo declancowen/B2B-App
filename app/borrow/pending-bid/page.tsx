@@ -56,7 +56,7 @@ export default function PendingBidPage() {
           <h2 className="text-lg font-semibold text-gray-900 mb-6">Bid Details</h2>
           
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <p className="text-sm text-gray-500 mb-1">Requested Amount</p>
                 <p className="text-base font-medium text-gray-900">R5,000,000</p>
@@ -68,6 +68,10 @@ export default function PendingBidPage() {
               <div>
                 <p className="text-sm text-gray-500 mb-1">Loan Type</p>
                 <p className="text-base font-medium text-gray-900">Trade Finance</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 mb-1">Due Date</p>
+                <p className="text-base font-medium text-gray-900">20 February 2024</p>
               </div>
             </div>
           </div>

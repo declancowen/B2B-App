@@ -186,7 +186,15 @@ export default function ActiveLoanPage() {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Date Approved</p>
-                <p className="text-lg font-semibold text-gray-900">October 15, 2023</p>
+                <p className="text-lg font-semibold text-gray-900">15 October 2023</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500 mb-1">Start Date</p>
+                <p className="text-lg font-semibold text-gray-900">15 October 2023</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500 mb-1">Completion Date</p>
+                <p className="text-lg font-semibold text-gray-900">15 April 2024</p>
               </div>
             </div>
           </div>
@@ -474,33 +482,49 @@ export default function ActiveLoanPage() {
           
           <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
             <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
-              <div className="grid grid-cols-4 gap-4 text-sm font-medium text-gray-500">
+              <div className="grid grid-cols-5 gap-4 text-sm font-medium text-gray-500">
                 <div>Payment Date</div>
                 <div>Principal</div>
                 <div>Interest</div>
                 <div>Total Payment</div>
+                <div>Status</div>
               </div>
             </div>
             <div className="divide-y divide-gray-200">
               {actualSchedule.slice(1).map((payment, index) => {
                 const paymentDate = new Date(2023, 10 + index, 15); // Nov 15, 2023 + index months
-                const dateString = paymentDate.toLocaleDateString('en-US', { 
-                  month: 'short', 
-                  day: 'numeric', 
-                  year: 'numeric' 
+                const dateString = paymentDate.toLocaleDateString('en-GB', { 
+                  day: '2-digit', 
+                  month: '2-digit', 
+                  year: '2-digit' 
                 });
                 
-                // Fix the billing schedule calculation to use the actual monthly data
+                // Use the actual monthly data from the schedule
                 const monthlyPrincipal = payment.principalPaid;
                 const monthlyInterest = payment.interestPaid;
                 const monthlyTotal = payment.monthlyPayment;
+                const isPaid = index < 3; // First 3 payments are paid
                 
                 return (
-                  <div key={index} className="px-6 py-4 grid grid-cols-4 gap-4 text-sm">
+                  <div key={index} className="px-6 py-4 grid grid-cols-5 gap-4 text-sm">
                     <div className="font-medium text-gray-900">{dateString}</div>
                     <div className="text-gray-900">R{monthlyPrincipal.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
                     <div className="text-gray-900">R{monthlyInterest.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
                     <div className="font-semibold text-gray-900">R{monthlyTotal.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                    <div className="flex items-center">
+                      {isPaid ? (
+                        <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-green-100 text-green-800">
+                          <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                          Paid
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-600">
+                          Pending
+                        </span>
+                      )}
+                    </div>
                   </div>
                 );
               })}

@@ -91,6 +91,32 @@ export default function BidOfferPage() {
           </div>
         </div>
 
+        {/* Offer Details Section */}
+        <div className="mb-10">
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Offer Details</h2>
+          
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <p className="text-sm font-medium text-gray-500 mb-1">Loan Amount</p>
+                <p className="text-lg font-semibold text-gray-900">R5,000,000</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500 mb-1">Interest Rate</p>
+                <p className="text-lg font-semibold text-gray-900">14.00% p.a.</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500 mb-1">Due Date</p>
+                <p className="text-lg font-semibold text-gray-900">15 March 2024</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500 mb-1">Loan Term</p>
+                <p className="text-lg font-semibold text-gray-900">12 months</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Loan Amortization Section */}
         <div className="mb-10">
           <h2 className="text-lg font-semibold text-gray-900 mb-6">Loan Amortization</h2>
@@ -290,35 +316,47 @@ export default function BidOfferPage() {
           </div>
         </div>
 
-        {/* Loan Details Section */}
+        {/* Billing Schedule Section */}
         <div className="mb-10">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">Loan Details</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Billing Schedule</h2>
           
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <p className="text-sm text-gray-500 mb-1">Loan Amount</p>
-                <p className="text-lg font-semibold text-gray-900">R5,000,000</p>
+          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
+              <div className="grid grid-cols-4 gap-4 text-sm font-medium text-gray-500">
+                <div>Payment Date</div>
+                <div>Principal</div>
+                <div>Interest</div>
+                <div>Total Payment</div>
               </div>
-              <div>
-                <p className="text-sm text-gray-500 mb-1">Interest Rate</p>
-                <p className="text-lg font-semibold text-gray-900">14.00% APR</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 mb-1">Loan Term</p>
-                <p className="text-lg font-semibold text-gray-900">12 months</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 mb-1">Loan Provider</p>
-                <p className="text-lg font-semibold text-gray-900">First National Bank</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 mb-1">Monthly Payment</p>
-                <p className="text-lg font-semibold text-gray-900">R427,083</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 mb-1">Total Interest Paid</p>
-                <p className="text-lg font-semibold text-gray-900">R125,000</p>
+            </div>
+            <div className="divide-y divide-gray-200">
+              {actualSchedule.slice(1, 7).map((payment, index) => {
+                const paymentDate = new Date(2024, 2 + index, 15); // Mar 15, 2024 + index months
+                const dateString = paymentDate.toLocaleDateString('en-GB', { 
+                  day: '2-digit', 
+                  month: '2-digit', 
+                  year: '2-digit' 
+                });
+                
+                // Use the actual monthly data from the schedule
+                const monthlyPrincipal = payment.principalPaid;
+                const monthlyInterest = payment.interestPaid;
+                const monthlyTotal = payment.monthlyPayment;
+                
+                return (
+                  <div key={index} className="px-6 py-4 grid grid-cols-4 gap-4 text-sm">
+                    <div className="font-medium text-gray-900">{dateString}</div>
+                    <div className="text-gray-900">R{monthlyPrincipal.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                    <div className="text-gray-900">R{monthlyInterest.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                    <div className="font-semibold text-gray-900">R{monthlyTotal.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                  </div>
+                );
+              })}
+              <div className="px-6 py-4 grid grid-cols-4 gap-4 text-sm bg-gray-50">
+                <div className="font-medium text-gray-900">...</div>
+                <div className="text-gray-600 italic">{12 - 6} more payments</div>
+                <div className="text-gray-600 italic">...</div>
+                <div className="font-semibold text-gray-700 cursor-pointer hover:text-gray-900">View Full Schedule</div>
               </div>
             </div>
           </div>

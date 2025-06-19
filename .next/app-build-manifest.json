@@ -90,6 +90,21 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/borrow/request/page.js"
+    ],
+    "/borrow/submit/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/submit/page.js"
+    ],
+    "/borrow/next-steps/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/next-steps/page.js"
+    ],
+    "/borrow/completed-loan/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/completed-loan/page.js"
     ]
   }
 }
