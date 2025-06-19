@@ -40,6 +40,56 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/borrow/approved-bid/page.js"
+    ],
+    "/borrow/pending-bid/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/pending-bid/page.js"
+    ],
+    "/borrow/bid-offer/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/bid-offer/page.js"
+    ],
+    "/lend/bid-dashboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/lend/bid-dashboard/page.js"
+    ],
+    "/lend/bid-offer/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/lend/bid-offer/page.js"
+    ],
+    "/borrow/contract/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/contract/page.js"
+    ],
+    "/borrow/debit-order/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/debit-order/page.js"
+    ],
+    "/lend/submission/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/lend/submission/page.js"
+    ],
+    "/lend/active-offer/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/lend/active-offer/page.js"
+    ],
+    "/lend/accepted-offer/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/lend/accepted-offer/page.js"
+    ],
+    "/borrow/request/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/request/page.js"
     ]
   }
 }

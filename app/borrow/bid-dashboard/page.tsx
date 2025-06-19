@@ -1,9 +1,11 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function BidDashboardPage() {
   const router = useRouter()
+  const [activeTab, setActiveTab] = useState<'approved' | 'pending'>('approved')
 
   const handleFinanceNow = () => {
     console.log('Finance Now clicked')
@@ -66,108 +68,131 @@ export default function BidDashboardPage() {
       <div className="flex-1 px-24 py-8">
         <h1 className="text-2xl font-semibold text-gray-900 mb-8">Bids</h1>
         
-        {/* Approved Bids Section */}
-        <div className="mb-10">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Approved Bids</h2>
-          <div className="space-y-4">
-          {/* Bridging Finance Loan */}
-          <div 
-                            onClick={() => router.push('/borrow/approved-bid')}
-            className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer"
-          >
-            <div className="flex justify-between items-center mb-6">
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="m15 14 5-5-5-5"/>
-                    <path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5v0A5.5 5.5 0 0 0 9.5 20H13"/>
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">Bridging Finance</p>
-                  <p className="text-3xl font-bold text-gray-900">R10,000,000</p>
-                </div>
-              </div>
-              <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center shadow-sm">
-                <span className="text-white text-base font-bold">SB</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-              <div className="flex items-center space-x-8">
-                <div className="min-w-[80px]">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide">Term</p>
-                  <p className="text-sm font-semibold text-gray-900">12 months</p>
-                </div>
-                <div className="min-w-[60px]">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide">APR</p>
-                  <p className="text-sm font-semibold text-gray-900">18.50%</p>
-                </div>
-                <div className="min-w-[100px]">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
-                  <p className="text-sm font-semibold text-gray-900">Standard Bank</p>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
-                <span className="text-sm font-medium text-blue-600">Awaiting Dispersement</span>
-              </div>
-            </div>
-                      </div>
-          </div>
+        {/* Tab Navigation */}
+        <div className="border-b border-gray-200 mb-8">
+          <nav className="-mb-px flex space-x-8">
+            <button
+              onClick={() => setActiveTab('approved')}
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                activeTab === 'approved'
+                  ? 'border-black text-black'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Approved Bids
+            </button>
+            <button
+              onClick={() => setActiveTab('pending')}
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                activeTab === 'pending'
+                  ? 'border-black text-black'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Pending Bids
+            </button>
+          </nav>
         </div>
 
-        {/* Pending Bids Section */}
-        <div className="mb-10">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Pending Bids</h2>
-          <div className="space-y-4">
-            {/* Trade Finance Loan */}
-          <div 
-            onClick={() => router.push('/borrow/pending-bid')}
-            className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer"
-          >
-            <div className="flex justify-between items-center mb-6">
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
-                  <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="m16 3 4 4-4 4"/>
-                    <path d="M20 7H4"/>
-                    <path d="m8 21-4-4 4-4"/>
-                    <path d="M4 17h16"/>
-                  </svg>
+        {/* Tab Content */}
+        <div className="mt-6">
+          {activeTab === 'approved' ? (
+            <div className="space-y-4">
+              {/* Bridging Finance Loan */}
+              <div 
+                onClick={() => router.push('/borrow/approved-bid')}
+                className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer"
+              >
+                <div className="flex justify-between items-center mb-6">
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m15 14 5-5-5-5"/>
+                        <path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5v0A5.5 5.5 0 0 0 9.5 20H13"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">Bridging Finance</p>
+                      <p className="text-3xl font-bold text-gray-900">R10,000,000</p>
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center shadow-sm">
+                    <span className="text-white text-base font-bold">SB</span>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">Trade Finance</p>
-                  <p className="text-3xl font-bold text-gray-900">R5,000,000</p>
+                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                  <div className="flex items-center space-x-8">
+                    <div className="min-w-[80px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Term</p>
+                      <p className="text-sm font-semibold text-gray-900">12 months</p>
+                    </div>
+                    <div className="min-w-[60px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">APR</p>
+                      <p className="text-sm font-semibold text-gray-900">18.50%</p>
+                    </div>
+                    <div className="min-w-[100px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
+                      <p className="text-sm font-semibold text-gray-900">Standard Bank</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
+                    <span className="text-sm font-medium text-blue-600">Awaiting Dispersement</span>
+                  </div>
                 </div>
-              </div>
-              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-                <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-            </div>
-            <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-              <div className="flex items-center space-x-8">
-                <div className="min-w-[80px]">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide">Term</p>
-                  <p className="text-sm font-semibold text-gray-900">12 months</p>
-                </div>
-                <div className="min-w-[60px]">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide">APR</p>
-                  <p className="text-sm font-semibold text-gray-900">TBD</p>
-                </div>
-                <div className="min-w-[100px]">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
-                  <p className="text-sm font-semibold text-gray-900">TBD</p>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <div className="w-2 h-2 bg-orange-400 rounded-full mr-2"></div>
-                <span className="text-sm font-medium text-orange-600">Pending</span>
               </div>
             </div>
-          </div>
-        </div>
+          ) : (
+            <div className="space-y-4">
+              {/* Trade Finance Loan */}
+              <div 
+                onClick={() => router.push('/borrow/pending-bid')}
+                className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer"
+              >
+                <div className="flex justify-between items-center mb-6">
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m16 3 4 4-4 4"/>
+                        <path d="M20 7H4"/>
+                        <path d="m8 21-4-4 4-4"/>
+                        <path d="M4 17h16"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">Trade Finance</p>
+                      <p className="text-3xl font-bold text-gray-900">R5,000,000</p>
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                  <div className="flex items-center space-x-8">
+                    <div className="min-w-[80px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Term</p>
+                      <p className="text-sm font-semibold text-gray-900">12 months</p>
+                    </div>
+                    <div className="min-w-[60px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">APR</p>
+                      <p className="text-sm font-semibold text-gray-900">TBD</p>
+                    </div>
+                    <div className="min-w-[100px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
+                      <p className="text-sm font-semibold text-gray-900">TBD</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mr-2"></div>
+                    <span className="text-sm font-medium text-orange-600">Pending</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
