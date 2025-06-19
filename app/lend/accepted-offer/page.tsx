@@ -49,6 +49,11 @@ export default function ApprovedBidPage() {
     router.push('/lend/submission')
   }
 
+  const handleSignContract = () => {
+    console.log('Navigating to contract signing...')
+    router.push('/lend/contract')
+  }
+
   // Function to generate payment dates starting from due date
   const getPaymentDates = () => {
     const startDate = new Date('2024-01-15') // Due date
@@ -91,7 +96,10 @@ export default function ApprovedBidPage() {
               <button className="px-4 py-2 bg-gray-200 text-black text-sm font-medium rounded-lg hover:bg-gray-300 transition-colors">
                 Cancel Bid
               </button>
-              <button className="px-4 py-2 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors">
+              <button 
+                onClick={handleSignContract}
+                className="px-4 py-2 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
+              >
                 Sign Contract
               </button>
             </div>
