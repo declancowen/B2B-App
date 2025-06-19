@@ -111,6 +111,11 @@ export default function PendingBidPage() {
                       </svg>
                       Fast approval
                     </div>
+                    <div className="flex items-center gap-2">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-teal-100 text-teal-800">
+                        Personal Suretyship
+                      </span>
+                    </div>
                   </div>
                 </div>
                 
@@ -141,17 +146,18 @@ export default function PendingBidPage() {
           <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
             <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-8 py-4 border-b border-gray-200">
               <div className="grid grid-cols-12 text-sm font-semibold text-gray-700">
-                <div className="col-span-7">Lender</div>
+                <div className="col-span-5">Lender</div>
+                <div className="col-span-3">Lending Structure</div>
                 <div className="col-span-2 text-right">APR</div>
-                <div className="col-span-3 text-right">Action</div>
+                <div className="col-span-2 text-right">Action</div>
               </div>
             </div>
             
             <div className="divide-y divide-gray-100">
-              {/* Second Federal Credit Union */}
+              {/* Second Federal Credit Union - 14.50% APR - Second lowest rate */}
               <div className="px-8 py-6 hover:bg-gray-50 transition-colors duration-150">
                 <div className="grid grid-cols-12 items-center">
-                  <div className="col-span-7 flex items-center">
+                  <div className="col-span-5 flex items-center">
                     <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mr-4 shadow-sm">
                       <span className="text-white text-sm font-bold">SF</span>
                     </div>
@@ -160,11 +166,24 @@ export default function PendingBidPage() {
                       <p className="text-xs text-gray-500">Traditional banking</p>
                     </div>
                   </div>
+                  <div className="col-span-3">
+                    <div className="flex flex-wrap gap-1">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                        Securitisation
+                      </span>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                        Cession of Debt
+                      </span>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                        Personal Suretyship
+                      </span>
+                    </div>
+                  </div>
                   <div className="col-span-2 text-right">
                     <p className="text-xl font-bold text-gray-900">14.50%</p>
                     <p className="text-xs text-gray-500">APR</p>
                   </div>
-                  <div className="col-span-3 text-right">
+                  <div className="col-span-2 text-right">
                     <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150">
                       View Details
                     </button>
@@ -172,10 +191,10 @@ export default function PendingBidPage() {
                 </div>
               </div>
 
-              {/* Community Savings Bank */}
+              {/* Community Savings Bank - 14.75% APR */}
               <div className="px-8 py-6 hover:bg-gray-50 transition-colors duration-150">
                 <div className="grid grid-cols-12 items-center">
-                  <div className="col-span-7 flex items-center">
+                  <div className="col-span-5 flex items-center">
                     <div className="w-12 h-12 bg-teal-600 rounded-lg flex items-center justify-center mr-4 shadow-sm">
                       <span className="text-white text-sm font-bold">CS</span>
                     </div>
@@ -184,35 +203,21 @@ export default function PendingBidPage() {
                       <p className="text-xs text-gray-500">Local community bank</p>
                     </div>
                   </div>
+                  <div className="col-span-3">
+                    <div className="flex flex-wrap gap-1">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                        Securitisation
+                      </span>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                        Cession of Debt
+                      </span>
+                    </div>
+                  </div>
                   <div className="col-span-2 text-right">
                     <p className="text-xl font-bold text-gray-900">14.75%</p>
                     <p className="text-xs text-gray-500">APR</p>
                   </div>
-                  <div className="col-span-3 text-right">
-                    <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150">
-                      View Details
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Regional Trust */}
-              <div className="px-8 py-6 hover:bg-gray-50 transition-colors duration-150">
-                <div className="grid grid-cols-12 items-center">
-                  <div className="col-span-7 flex items-center">
-                    <div className="w-12 h-12 bg-teal-700 rounded-lg flex items-center justify-center mr-4 shadow-sm">
-                      <span className="text-white text-sm font-bold">RT</span>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-900">Regional Trust</p>
-                      <p className="text-xs text-gray-500">Regional financial services</p>
-                    </div>
-                  </div>
                   <div className="col-span-2 text-right">
-                    <p className="text-xl font-bold text-gray-900">15.25%</p>
-                    <p className="text-xs text-gray-500">APR</p>
-                  </div>
-                  <div className="col-span-3 text-right">
                     <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150">
                       View Details
                     </button>
@@ -220,10 +225,10 @@ export default function PendingBidPage() {
                 </div>
               </div>
 
-              {/* United Financial Group */}
+              {/* United Financial Group - 15.25% APR */}
               <div className="px-8 py-6 hover:bg-gray-50 transition-colors duration-150">
                 <div className="grid grid-cols-12 items-center">
-                  <div className="col-span-7 flex items-center">
+                  <div className="col-span-5 flex items-center">
                     <div className="w-12 h-12 bg-teal-800 rounded-lg flex items-center justify-center mr-4 shadow-sm">
                       <span className="text-white text-sm font-bold">UF</span>
                     </div>
@@ -232,11 +237,52 @@ export default function PendingBidPage() {
                       <p className="text-xs text-gray-500">Corporate finance specialist</p>
                     </div>
                   </div>
+                  <div className="col-span-3">
+                    <div className="flex flex-wrap gap-1">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                        Securitisation
+                      </span>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                        Cession of Debt
+                      </span>
+                    </div>
+                  </div>
+                  <div className="col-span-2 text-right">
+                    <p className="text-xl font-bold text-gray-900">15.25%</p>
+                    <p className="text-xs text-gray-500">APR</p>
+                  </div>
+                  <div className="col-span-2 text-right">
+                    <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Regional Trust - 16.00% APR - Highest rate */}
+              <div className="px-8 py-6 hover:bg-gray-50 transition-colors duration-150">
+                <div className="grid grid-cols-12 items-center">
+                  <div className="col-span-5 flex items-center">
+                    <div className="w-12 h-12 bg-teal-700 rounded-lg flex items-center justify-center mr-4 shadow-sm">
+                      <span className="text-white text-sm font-bold">RT</span>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Regional Trust</p>
+                      <p className="text-xs text-gray-500">Regional financial services</p>
+                    </div>
+                  </div>
+                  <div className="col-span-3">
+                    <div className="flex flex-wrap gap-1">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                        Unsecured
+                      </span>
+                    </div>
+                  </div>
                   <div className="col-span-2 text-right">
                     <p className="text-xl font-bold text-gray-900">16.00%</p>
                     <p className="text-xs text-gray-500">APR</p>
                   </div>
-                  <div className="col-span-3 text-right">
+                  <div className="col-span-2 text-right">
                     <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150">
                       View Details
                     </button>

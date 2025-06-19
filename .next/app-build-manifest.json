@@ -36,11 +36,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/borrow/active-loan/page.js"
     ],
-    "/borrow/approved-bid/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/borrow/approved-bid/page.js"
-    ],
     "/borrow/pending-bid/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -121,10 +116,50 @@
       "static/chunks/main-app.js",
       "static/chunks/app/lend/approval/page.js"
     ],
-    "/not-found": [
+    "/borrow/register/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
+      "static/chunks/app/borrow/register/page.js"
+    ],
+    "/borrow/callback/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/callback/page.js"
+    ],
+    "/borrow/verify/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/verify/page.js"
+    ],
+    "/borrow/document-upload/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/document-upload/page.js"
+    ],
+    "/borrow/confirmation/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/confirmation/page.js"
+    ],
+    "/borrow/terms/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/terms/page.js"
+    ],
+    "/borrow/bid-confirmation/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/bid-confirmation/page.js"
+    ],
+    "/borrow/approved-bid-2/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/approved-bid-2/page.js"
+    ],
+    "/borrow/approved-bid/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/borrow/approved-bid/page.js"
     ]
   }
 }

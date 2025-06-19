@@ -29,7 +29,6 @@ export default function SignInPage() {
               id="email"
               name="email"
               type="email"
-              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
@@ -45,7 +44,6 @@ export default function SignInPage() {
               id="password"
               name="password"
               type="password"
-              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400"

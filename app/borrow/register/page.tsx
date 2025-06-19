@@ -24,13 +24,13 @@ export default function RegisterPage() {
       email 
     })
     // Navigate to callback page after registration
-          router.push('/borrow/callback')
+    router.push('/borrow/callback')
   }
 
   return (
     <div className="min-h-screen bg-white px-4 py-8">
       <div className="max-w-2xl mx-auto">
-        <ProgressBar currentStep={1} totalSteps={6} />
+        <ProgressBar currentStep={1} totalSteps={5} />
         <div className="mb-8">
           <h1 className="text-2xl font-semibold text-gray-900 mb-6">Register Your Business</h1>
         </div>

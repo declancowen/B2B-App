@@ -130,19 +130,27 @@ export default function RequestPage() {
 
   const handleNext = () => {
     console.log('Finance request:', { financeType, loanValue, term })
-    // Navigate to submission page
-    router.push('/borrow/submit')
+    // Navigate to document upload page
+    router.push('/borrow/document-upload')
   }
 
   return (
     <div className="min-h-screen bg-white px-4 py-8">
       <div className="max-w-6xl mx-auto">
-        {/* Breadcrumb Navigation */}
+        {/* Progress Bar */}
         <div className="mb-12 mt-4">
+          <p className="text-sm text-gray-600 mb-4">Step 1 of 3</p>
+          <div className="w-full bg-gray-200 rounded-full h-2">
+            <div className="bg-black h-2 rounded-full" style={{ width: '33.33%' }}></div>
+          </div>
+        </div>
+
+        {/* Breadcrumb Navigation */}
+        <div className="mb-12">
           <p className="text-sm text-gray-500">
-            <span className="text-gray-400">Loans</span>
+            <span className="text-gray-400">Application</span>
             <span className="mx-2">/</span>
-            <span className="text-gray-900">Request</span>
+            <span className="text-gray-900">Loan</span>
           </p>
         </div>
 

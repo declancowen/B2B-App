@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 export default function BidDashboardPage() {
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState<'approved' | 'pending'>('approved')
+  const [activeTab, setActiveTab] = useState<'approved' | 'pending' | 'inProgress'>('approved')
 
   const handleFinanceNow = () => {
     console.log('Finance Now clicked')
@@ -66,7 +66,16 @@ export default function BidDashboardPage() {
 
       {/* Main Content */}
       <div className="flex-1 px-24 py-8">
-        <h1 className="text-2xl font-semibold text-gray-900 mb-8">Bids</h1>
+        {/* Header with title and New Application button */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-2xl font-semibold text-gray-900">Bids</h1>
+          <button
+            onClick={() => router.push('/borrow/request')}
+            className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 font-semibold text-sm transition-colors duration-200"
+          >
+            New Application
+          </button>
+        </div>
         
         {/* Tab Navigation */}
         <div className="border-b border-gray-200 mb-8">
@@ -79,12 +88,22 @@ export default function BidDashboardPage() {
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
-              Approved Bids
+              Accepted Bids
             </button>
             <button
               onClick={() => setActiveTab('pending')}
               className={`py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === 'pending'
+                  ? 'border-black text-black'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Approved Bids
+            </button>
+            <button
+              onClick={() => setActiveTab('inProgress')}
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                activeTab === 'inProgress'
                   ? 'border-black text-black'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
@@ -142,6 +161,54 @@ export default function BidDashboardPage() {
                 </div>
               </div>
             </div>
+          ) : activeTab === 'pending' ? (
+            <div className="space-y-4">
+              {/* Trade Finance Loan */}
+              <div 
+                onClick={() => router.push('/borrow/approved-bid-2')}
+                className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer"
+              >
+                <div className="flex justify-between items-center mb-6">
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m16 3 4 4-4 4"/>
+                        <path d="M20 7H4"/>
+                        <path d="m8 21-4-4 4-4"/>
+                        <path d="M4 17h16"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">Trade Finance</p>
+                      <p className="text-3xl font-bold text-gray-900">R5,000,000</p>
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center shadow-sm">
+                    <span className="text-white text-base font-bold">FN</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                  <div className="flex items-center space-x-8">
+                    <div className="min-w-[80px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Term</p>
+                      <p className="text-sm font-semibold text-gray-900">12 months</p>
+                    </div>
+                    <div className="min-w-[60px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">APR</p>
+                      <p className="text-sm font-semibold text-gray-900">14.00%</p>
+                    </div>
+                    <div className="min-w-[100px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
+                      <p className="text-sm font-semibold text-gray-900">First National Bank</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full mr-2"></div>
+                    <span className="text-sm font-medium text-yellow-600">Awaiting Bid Acceptance</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           ) : (
             <div className="space-y-4">
               {/* Trade Finance Loan */}
@@ -187,7 +254,7 @@ export default function BidDashboardPage() {
                   </div>
                   <div className="flex items-center">
                     <div className="w-2 h-2 bg-orange-400 rounded-full mr-2"></div>
-                    <span className="text-sm font-medium text-orange-600">Pending</span>
+                    <span className="text-sm font-medium text-orange-600">Receiving Bids</span>
                   </div>
                 </div>
               </div>

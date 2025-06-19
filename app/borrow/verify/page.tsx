@@ -8,14 +8,14 @@ export default function VerifyPage() {
 
   const handleStartVerification = () => {
     console.log('Starting verification...')
-    // Navigate to document upload page after verification
-    router.push('/borrow/document-upload')
+    // Navigate to confirmation page after verification
+    router.push('/borrow/confirmation')
   }
 
   return (
     <div className="min-h-screen bg-white px-4 py-8">
       <div className="max-w-2xl mx-auto">
-        <ProgressBar currentStep={3} totalSteps={6} />
+        <ProgressBar currentStep={3} totalSteps={5} />
         <div className="mb-8">
           <h1 className="text-2xl font-semibold text-gray-900 mb-6">Verify your identity</h1>
           <p className="text-gray-700 text-base leading-relaxed">
