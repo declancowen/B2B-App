@@ -1,7 +1,8 @@
 {
-  "/document-dashboard/page": "app/document-dashboard/page.js",
-  "/bid-dashboard/page": "app/bid-dashboard/page.js",
-  "/approved-bid/page": "app/approved-bid/page.js",
-  "/pending-bid/page": "app/pending-bid/page.js",
-  "/active-loan/page": "app/active-loan/page.js"
+  "/borrow/bid-dashboard/page": "app/borrow/bid-dashboard/page.js",
+  "/borrow/company-dashboard/page": "app/borrow/company-dashboard/page.js",
+  "/borrow/loan-dashboard/page": "app/borrow/loan-dashboard/page.js",
+  "/borrow/document-dashboard/page": "app/borrow/document-dashboard/page.js",
+  "/borrow/active-loan/page": "app/borrow/active-loan/page.js",
+  "/borrow/approved-bid/page": "app/borrow/approved-bid/page.js"
 }

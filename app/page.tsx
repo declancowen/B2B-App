@@ -1,5 +1,14 @@
-import { redirect } from 'next/navigation'
+'use client'
+
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function IndexPage() {
-  redirect('/sign-in')
+  const router = useRouter()
+
+  useEffect(() => {
+    router.push('/borrow/sign-in')
+  }, [router])
+
+  return null
 } 

@@ -6,50 +6,40 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/bid-dashboard/page": [
+    "/borrow/sign-in/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/bid-dashboard/page.js"
+      "static/chunks/app/borrow/sign-in/page.js"
     ],
-    "/loan-dashboard/page": [
+    "/borrow/loan-dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/loan-dashboard/page.js"
+      "static/chunks/app/borrow/loan-dashboard/page.js"
     ],
-    "/active-loan/page": [
+    "/borrow/bid-dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/active-loan/page.js"
+      "static/chunks/app/borrow/bid-dashboard/page.js"
     ],
-    "/completed-loan/page": [
+    "/borrow/company-dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/completed-loan/page.js"
+      "static/chunks/app/borrow/company-dashboard/page.js"
     ],
-    "/approved-bid/page": [
+    "/borrow/document-dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/approved-bid/page.js"
+      "static/chunks/app/borrow/document-dashboard/page.js"
     ],
-    "/pending-bid/page": [
+    "/borrow/active-loan/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/pending-bid/page.js"
+      "static/chunks/app/borrow/active-loan/page.js"
     ],
-    "/bid-offer/page": [
+    "/borrow/approved-bid/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/bid-offer/page.js"
-    ],
-    "/company-dashboard/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/company-dashboard/page.js"
-    ],
-    "/document-dashboard/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/document-dashboard/page.js"
+      "static/chunks/app/borrow/approved-bid/page.js"
     ]
   }
 }
