@@ -40,9 +40,9 @@ export default function ActiveLoanPage() {
 
   // Pie chart data for loan repayment breakdown
   const pieData = [
-    { name: 'Principal Amount', value: loanAmount, color: '#d1d5db' },
+    { name: 'Capital Received', value: loanAmount * 0.98, color: '#d1d5db' },
     { name: 'Total Interest', value: actualSchedule[actualSchedule.length - 1].cumulativeInterest, color: '#6b7280' },
-    { name: 'Service Fee', value: loanAmount * 0.01, color: '#000000' }
+    { name: 'Service Fee', value: loanAmount * 0.02, color: '#000000' }
   ];
 
   // Calculate schedule for summary statistics (using actual data)
@@ -395,12 +395,12 @@ export default function ActiveLoanPage() {
             <div className="p-6 pt-4">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm text-gray-500 mb-1">Principal Amount</p>
-                  <p className="text-lg font-bold text-gray-900">R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
+                  <p className="text-sm text-gray-500 mb-1">Capital Received</p>
+                  <p className="text-lg font-bold text-gray-900">R{(loanAmount * 0.98).toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
                   <p className="text-sm text-gray-500 mb-1">Service Fee</p>
-                  <p className="text-lg font-bold text-gray-900">R{(loanAmount * 0.01).toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
+                  <p className="text-lg font-bold text-gray-900">R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
                   <p className="text-sm text-gray-500 mb-1">Total Interest</p>

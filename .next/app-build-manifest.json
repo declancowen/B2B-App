@@ -175,6 +175,26 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/borrow/approved-bid-3/page.js"
+    ],
+    "/lend/invoices/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/lend/invoices/page.js"
+    ],
+    "/lend/loan-dashboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/lend/loan-dashboard/page.js"
+    ],
+    "/lend/completed-loan/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/lend/completed-loan/page.js"
+    ],
+    "/lend/active-loan/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/lend/active-loan/page.js"
     ]
   }
 }
