@@ -66,7 +66,16 @@ export default function LoanDashboardPage() {
 
       {/* Main Content */}
       <div className="flex-1 px-24 py-8">
-        <h1 className="text-2xl font-semibold text-gray-900 mb-8">Loans</h1>
+        {/* Header with title and New Application button */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-2xl font-semibold text-gray-900">Loans</h1>
+          <button
+            onClick={() => router.push('/borrow/request')}
+            className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 font-semibold text-sm transition-colors duration-200"
+          >
+            New Application
+          </button>
+        </div>
         
         {/* Tab Navigation */}
         <div className="border-b border-gray-200 mb-8">

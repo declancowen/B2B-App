@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 export default function BidDashboardPage() {
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState<'approved' | 'pending' | 'inProgress'>('approved')
+  const [activeTab, setActiveTab] = useState<'approved' | 'pending' | 'inProgress' | 'cancelled'>('approved')
 
   const handleFinanceNow = () => {
     console.log('Finance Now clicked')
@@ -109,6 +109,16 @@ export default function BidDashboardPage() {
               }`}
             >
               Pending Bids
+            </button>
+            <button
+              onClick={() => setActiveTab('cancelled')}
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                activeTab === 'cancelled'
+                  ? 'border-black text-black'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Cancelled Bids
             </button>
           </nav>
         </div>
@@ -265,6 +275,19 @@ export default function BidDashboardPage() {
                     <span className="text-sm font-medium text-orange-600">Under Review</span>
                   </div>
                 </div>
+              </div>
+            </div>
+          ) : activeTab === 'cancelled' ? (
+            <div className="space-y-4">
+              {/* Empty state for cancelled bids */}
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No cancelled bids</h3>
+                <p className="text-gray-500">You don't have any cancelled bids at the moment.</p>
               </div>
             </div>
           ) : (

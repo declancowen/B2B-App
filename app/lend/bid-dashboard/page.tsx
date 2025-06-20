@@ -6,11 +6,11 @@ import { useRouter, useSearchParams } from 'next/navigation'
 export default function LenderBidDashboardPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [activeTab, setActiveTab] = useState<'leads' | 'prospects' | 'opportunities'>('leads')
+  const [activeTab, setActiveTab] = useState<'leads' | 'prospects' | 'opportunities' | 'cancelled'>('leads')
 
   useEffect(() => {
     const tab = searchParams.get('tab')
-    if (tab && (tab === 'leads' || tab === 'prospects' || tab === 'opportunities')) {
+    if (tab && (tab === 'leads' || tab === 'prospects' || tab === 'opportunities' || tab === 'cancelled')) {
       setActiveTab(tab)
     }
   }, [searchParams])
@@ -65,6 +65,8 @@ export default function LenderBidDashboardPage() {
       return dummyCompanies.filter(company => company.id === 1 || company.id === 2) // TechCorp Solutions and Green Energy Ltd
     } else if (activeTab === 'opportunities') {
       return dummyCompanies.filter(company => company.id === 1) // Only TechCorp Solutions
+    } else if (activeTab === 'cancelled') {
+      return dummyCompanies.filter(company => company.id === 3 || company.id === 4) // Manufacturing Plus and Retail Dynamics
     }
     return dummyCompanies // Show all companies for other tabs
   }
@@ -173,18 +175,20 @@ export default function LenderBidDashboardPage() {
                       <circle cx="12" cy="12" r="3"/>
                     </svg>
                   </button>
-                  <button
-                    onClick={() => handleDelete(company.id)}
-                    className="bg-red-600 text-white p-2 rounded-md hover:bg-red-700 transition-colors duration-200"
-                    title="Delete"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="3,6 5,6 21,6"/>
-                      <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"/>
-                      <line x1="10" y1="11" x2="10" y2="17"/>
-                      <line x1="14" y1="11" x2="14" y2="17"/>
-                    </svg>
-                  </button>
+                  {activeTab !== 'opportunities' && activeTab !== 'cancelled' && (
+                    <button
+                      onClick={() => handleDelete(company.id)}
+                      className="bg-red-600 text-white p-2 rounded-md hover:bg-red-700 transition-colors duration-200"
+                      title="Delete"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="3,6 5,6 21,6"/>
+                        <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"/>
+                        <line x1="10" y1="11" x2="10" y2="17"/>
+                        <line x1="14" y1="11" x2="14" y2="17"/>
+                      </svg>
+                    </button>
+                  )}
                 </div>
               </td>
             </tr>
@@ -274,6 +278,16 @@ export default function LenderBidDashboardPage() {
               }`}
             >
               Opportunities
+            </button>
+            <button
+              onClick={() => setActiveTab('cancelled')}
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                activeTab === 'cancelled'
+                  ? 'border-black text-black'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Cancelled
             </button>
           </nav>
         </div>
