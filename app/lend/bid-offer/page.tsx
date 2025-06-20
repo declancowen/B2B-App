@@ -1013,63 +1013,6 @@ export default function ApprovedBidPage() {
 
 
 
-        {/* Lender Bank Details Section */}
-        <div className="mb-10">
-          <h2 className="text-base font-semibold text-gray-900 mb-6">Lender Bank Details</h2>
-          
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Bank Information */}
-              <div>
-                <h3 className="text-base font-semibold text-gray-900 mb-4">Bank Information</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-sm text-gray-500">Bank Name</p>
-                    <p className="text-base font-medium text-gray-900">Standard Bank</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Branch Code</p>
-                    <p className="text-base font-medium text-gray-900">051001</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Account Holder</p>
-                    <p className="text-base font-medium text-gray-900">Standard Bank Corporate Finance</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Account Type</p>
-                    <p className="text-base font-medium text-gray-900">Corporate Current Account</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Account Details */}
-              <div>
-                <h3 className="text-base font-semibold text-gray-900 mb-4">Account Details</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-sm text-gray-500">Account Number</p>
-                    <p className="text-base font-medium text-gray-900">••••••••••5678</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Swift Code</p>
-                    <p className="text-base font-medium text-gray-900">SBZAZAJJ</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Reference</p>
-                    <p className="text-base font-medium text-gray-900">LN-2023-00123-TECH</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Status</p>
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                      <p className="text-base font-medium text-green-700">Verified</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
 
           </>

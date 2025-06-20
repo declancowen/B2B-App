@@ -39,23 +39,23 @@ export default function ConfirmationPage() {
               <tbody className="divide-y divide-gray-200">
                 <tr>
                   <td className="px-4 py-4 text-sm font-medium text-gray-900 w-1/3">Company Name</td>
-                  <td className="px-4 py-4 text-sm text-gray-600">Tech Solutions Inc.</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Mzansi Manufacturing (Pty) Ltd</td>
                 </tr>
                 <tr>
                   <td className="px-4 py-4 text-sm font-medium text-gray-900">Company Number</td>
-                  <td className="px-4 py-4 text-sm text-gray-600">987654321</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">2019/456789/07</td>
                 </tr>
                 <tr>
                   <td className="px-4 py-4 text-sm font-medium text-gray-900">Registered Address</td>
-                  <td className="px-4 py-4 text-sm text-gray-600">456 Innovation Avenue, Tech City, CA 90210</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">15 Nelson Mandela Boulevard, Woodstock, Cape Town, 7925</td>
                 </tr>
                 <tr>
                   <td className="px-4 py-4 text-sm font-medium text-gray-900">Industry</td>
-                  <td className="px-4 py-4 text-sm text-gray-600">Technology</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Manufacturing</td>
                 </tr>
                 <tr>
                   <td className="px-4 py-4 text-sm font-medium text-gray-900">Business Description</td>
-                  <td className="px-4 py-4 text-sm text-gray-600">Provides innovative software solutions for businesses</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">Manufacturing and distribution of sustainable packaging solutions and eco-friendly products</td>
                 </tr>
               </tbody>
             </table>
@@ -95,22 +95,76 @@ export default function ConfirmationPage() {
               </thead>
               <tbody className="divide-y divide-gray-200">
                 <tr>
-                  <td className="px-4 py-3 text-sm text-gray-900">Liam Harper</td>
+                  <td className="px-4 py-3 text-sm text-gray-900">Thabo Mthembu</td>
                   <td className="px-4 py-3 text-sm text-gray-600">CEO</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">2021-01-15</td>
+                  <td className="px-4 py-3 text-sm text-gray-600">2019-03-01</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 text-sm text-gray-900">Ava Sullivan</td>
+                  <td className="px-4 py-3 text-sm text-gray-900">Sarah Nkomo</td>
                   <td className="px-4 py-3 text-sm text-gray-600">CFO</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">2021-01-15</td>
+                  <td className="px-4 py-3 text-sm text-gray-600">2020-06-15</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 text-sm text-gray-900">Owen Parker</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">CTO</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">2021-01-15</td>
+                  <td className="px-4 py-3 text-sm text-gray-900">Pieter van der Merwe</td>
+                  <td className="px-4 py-3 text-sm text-gray-600">COO</td>
+                  <td className="px-4 py-3 text-sm text-gray-600">2019-09-10</td>
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+
+        {/* Banking Details Section */}
+        <div className="mb-8">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Banking Details</h2>
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-sm font-medium text-gray-900 mb-3">Bank Information</h3>
+                <div className="space-y-2">
+                  <div>
+                    <span className="text-sm text-gray-500">Bank Name</span>
+                    <p className="text-sm font-medium text-gray-900">FNB Business</p>
+                  </div>
+                  <div>
+                    <span className="text-sm text-gray-500">Branch Code</span>
+                    <p className="text-sm font-medium text-gray-900">250655</p>
+                  </div>
+                  <div>
+                    <span className="text-sm text-gray-500">Swift Code</span>
+                    <p className="text-sm font-medium text-gray-900">FIRNZAJJ</p>
+                  </div>
+                  <div>
+                    <span className="text-sm text-gray-500">Status</span>
+                    <div className="flex items-center">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                      <span className="text-sm font-medium text-green-600">Verified</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-sm font-medium text-gray-900 mb-3">Account Details</h3>
+                <div className="space-y-2">
+                  <div>
+                    <span className="text-sm text-gray-500">Account Holder</span>
+                    <p className="text-sm font-medium text-gray-900">Mzansi Manufacturing (Pty) Ltd</p>
+                  </div>
+                  <div>
+                    <span className="text-sm text-gray-500">Account Type</span>
+                    <p className="text-sm font-medium text-gray-900">Business Current Account</p>
+                  </div>
+                  <div>
+                    <span className="text-sm text-gray-500">Account Number</span>
+                    <p className="text-sm font-medium text-gray-900">••••••••••1234</p>
+                  </div>
+                  <div>
+                    <span className="text-sm text-gray-500">Reference</span>
+                    <p className="text-sm font-medium text-gray-900">MZANSI-MFG-001</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

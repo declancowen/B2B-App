@@ -576,6 +576,16 @@ export default function LenderBidDashboardPage() {
               </svg>
               <span>Invoices</span>
             </div>
+            
+            <div 
+              className="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer"
+              onClick={() => router.push('/lend/company-dashboard')}
+            >
+              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+              <span>Company</span>
+            </div>
           </nav>
         </div>
       </div>
@@ -755,7 +765,7 @@ export default function LenderBidDashboardPage() {
                       </div>
                       <button className="ml-3 px-3 py-1 bg-black text-white text-xs font-medium rounded hover:bg-gray-800 transition-colors">
                         View
-                      </button>
+              </button>
                     </div>
                   </div>
                 </div>
@@ -801,7 +811,7 @@ export default function LenderBidDashboardPage() {
                       </div>
                       <button className="ml-3 px-3 py-1 bg-black text-white text-xs font-medium rounded hover:bg-gray-800 transition-colors">
                         View
-                      </button>
+              </button>
                     </div>
                     <div className="flex items-center justify-between p-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors">
                       <div className="flex-1">
@@ -818,7 +828,7 @@ export default function LenderBidDashboardPage() {
                       </div>
                       <button className="ml-3 px-3 py-1 bg-black text-white text-xs font-medium rounded hover:bg-gray-800 transition-colors">
                         View
-                      </button>
+              </button>
                     </div>
                   </div>
                 </div>

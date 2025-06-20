@@ -99,12 +99,12 @@ export default function CompanyDashboardPage() {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">Company</p>
-                  <p className="text-lg font-bold text-gray-900">Tech Solutions Inc.</p>
+                  <p className="text-lg font-bold text-gray-900">Mzansi Manufacturing (Pty) Ltd</p>
                 </div>
               </div>
               <div className="pt-3 border-t border-gray-100">
                 <p className="text-xs text-gray-500 uppercase tracking-wide">Number</p>
-                <p className="text-sm font-semibold text-gray-900">987654321</p>
+                <p className="text-sm font-semibold text-gray-900">2019/456789/07</p>
               </div>
             </div>
 
@@ -118,12 +118,12 @@ export default function CompanyDashboardPage() {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">Industry</p>
-                  <p className="text-lg font-bold text-gray-900">Technology</p>
+                  <p className="text-lg font-bold text-gray-900">Manufacturing</p>
                 </div>
               </div>
               <div className="pt-3 border-t border-gray-100">
                 <p className="text-xs text-gray-500 uppercase tracking-wide">Location</p>
-                <p className="text-sm font-semibold text-gray-900">Tech City, CA</p>
+                <p className="text-sm font-semibold text-gray-900">Cape Town, SA</p>
               </div>
             </div>
 
@@ -155,11 +155,11 @@ export default function CompanyDashboardPage() {
               <tbody className="divide-y divide-gray-200">
                 <tr className="hover:bg-gray-50 transition-colors duration-150">
                   <td className="px-6 py-4 text-sm font-medium text-gray-900 w-1/3">Registered Address</td>
-                  <td className="px-6 py-4 text-sm text-gray-600">456 Innovation Avenue, Tech City, CA 90210</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">15 Nelson Mandela Boulevard, Woodstock, Cape Town, 7925</td>
                 </tr>
                 <tr className="hover:bg-gray-50 transition-colors duration-150">
                   <td className="px-6 py-4 text-sm font-medium text-gray-900">Business Description</td>
-                  <td className="px-6 py-4 text-sm text-gray-600">Provides innovative software solutions for businesses</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">Manufacturing and distribution of sustainable packaging solutions and eco-friendly products</td>
                 </tr>
               </tbody>
             </table>
@@ -183,49 +183,107 @@ export default function CompanyDashboardPage() {
                   <td className="px-6 py-3">
                     <div className="flex items-center">
                       <div className="w-10 h-10 bg-gray-500 rounded-lg flex items-center justify-center mr-3">
-                        <span className="text-white text-sm font-bold">LH</span>
+                        <span className="text-white text-sm font-bold">TM</span>
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-gray-900">Liam Harper</p>
+                        <p className="text-sm font-semibold text-gray-900">Thabo Mthembu</p>
                         <p className="text-xs text-gray-500">Chief Executive Officer</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-3 text-sm text-gray-600">CEO</td>
-                  <td className="px-6 py-3 text-sm text-gray-600">2021-01-15</td>
+                  <td className="px-6 py-3 text-sm text-gray-600">2019-03-01</td>
                 </tr>
                 <tr className="hover:bg-gray-50 transition-colors duration-150">
                   <td className="px-6 py-3">
                     <div className="flex items-center">
                       <div className="w-10 h-10 bg-gray-500 rounded-lg flex items-center justify-center mr-3">
-                        <span className="text-white text-sm font-bold">AS</span>
+                        <span className="text-white text-sm font-bold">SN</span>
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-gray-900">Ava Sullivan</p>
+                        <p className="text-sm font-semibold text-gray-900">Sarah Nkomo</p>
                         <p className="text-xs text-gray-500">Chief Financial Officer</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-3 text-sm text-gray-600">CFO</td>
-                  <td className="px-6 py-3 text-sm text-gray-600">2021-01-15</td>
+                  <td className="px-6 py-3 text-sm text-gray-600">2020-06-15</td>
                 </tr>
                 <tr className="hover:bg-gray-50 transition-colors duration-150">
                   <td className="px-6 py-3">
                     <div className="flex items-center">
                       <div className="w-10 h-10 bg-gray-500 rounded-lg flex items-center justify-center mr-3">
-                        <span className="text-white text-sm font-bold">OP</span>
+                        <span className="text-white text-sm font-bold">PV</span>
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-gray-900">Owen Parker</p>
-                        <p className="text-xs text-gray-500">Chief Technology Officer</p>
+                        <p className="text-sm font-semibold text-gray-900">Pieter van der Merwe</p>
+                        <p className="text-xs text-gray-500">Operations Director</p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-3 text-sm text-gray-600">CTO</td>
-                  <td className="px-6 py-3 text-sm text-gray-600">2021-01-15</td>
+                  <td className="px-6 py-3 text-sm text-gray-600">COO</td>
+                  <td className="px-6 py-3 text-sm text-gray-600">2019-09-10</td>
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+
+        {/* Bank Details Section */}
+        <div className="mb-10">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Bank Details</h2>
+          
+          <div className="bg-gray-50 border border-gray-200 rounded-xl p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Bank Information */}
+              <div>
+                <h3 className="text-base font-semibold text-gray-900 mb-4">Bank Information</h3>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm text-gray-500">Bank Name</p>
+                    <p className="text-base font-medium text-gray-900">FNB Business</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Branch Code</p>
+                    <p className="text-base font-medium text-gray-900">250655</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Account Holder</p>
+                    <p className="text-base font-medium text-gray-900">Mzansi Manufacturing (Pty) Ltd</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Account Type</p>
+                    <p className="text-base font-medium text-gray-900">Business Current Account</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Account Details */}
+              <div>
+                <h3 className="text-base font-semibold text-gray-900 mb-4">Account Details</h3>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm text-gray-500">Account Number</p>
+                    <p className="text-base font-medium text-gray-900">••••••••••5678</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Swift Code</p>
+                    <p className="text-base font-medium text-gray-900">FIRNZAJJ</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Reference</p>
+                    <p className="text-base font-medium text-gray-900">MZANSI-MFG-001</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Status</p>
+                    <div className="flex items-center">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                      <p className="text-base font-medium text-green-700">Verified</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

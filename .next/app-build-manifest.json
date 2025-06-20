@@ -200,6 +200,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/lend/dashboard/page.js"
+    ],
+    "/lend/company-dashboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/lend/company-dashboard/page.js"
     ]
   }
 }
