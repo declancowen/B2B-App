@@ -50,6 +50,10 @@ export default function ApprovedBidPage() {
     // Add download logic here
   }
 
+  const handleAcceptOffer = () => {
+    router.push('/borrow/contract')
+  }
+
   return (
     <div className="min-h-screen bg-white px-4 py-8">
       <div className="max-w-4xl mx-auto">
@@ -73,7 +77,10 @@ export default function ApprovedBidPage() {
               <button className="bg-gray-200 hover:bg-gray-300 text-black px-4 py-2 rounded-lg font-medium transition-colors duration-200">
                 Cancel Bid
               </button>
-              <button className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
+              <button 
+                onClick={handleAcceptOffer}
+                className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+              >
                 Accept Offer
               </button>
             </div>
