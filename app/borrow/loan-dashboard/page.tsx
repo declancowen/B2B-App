@@ -150,6 +150,10 @@ export default function LoanDashboardPage() {
                       <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
                       <p className="text-sm font-semibold text-gray-900">ABSA</p>
                     </div>
+                    <div className="min-w-[90px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Security</p>
+                      <p className="text-sm font-semibold text-gray-900">Unsecured</p>
+                    </div>
                   </div>
                   <div className="flex items-center">
                     <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
@@ -213,6 +217,10 @@ export default function LoanDashboardPage() {
                     <div className="min-w-[100px]">
                       <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
                       <p className="text-sm font-semibold text-gray-900">Investec</p>
+                    </div>
+                    <div className="min-w-[120px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Security</p>
+                      <p className="text-sm font-semibold text-gray-900">Personal Suretyship</p>
                     </div>
                   </div>
                   <div className="flex items-center">

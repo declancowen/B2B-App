@@ -89,7 +89,7 @@ export default function ApprovedBidPage() {
         <div className="mb-8">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Bridge Finance Details</h1>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Trade Finance Details</h1>
               <p className="text-gray-600">View your submitted bid.</p>
             </div>
             <div className="flex items-center space-x-3">
@@ -263,7 +263,7 @@ export default function ApprovedBidPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Loan Type</p>
-                    <p className="text-base font-medium text-gray-900">Bridging Finance</p>
+                    <p className="text-base font-medium text-gray-900">Trade Finance</p>
                   </div>
                 </div>
               </div>

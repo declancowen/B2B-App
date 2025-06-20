@@ -22,16 +22,16 @@ export default function LenderBidDashboardPage() {
 
   // Dummy company data
   const dummyCompanies = [
-    { id: 1, name: "TechCorp Solutions", loanValue: "R10,000,000", loanTerm: "12 months", loanType: "Bridging Finance", dueDate: "2024-01-15", daysUntilDue: 7 },
-    { id: 2, name: "Green Energy Ltd", loanValue: "R5,000,000", loanTerm: "18 months", loanType: "Trade Finance", dueDate: "2024-02-10", daysUntilDue: 33 },
-    { id: 3, name: "Manufacturing Plus", loanValue: "R3,200,000", loanTerm: "24 months", loanType: "Bridging Finance", dueDate: "2024-01-20", daysUntilDue: 12 },
-    { id: 4, name: "Retail Dynamics", loanValue: "R1,800,000", loanTerm: "6 months", loanType: "Trade Finance", dueDate: "2024-01-12", daysUntilDue: 4 },
-    { id: 5, name: "Construction Pro", loanValue: "R7,500,000", loanTerm: "36 months", loanType: "Bridging Finance", dueDate: "2024-03-05", daysUntilDue: 56 },
-    { id: 6, name: "Digital Marketing Inc", loanValue: "R950,000", loanTerm: "9 months", loanType: "Trade Finance", dueDate: "2024-01-18", daysUntilDue: 10 },
-    { id: 7, name: "Food & Beverage Co", loanValue: "R4,100,000", loanTerm: "15 months", loanType: "Bridging Finance", dueDate: "2024-02-25", daysUntilDue: 48 },
-    { id: 8, name: "Transport Solutions", loanValue: "R6,300,000", loanTerm: "30 months", loanType: "Trade Finance", dueDate: "2024-01-30", daysUntilDue: 22 },
-    { id: 9, name: "Healthcare Systems", loanValue: "R2,900,000", loanTerm: "12 months", loanType: "Bridging Finance", dueDate: "2024-01-25", daysUntilDue: 17 },
-    { id: 10, name: "Logistics Express", loanValue: "R3,750,000", loanTerm: "21 months", loanType: "Trade Finance", dueDate: "2024-02-15", daysUntilDue: 38 }
+    { id: 1, name: "TechCorp Solutions", loanValue: "R10,000,000", loanTerm: "12 months", loanType: "Trade Finance", dueDate: "2024-01-15", daysUntilDue: 7, status: "Bid Submitted" },
+    { id: 2, name: "Green Energy Ltd", loanValue: "R5,000,000", loanTerm: "18 months", loanType: "Trade Finance", dueDate: "2024-02-10", daysUntilDue: 33, status: "Under Review" },
+    { id: 3, name: "Manufacturing Plus", loanValue: "R3,200,000", loanTerm: "24 months", loanType: "Bridging Finance", dueDate: "2024-01-20", daysUntilDue: 12, status: "New" },
+    { id: 4, name: "Retail Dynamics", loanValue: "R1,800,000", loanTerm: "6 months", loanType: "Trade Finance", dueDate: "2024-01-12", daysUntilDue: 4, status: "New" },
+    { id: 5, name: "Construction Pro", loanValue: "R7,500,000", loanTerm: "36 months", loanType: "Bridging Finance", dueDate: "2024-03-05", daysUntilDue: 56, status: "New" },
+    { id: 6, name: "Digital Marketing Inc", loanValue: "R950,000", loanTerm: "9 months", loanType: "Trade Finance", dueDate: "2024-01-18", daysUntilDue: 10, status: "New" },
+    { id: 7, name: "Food & Beverage Co", loanValue: "R4,100,000", loanTerm: "15 months", loanType: "Bridging Finance", dueDate: "2024-02-25", daysUntilDue: 48, status: "New" },
+    { id: 8, name: "Transport Solutions", loanValue: "R6,300,000", loanTerm: "30 months", loanType: "Trade Finance", dueDate: "2024-01-30", daysUntilDue: 22, status: "New" },
+    { id: 9, name: "Healthcare Systems", loanValue: "R2,900,000", loanTerm: "12 months", loanType: "Bridging Finance", dueDate: "2024-01-25", daysUntilDue: 17, status: "New" },
+    { id: 10, name: "Logistics Express", loanValue: "R3,750,000", loanTerm: "21 months", loanType: "Trade Finance", dueDate: "2024-02-15", daysUntilDue: 38, status: "New" }
   ]
 
   const handleView = (companyId: number) => {
@@ -40,6 +40,9 @@ export default function LenderBidDashboardPage() {
     if (companyId === 1 && activeTab === 'prospects') {
       console.log('Navigating to active offer page...')
       router.push('/lend/active-offer')
+    } else if (companyId === 2 && activeTab === 'prospects') {
+      console.log('Navigating to active offer 2 page...')
+      router.push('/lend/active-offer-2')
     } else if (companyId === 1 && activeTab === 'opportunities') {
       console.log('Navigating to accepted offer page...')
       router.push('/lend/accepted-offer')
@@ -58,7 +61,9 @@ export default function LenderBidDashboardPage() {
   }
 
   const getFilteredCompanies = () => {
-    if (activeTab === 'prospects' || activeTab === 'opportunities') {
+    if (activeTab === 'prospects') {
+      return dummyCompanies.filter(company => company.id === 1 || company.id === 2) // TechCorp Solutions and Green Energy Ltd
+    } else if (activeTab === 'opportunities') {
       return dummyCompanies.filter(company => company.id === 1) // Only TechCorp Solutions
     }
     return dummyCompanies // Show all companies for other tabs
@@ -66,6 +71,19 @@ export default function LenderBidDashboardPage() {
 
   const getDueDatePillStyle = (daysUntilDue: number) => {
     return "bg-white text-black border-gray-300"
+  }
+
+  const getStatusBadgeStyle = (status: string) => {
+    switch (status) {
+      case "Bid Submitted":
+        return "bg-blue-50 text-blue-800 border-blue-200"
+      case "Under Review":
+        return "bg-orange-50 text-orange-800 border-orange-200"
+      case "New":
+        return "bg-white text-black border-gray-300"
+      default:
+        return "bg-white text-black border-gray-300"
+    }
   }
 
   const formatDate = (dateString: string) => {
@@ -96,6 +114,11 @@ export default function LenderBidDashboardPage() {
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Due Date
             </th>
+            {activeTab === 'prospects' && (
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+            )}
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Actions
             </th>
@@ -131,6 +154,13 @@ export default function LenderBidDashboardPage() {
                   {formatDate(company.dueDate)}
                 </span>
               </td>
+              {activeTab === 'prospects' && (
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-md border shadow-sm ${getStatusBadgeStyle(company.status)}`}>
+                    {company.status}
+                  </span>
+                </td>
+              )}
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex space-x-2">
                   <button

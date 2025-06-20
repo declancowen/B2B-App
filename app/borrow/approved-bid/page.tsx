@@ -95,6 +95,36 @@ export default function ApprovedBidPage() {
         <div className="mb-10">
           <h2 className="text-lg font-semibold text-gray-900 mb-6">Bid Overview</h2>
           
+          {/* Bid Proposal Section */}
+          <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div>
+                <p className="text-sm font-medium text-gray-500 mb-1">Interest Rate</p>
+                <p className="text-2xl font-bold text-gray-900">18.50%</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500 mb-1">Security Type</p>
+                <p className="text-base font-medium text-gray-900">First choice: Unsecured</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500 mb-1">Status</p>
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  Approved
+                </span>
+              </div>
+            </div>
+
+            <div className="border-t border-gray-200 pt-4">
+              <p className="text-sm font-medium text-gray-900 mb-3">Required Documents</p>
+              <ul className="text-sm text-gray-600 space-y-1">
+                <li>• Please provide a signed personal guarantee agreement from the company director</li>
+                <li>• Submit updated financial statements for the guarantor (not older than 3 months)</li>
+                <li>• Include proof of the guarantor's assets and liabilities statement</li>
+                <li>• Provide confirmation of the guarantor's employment and income verification</li>
+              </ul>
+            </div>
+          </div>
+
           {/* Loan Details Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <div className="bg-white border border-gray-200 rounded-lg p-6">
@@ -168,6 +198,77 @@ export default function ApprovedBidPage() {
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Funds Required</p>
                 <p className="text-lg font-semibold text-gray-900">7 days</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Fee Summary Section */}
+        <div className="mb-10">
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Fee Summary</h2>
+          
+          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+            {/* Main Fee Display */}
+            <div className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200 p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Service Fee</h3>
+                  <p className="text-sm text-gray-600">2% of loan principal</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-3xl font-bold text-gray-900">
+                    R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                  </p>
+                  <p className="text-sm text-gray-500">Total Fee</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Fee Breakdown */}
+            <div className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <div className="text-2xl font-bold text-gray-900 mb-1">2.00%</div>
+                  <p className="text-sm text-gray-500">Fee Rate</p>
+                </div>
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <div className="text-lg font-bold text-gray-900 mb-1">R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                  <p className="text-sm text-gray-500">Loan Principal</p>
+                </div>
+                <div className="text-center p-4 bg-black text-white rounded-lg">
+                  <div className="text-lg font-bold mb-1">R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                  <p className="text-sm text-gray-300">Service Fee</p>
+                </div>
+              </div>
+
+              {/* Calculation Display */}
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+                <div className="flex items-center justify-center text-gray-700">
+                  <span className="font-medium">R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+                  <span className="mx-3 text-gray-400">×</span>
+                  <span className="font-medium">2%</span>
+                  <span className="mx-3 text-gray-400">=</span>
+                  <span className="font-bold text-black">R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+                </div>
+              </div>
+
+              {/* Disclaimer */}
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5">
+                    <svg fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-sm font-semibold text-amber-900 mb-1">Important Notice</h4>
+                    <p className="text-sm text-amber-800">
+                      The 2% service fee (R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}) will be deducted from the loan amount at disbursement. 
+                      You will receive R{(loanAmount * 0.98).toLocaleString('en-US', { maximumFractionDigits: 0 })} (98% of the loan), 
+                      but the full principal amount of R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })} plus interest will be repaid to the lender.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -304,11 +405,12 @@ export default function ApprovedBidPage() {
           
           <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
             <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
-              <div className="grid grid-cols-4 gap-4 text-sm font-medium text-gray-500">
+              <div className="grid grid-cols-5 gap-4 text-sm font-medium text-gray-500">
                 <div>Payment Date</div>
                 <div>Principal</div>
                 <div>Interest</div>
                 <div>Total Payment</div>
+                <div>Status</div>
               </div>
             </div>
             <div className="divide-y divide-gray-200">
@@ -326,90 +428,25 @@ export default function ApprovedBidPage() {
                 const monthlyTotal = payment.monthlyPayment;
                 
                 return (
-                  <div key={index} className="px-6 py-4 grid grid-cols-4 gap-4 text-sm">
+                  <div key={index} className="px-6 py-4 grid grid-cols-5 gap-4 text-sm">
                     <div className="font-medium text-gray-900">{dateString}</div>
                     <div className="text-gray-900">R{monthlyPrincipal.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
                     <div className="text-gray-900">R{monthlyInterest.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
                     <div className="font-semibold text-gray-900">R{monthlyTotal.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                    <div className="flex items-center">
+                      <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-600">
+                        No Payment
+                      </span>
+                    </div>
                   </div>
                 );
               })}
-              <div className="px-6 py-4 grid grid-cols-4 gap-4 text-sm bg-gray-50">
+              <div className="px-6 py-4 grid grid-cols-5 gap-4 text-sm bg-gray-50">
                 <div className="font-medium text-gray-900">...</div>
                 <div className="text-gray-600 italic">{12 - 6} more payments</div>
                 <div className="text-gray-600 italic">...</div>
+                <div></div>
                 <div className="font-semibold text-gray-700 cursor-pointer hover:text-gray-900">View Full Schedule</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Fee Summary Section */}
-        <div className="mb-10">
-          <h2 className="text-lg font-semibold text-gray-900 mb-6">Fee Summary</h2>
-          
-          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-            {/* Main Fee Display */}
-            <div className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200 p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Service Fee</h3>
-                  <p className="text-sm text-gray-600">2% of loan principal</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-3xl font-bold text-gray-900">
-                    R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}
-                  </p>
-                  <p className="text-sm text-gray-500">Total Fee</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Fee Breakdown */}
-            <div className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-2xl font-bold text-gray-900 mb-1">2.00%</div>
-                  <p className="text-sm text-gray-500">Fee Rate</p>
-                </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-lg font-bold text-gray-900 mb-1">R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
-                  <p className="text-sm text-gray-500">Loan Principal</p>
-                </div>
-                <div className="text-center p-4 bg-black text-white rounded-lg">
-                  <div className="text-lg font-bold mb-1">R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
-                  <p className="text-sm text-gray-300">Service Fee</p>
-                </div>
-              </div>
-
-              {/* Calculation Display */}
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
-                <div className="flex items-center justify-center text-gray-700">
-                  <span className="font-medium">R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
-                  <span className="mx-3 text-gray-400">×</span>
-                  <span className="font-medium">2%</span>
-                  <span className="mx-3 text-gray-400">=</span>
-                  <span className="font-bold text-black">R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
-                </div>
-              </div>
-
-              {/* Disclaimer */}
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5">
-                    <svg fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="text-sm font-semibold text-amber-900 mb-1">Important Notice</h4>
-                    <p className="text-sm text-amber-800">
-                      The 2% service fee (R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}) will be deducted from the loan amount at disbursement. 
-                      You will receive R{(loanAmount * 0.98).toLocaleString('en-US', { maximumFractionDigits: 0 })} (98% of the loan), 
-                      but the full principal amount of R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })} plus interest will be repaid to the lender.
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -527,8 +564,21 @@ export default function ApprovedBidPage() {
                   </svg>
                 </div>
                 <div className="pt-1">
-                  <p className="text-base font-semibold text-gray-900">Bid Application Submitted</p>
+                  <p className="text-base font-semibold text-gray-900">Bid Submitted</p>
                   <p className="text-gray-500 text-sm">October 1, 2023</p>
+                </div>
+              </div>
+
+              {/* Bid Accepted */}
+              <div className="flex items-start">
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center mr-4 relative z-10">
+                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="pt-1">
+                  <p className="text-base font-semibold text-gray-900">Bid Accepted</p>
+                  <p className="text-gray-500 text-sm">October 10, 2023</p>
                 </div>
               </div>
 
@@ -553,7 +603,7 @@ export default function ApprovedBidPage() {
                   </svg>
                 </div>
                 <div className="pt-1">
-                  <p className="text-base font-semibold text-gray-900">Borrower Contract Signed</p>
+                  <p className="text-base font-semibold text-gray-900">Borrower Accepted</p>
                   <p className="text-gray-500 text-sm">October 16, 2023</p>
                 </div>
               </div>
@@ -566,7 +616,7 @@ export default function ApprovedBidPage() {
                   </svg>
                 </div>
                 <div className="pt-1">
-                  <p className="text-base font-semibold text-gray-900">Lender Contract Signed</p>
+                  <p className="text-base font-semibold text-gray-900">Lender Accepted</p>
                   <p className="text-gray-500 text-sm">October 17, 2023</p>
                 </div>
               </div>

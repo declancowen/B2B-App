@@ -1,9 +1,7 @@
 {
-  "/borrow/bid-offer/page": "app/borrow/bid-offer/page.js",
-  "/borrow/approved-bid-2/page": "app/borrow/approved-bid-2/page.js",
+  "/lend/active-offer/page": "app/lend/active-offer/page.js",
   "/borrow/approved-bid/page": "app/borrow/approved-bid/page.js",
-  "/borrow/contract/page": "app/borrow/contract/page.js",
-  "/borrow/debit-order/page": "app/borrow/debit-order/page.js",
-  "/borrow/next-steps/page": "app/borrow/next-steps/page.js",
-  "/borrow/bid-dashboard/page": "app/borrow/bid-dashboard/page.js"
+  "/borrow/bid-dashboard/page": "app/borrow/bid-dashboard/page.js",
+  "/lend/accepted-offer/page": "app/lend/accepted-offer/page.js",
+  "/borrow/approved-bid-3/page": "app/borrow/approved-bid-3/page.js"
 }

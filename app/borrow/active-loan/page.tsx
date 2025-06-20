@@ -2,27 +2,27 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 
 export default function ActiveLoanPage() {
   const router = useRouter()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Actual amortization schedule data for R2M, 6 months, 20.00% APR
+  // Bullet payment schedule data for R2M, 6 months, 20.00% APR (everything paid in last month)
   const loanAmount = 2000000; // R2M
   const actualSchedule = [
-    { month: 0, monthlyPayment: 0, principalPaid: 0, interestPaid: 0, remainingBalance: 2000000, cumulativeInterest: 0, cumulativePrincipal: 0 },
-    { month: 1, monthlyPayment: 353046, principalPaid: 319712, interestPaid: 33333, remainingBalance: 1680288, cumulativeInterest: 33333.33, cumulativePrincipal: 319712.24 },
-    { month: 2, monthlyPayment: 353046, principalPaid: 325041, interestPaid: 28005, remainingBalance: 1355247, cumulativeInterest: 61338.13, cumulativePrincipal: 644753.01 },
-    { month: 3, monthlyPayment: 353046, principalPaid: 330458, interestPaid: 22588, remainingBalance: 1024789, cumulativeInterest: 83925.58, cumulativePrincipal: 975211.13 },
-    { month: 4, monthlyPayment: 353046, principalPaid: 335966, interestPaid: 17080, remainingBalance: 688823, cumulativeInterest: 101005.39, cumulativePrincipal: 1311176.88 },
-    { month: 5, monthlyPayment: 353046, principalPaid: 341565, interestPaid: 11480, remainingBalance: 347258, cumulativeInterest: 112485.78, cumulativePrincipal: 1652742.06 },
-    { month: 6, monthlyPayment: 353046, principalPaid: 347258, interestPaid: 5788, remainingBalance: 0, cumulativeInterest: 118273.41, cumulativePrincipal: 2000000.0 }
+    { month: 0, monthlyPayment: 0.0, principalPaid: 0.0, interestPaid: 0.0, remainingBalance: 2000000.0, cumulativeInterest: 0.0, cumulativePrincipal: 0.0 },
+    { month: 1, monthlyPayment: 0.0, principalPaid: 0.0, interestPaid: 0.0, remainingBalance: 2000000.0, cumulativeInterest: 0.0, cumulativePrincipal: 0.0 },
+    { month: 2, monthlyPayment: 0.0, principalPaid: 0.0, interestPaid: 0.0, remainingBalance: 2000000.0, cumulativeInterest: 0.0, cumulativePrincipal: 0.0 },
+    { month: 3, monthlyPayment: 0.0, principalPaid: 0.0, interestPaid: 0.0, remainingBalance: 2000000.0, cumulativeInterest: 0.0, cumulativePrincipal: 0.0 },
+    { month: 4, monthlyPayment: 0.0, principalPaid: 0.0, interestPaid: 0.0, remainingBalance: 2000000.0, cumulativeInterest: 0.0, cumulativePrincipal: 0.0 },
+    { month: 5, monthlyPayment: 0.0, principalPaid: 0.0, interestPaid: 0.0, remainingBalance: 2000000.0, cumulativeInterest: 0.0, cumulativePrincipal: 0.0 },
+    { month: 6, monthlyPayment: 2200000.0, principalPaid: 2000000.0, interestPaid: 200000.0, remainingBalance: 0.0, cumulativeInterest: 200000.0, cumulativePrincipal: 2000000.0 }
   ];
 
   // Prepare data for Recharts (convert to millions)
   // Split data into paid and remaining periods
-  const paidMonths = 3; // We've paid 3 months
+  const paidMonths = 0; // No payments made yet in bullet structure
   
   const chartData = actualSchedule.map(item => ({
     month: item.month,
@@ -37,6 +37,13 @@ export default function ActiveLoanPage() {
     interestRemaining: item.month >= paidMonths ? item.cumulativeInterest / 1000000 : null,
     principalRemaining: item.month >= paidMonths ? item.cumulativePrincipal / 1000000 : null
   }));
+
+  // Pie chart data for loan repayment breakdown
+  const pieData = [
+    { name: 'Principal Amount', value: loanAmount, color: '#d1d5db' },
+    { name: 'Total Interest', value: actualSchedule[actualSchedule.length - 1].cumulativeInterest, color: '#6b7280' },
+    { name: 'Service Fee', value: loanAmount * 0.01, color: '#000000' }
+  ];
 
   // Calculate schedule for summary statistics (using actual data)
   const schedule = actualSchedule.slice(1); // Remove month 0 for calculations
@@ -95,10 +102,10 @@ export default function ActiveLoanPage() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">Payment Progress</h3>
-                <p className="text-sm text-gray-600">3 of 6 payments completed</p>
+                <p className="text-sm text-gray-600">0 of 1 payment completed</p>
               </div>
               <div className="text-right">
-                <p className="text-2xl font-bold text-black">50%</p>
+                <p className="text-2xl font-bold text-black">0%</p>
                 <p className="text-sm text-gray-500">Complete</p>
               </div>
             </div>
@@ -106,7 +113,7 @@ export default function ActiveLoanPage() {
             {/* Progress Bar */}
             <div className="mb-6">
               <div className="w-full bg-gray-200 rounded-full h-3">
-                <div className="bg-black h-3 rounded-full" style={{ width: '50%' }}></div>
+                <div className="bg-black h-3 rounded-full" style={{ width: '0%' }}></div>
               </div>
             </div>
             
@@ -114,18 +121,18 @@ export default function ActiveLoanPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
                 <p className="text-sm text-gray-600 mb-1">Amount Paid</p>
-                <p className="text-xl font-bold text-gray-900">R1,059,138</p>
+                <p className="text-xl font-bold text-gray-900">R0</p>
                 <p className="text-xs text-gray-600">Principal + Interest</p>
               </div>
               <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
                 <p className="text-sm text-gray-600 mb-1">Remaining Balance</p>
-                <p className="text-xl font-bold text-gray-900">R1,024,789</p>
-                <p className="text-xs text-gray-600">After 3 payments</p>
+                <p className="text-xl font-bold text-gray-900">R2,000,000</p>
+                <p className="text-xs text-gray-600">Full principal</p>
               </div>
               <div className="text-center p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                <p className="text-sm text-gray-600 mb-1">Next Payment</p>
-                <p className="text-xl font-bold text-gray-900">R353,046</p>
-                <p className="text-xs text-gray-600">Due: 15 Jan 2024</p>
+                <p className="text-sm text-gray-600 mb-1">Final Payment</p>
+                <p className="text-xl font-bold text-gray-900">R2,200,000</p>
+                <p className="text-xs text-gray-600">Due: 15 Apr 2024</p>
               </div>
             </div>
           </div>
@@ -136,7 +143,7 @@ export default function ActiveLoanPage() {
           <h2 className="text-lg font-semibold text-gray-900 mb-6">Loan Overview</h2>
 
           {/* Loan Details Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center mb-3">
                 <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
@@ -175,13 +182,26 @@ export default function ActiveLoanPage() {
               <p className="text-xl font-bold text-gray-900">ABSA</p>
               <p className="text-sm text-gray-500">Loan Provider</p>
             </div>
+
+            <div className="bg-white border border-gray-200 rounded-lg p-6">
+              <div className="flex items-center mb-3">
+                <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h4 className="font-medium text-gray-900">Security Type</h4>
+              </div>
+              <p className="text-xl font-bold text-gray-900">Unsecured</p>
+              <p className="text-sm text-gray-500">Security Type</p>
+            </div>
           </div>
 
           {/* Additional Details */}
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <p className="text-sm font-medium text-gray-500 mb-1">Bid ID</p>
+                <p className="text-sm font-medium text-gray-500 mb-1">Loan ID</p>
                 <p className="text-lg font-semibold text-gray-900">LN-2023-00123</p>
               </div>
               <div>
@@ -193,22 +213,93 @@ export default function ActiveLoanPage() {
                 <p className="text-lg font-semibold text-gray-900">15 October 2023</p>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-500 mb-1">Completion Date</p>
+                <p className="text-sm font-medium text-gray-500 mb-1">Maturity Date</p>
                 <p className="text-lg font-semibold text-gray-900">15 April 2024</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Loan Amortization Section */}
+        {/* Fee Summary Section */}
         <div className="mb-10">
-          <h2 className="text-lg font-semibold text-gray-900 mb-6">Loan Amortization</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Fee Summary</h2>
+          
+          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+            {/* Main Fee Display */}
+            <div className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200 p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Service Fee</h3>
+                  <p className="text-sm text-gray-600">2% of loan principal</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-3xl font-bold text-gray-900">
+                    R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                  </p>
+                  <p className="text-sm text-gray-500">Total Fee</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Fee Breakdown */}
+            <div className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <div className="text-2xl font-bold text-gray-900 mb-1">2.00%</div>
+                  <p className="text-sm text-gray-500">Fee Rate</p>
+                </div>
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <div className="text-lg font-bold text-gray-900 mb-1">R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                  <p className="text-sm text-gray-500">Loan Principal</p>
+                </div>
+                <div className="text-center p-4 bg-black text-white rounded-lg">
+                  <div className="text-lg font-bold mb-1">R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                  <p className="text-sm text-gray-300">Service Fee</p>
+                </div>
+              </div>
+
+              {/* Calculation Display */}
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+                <div className="flex items-center justify-center text-gray-700">
+                  <span className="font-medium">R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+                  <span className="mx-3 text-gray-400">×</span>
+                  <span className="font-medium">2%</span>
+                  <span className="mx-3 text-gray-400">=</span>
+                  <span className="font-bold text-black">R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+                </div>
+              </div>
+
+              {/* Disclaimer */}
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5">
+                    <svg fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-sm font-semibold text-amber-900 mb-1">Important Notice</h4>
+                    <p className="text-sm text-amber-800">
+                      The 2% service fee (R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}) was deducted from the loan amount at disbursement. 
+                      You received R{(loanAmount * 0.98).toLocaleString('en-US', { maximumFractionDigits: 0 })} (98% of the loan), 
+                      but the full principal amount of R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })} plus interest is being repaid to the lender.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Repayment Structure Section */}
+        <div className="mb-10">
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Repayment Structure</h2>
           
           <div className="bg-white border border-gray-200 rounded-lg">
             <div className="p-6 pb-0">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="text-base font-semibold text-gray-900">Amortization for R2,000,000 Loan</h3>
+                  <h3 className="text-base font-semibold text-gray-900">Repayment for R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })} Loan</h3>
                   <p className="text-sm text-gray-600">With 6-Month Term and 20.00% Interest Rate</p>
                 </div>
                 <button 
@@ -220,147 +311,57 @@ export default function ActiveLoanPage() {
               </div>
             </div>
               
-            {/* Recharts Chart Container - Full Width */}
+            {/* Loan Structure Chart */}
             <div className="h-96 w-full px-6">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                  data={chartData}
-                  margin={{
-                    top: 20,
-                    right: 20,
-                    left: -20,
-                    bottom: 40,
-                  }}
-                >
-                    <XAxis 
-                      dataKey="month" 
-                      domain={[0, 6]}
-                      type="number"
-                      ticks={[0, 1, 2, 3, 4, 5, 6]}
-                      axisLine={true}
-                      tickLine={false}
-                      tick={{ fontSize: 14, fill: '#6b7280' }}
-                      dy={10}
-                      stroke="#e5e7eb"
-                    />
-                    <YAxis 
-                      domain={[0, 2]}
-                      ticks={[0, 0.5, 1, 1.5, 2]}
-                      axisLine={true}
-                      tickLine={false}
-                      tick={{ fontSize: 14, fill: '#6b7280' }}
-                      tickFormatter={(value) => `${value.toFixed(1)}M`}
-                      stroke="#e5e7eb"
-                    />
-                    <Tooltip 
-                      content={(props) => {
-                        const { active, payload, label } = props;
-                        if (active && payload && payload.length) {
-                          // Filter out duplicate entries and only show the main data keys
-                          const uniqueEntries = payload.filter(entry => {
-                            const dataKey = entry.dataKey;
-                            return dataKey === 'balance' || dataKey === 'balancePaid' || dataKey === 'balanceRemaining' ||
-                                   dataKey === 'interest' || dataKey === 'interestPaid' || dataKey === 'interestRemaining' ||
-                                   dataKey === 'principal' || dataKey === 'principalPaid' || dataKey === 'principalRemaining';
-                          });
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={(props) => {
+                      const { name, value } = props;
+                      return (
+                        <text 
+                          x={props.x} 
+                          y={props.y} 
+                          fill="#000000" 
+                          textAnchor={props.x > props.cx ? 'start' : 'end'} 
+                          dominantBaseline="central"
+                          fontSize="14"
+                          fontWeight="500"
+                        >
+                          {`${name}: R${value.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
+                        </text>
+                      );
+                    }}
+                    outerRadius={120}
+                    innerRadius={60}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} stroke="#ffffff" strokeWidth={4} />
+                    ))}
+                  </Pie>
 
-                          // Group by type and take the first non-null value
-                          const consolidatedEntries: any[] = [];
-                          const seenTypes = new Set<string>();
-
-                          uniqueEntries.forEach(entry => {
-                            const dataKey = entry.dataKey;
-                            let type = '';
-                            
-                            if ((dataKey === 'balance' || dataKey === 'balancePaid' || dataKey === 'balanceRemaining') && !seenTypes.has('balance')) {
-                              type = 'balance';
-                            } else if ((dataKey === 'interest' || dataKey === 'interestPaid' || dataKey === 'interestRemaining') && !seenTypes.has('interest')) {
-                              type = 'interest';
-                            } else if ((dataKey === 'principal' || dataKey === 'principalPaid' || dataKey === 'principalRemaining') && !seenTypes.has('principal')) {
-                              type = 'principal';
-                            }
-
-                            if (type && entry.value !== null && entry.value !== undefined) {
-                              seenTypes.add(type);
-                              consolidatedEntries.push(entry);
-                            }
-                          });
-
-                          return (
-                            <div style={{
-                              backgroundColor: 'white',
-                              border: '1px solid #e5e7eb',
-                              borderRadius: '8px',
-                              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                              padding: '12px',
-                              fontSize: '14px'
-                            }}>
-                              <p style={{ 
-                                margin: '0 0 8px 0', 
-                                fontWeight: '600',
-                                color: '#000000'
-                              }}>
-                                Month {label}
-                              </p>
-                              {consolidatedEntries.map((entry, index) => {
-                                let displayName = 'Unknown';
-                                const dataKey = entry.dataKey;
-                                
-                                // Match legend labels exactly
-                                if (dataKey === 'balance' || dataKey === 'balancePaid' || dataKey === 'balanceRemaining') {
-                                  displayName = 'Balance';
-                                } else if (dataKey === 'interest' || dataKey === 'interestPaid' || dataKey === 'interestRemaining') {
-                                  displayName = 'Interest';
-                                } else if (dataKey === 'principal' || dataKey === 'principalPaid' || dataKey === 'principalRemaining') {
-                                  displayName = 'Principal';
-                                }
-                                
-                                return (
-                                  <div key={index} style={{ 
-                                    display: 'flex', 
-                                    alignItems: 'center', 
-                                    gap: '8px',
-                                    margin: '4px 0'
-                                  }}>
-                                    <div style={{
-                                      width: '12px',
-                                      height: '12px',
-                                      backgroundColor: entry.color,
-                                      borderRadius: '3px'
-                                    }} />
-                                    <span style={{ 
-                                      color: '#000000',
-                                      fontWeight: '400'
-                                    }}>
-                                      {displayName}: R{(Number(entry.value) * 1000000).toLocaleString('en-US', { maximumFractionDigits: 0 })}
-                                    </span>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          );
-                        }
-                        return null;
-                      }}
-                      cursor={{ stroke: '#e5e7eb', strokeWidth: 1 }}
-                    />
                     <Legend 
                       verticalAlign="bottom" 
-                      height={36}
+                    height={60}
                       content={(props) => {
                         const { payload } = props;
-                        // Filter out the "Remaining" entries
-                        const filteredPayload = payload?.filter(entry => 
-                          entry.value && !entry.value.toString().includes('Remaining')
-                        );
                         return (
                           <div style={{ 
                             display: 'flex', 
                             justifyContent: 'center', 
                             paddingTop: '20px',
-                            gap: '24px'
+                          gap: '24px',
+                          flexWrap: 'wrap'
                           }}>
-                            {filteredPayload?.map((entry, index) => (
+                          {payload?.map((entry, index) => {
+                            const data = pieData[index];
+                            return (
                               <div key={index} style={{ 
                                 display: 'flex', 
                                 alignItems: 'center', 
@@ -369,7 +370,7 @@ export default function ActiveLoanPage() {
                                 <div style={{
                                   width: '12px',
                                   height: '12px',
-                                  backgroundColor: entry.color,
+                                  backgroundColor: data.color,
                                   borderRadius: '3px'
                                 }} />
                                 <span style={{ 
@@ -377,99 +378,37 @@ export default function ActiveLoanPage() {
                                   color: '#000000',
                                   fontWeight: '400'
                                 }}>
-                                  {entry.value}
+                                  {data.name}
                                 </span>
                               </div>
-                            ))}
+                            );
+                          })}
                           </div>
                         );
                       }}
                     />
-                    {/* Paid period lines (full opacity) */}
-                    <Line 
-                      type="monotone" 
-                      dataKey="balancePaid" 
-                      stroke="#191c2b" 
-                      strokeWidth={3}
-                      name="Balance"
-                      dot={{ fill: '#191c2b', strokeWidth: 2, r: 3, stroke: '#191c2b' }}
-                      activeDot={{ r: 5, fill: '#191c2b', stroke: '#ffffff', strokeWidth: 2 }}
-                      connectNulls={false}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="interestPaid" 
-                      stroke="#43c149" 
-                      strokeWidth={3}
-                      name="Interest"
-                      dot={{ fill: '#43c149', strokeWidth: 2, r: 3, stroke: '#43c149' }}
-                      activeDot={{ r: 5, fill: '#43c149', stroke: '#ffffff', strokeWidth: 2 }}
-                      connectNulls={false}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="principalPaid" 
-                      stroke="#66f770" 
-                      strokeWidth={3}
-                      name="Principal"
-                      dot={{ fill: '#66f770', strokeWidth: 2, r: 3, stroke: '#66f770' }}
-                      activeDot={{ r: 5, fill: '#66f770', stroke: '#ffffff', strokeWidth: 2 }}
-                      connectNulls={false}
-                    />
-                    
-                    {/* Remaining period lines (reduced opacity) - no legend entries */}
-                    <Line 
-                      type="monotone" 
-                      dataKey="balanceRemaining" 
-                      stroke="#191c2b" 
-                      strokeWidth={3}
-                      strokeOpacity={0.3}
-                      dot={{ fill: '#191c2b', fillOpacity: 0.3, strokeWidth: 2, r: 3, stroke: '#191c2b', strokeOpacity: 0.3 }}
-                      activeDot={{ r: 5, fill: '#191c2b', fillOpacity: 0.3, stroke: '#ffffff', strokeWidth: 2 }}
-                      connectNulls={false}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="interestRemaining" 
-                      stroke="#43c149" 
-                      strokeWidth={3}
-                      strokeOpacity={0.3}
-                      dot={{ fill: '#43c149', fillOpacity: 0.3, strokeWidth: 2, r: 3, stroke: '#43c149', strokeOpacity: 0.3 }}
-                      activeDot={{ r: 5, fill: '#43c149', fillOpacity: 0.3, stroke: '#ffffff', strokeWidth: 2 }}
-                      connectNulls={false}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="principalRemaining" 
-                      stroke="#66f770" 
-                      strokeWidth={3}
-                      strokeOpacity={0.3}
-                      dot={{ fill: '#66f770', fillOpacity: 0.3, strokeWidth: 2, r: 3, stroke: '#66f770', strokeOpacity: 0.3 }}
-                      activeDot={{ r: 5, fill: '#66f770', fillOpacity: 0.3, stroke: '#ffffff', strokeWidth: 2 }}
-                      connectNulls={false}
-                    />
-                </LineChart>
+                </PieChart>
               </ResponsiveContainer>
             </div>
             
-            {/* Summary Cards Below Chart */}
+            {/* Summary Statistics */}
             <div className="p-6 pt-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm text-gray-500 mb-1">Total Interest</p>
-                  <p className="text-lg font-bold text-gray-900">
-                    R{actualSchedule[actualSchedule.length - 1].cumulativeInterest.toLocaleString('en-US', { maximumFractionDigits: 0 })}
-                  </p>
+                  <p className="text-sm text-gray-500 mb-1">Principal Amount</p>
+                  <p className="text-lg font-bold text-gray-900">R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm text-gray-500 mb-1">Total Principal</p>
-                  <p className="text-lg font-bold text-gray-900">R{loanAmount.toLocaleString('en-US')}</p>
+                  <p className="text-sm text-gray-500 mb-1">Service Fee</p>
+                  <p className="text-lg font-bold text-gray-900">R{(loanAmount * 0.01).toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
+                </div>
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <p className="text-sm text-gray-500 mb-1">Total Interest</p>
+                  <p className="text-lg font-bold text-gray-900">R{actualSchedule[actualSchedule.length - 1].cumulativeInterest.toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
                   <p className="text-sm text-gray-500 mb-1">Total Payments</p>
-                  <p className="text-lg font-bold text-gray-900">
-                    R{(actualSchedule[actualSchedule.length - 1].cumulativeInterest + actualSchedule[actualSchedule.length - 1].cumulativePrincipal).toLocaleString('en-US', { maximumFractionDigits: 0 })}
-                  </p>
+                  <p className="text-lg font-bold text-gray-900">R{(actualSchedule[actualSchedule.length - 1].cumulativeInterest + actualSchedule[actualSchedule.length - 1].cumulativePrincipal).toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
                 </div>
               </div>
             </div>
@@ -491,7 +430,7 @@ export default function ActiveLoanPage() {
               </div>
             </div>
             <div className="divide-y divide-gray-200">
-              {actualSchedule.slice(1).map((payment, index) => {
+              {actualSchedule.slice(1, 6).map((payment, index) => {
                 const paymentDate = new Date(2023, 10 + index, 15); // Nov 15, 2023 + index months
                 const dateString = paymentDate.toLocaleDateString('en-GB', { 
                   day: '2-digit', 
@@ -503,7 +442,7 @@ export default function ActiveLoanPage() {
                 const monthlyPrincipal = payment.principalPaid;
                 const monthlyInterest = payment.interestPaid;
                 const monthlyTotal = payment.monthlyPayment;
-                const isPaid = index < 3; // First 3 payments are paid
+                const isPaid = false; // No payments made yet
                 
                 return (
                   <div key={index} className="px-6 py-4 grid grid-cols-5 gap-4 text-sm">
@@ -512,22 +451,26 @@ export default function ActiveLoanPage() {
                     <div className="text-gray-900">R{monthlyInterest.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
                     <div className="font-semibold text-gray-900">R{monthlyTotal.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
                     <div className="flex items-center">
-                      {isPaid ? (
-                        <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-green-100 text-green-800">
-                          <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                          </svg>
-                          Paid
-                        </span>
-                      ) : (
                         <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-600">
-                          Pending
+                        No Payment
                         </span>
-                      )}
                     </div>
                   </div>
                 );
               })}
+              
+              {/* Final Payment Row */}
+              <div className="px-6 py-4 grid grid-cols-5 gap-4 text-sm bg-gray-50">
+                <div className="font-medium text-gray-900">15/04/24</div>
+                <div className="text-gray-900">R{actualSchedule[6].principalPaid.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                <div className="text-gray-900">R{actualSchedule[6].interestPaid.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                <div className="font-semibold text-gray-900">R{actualSchedule[6].monthlyPayment.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                <div className="flex items-center">
+                  <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-orange-100 text-orange-800">
+                    Final Payment
+                  </span>
+                </div>
+              </div>
             </div>
                      </div>
          </div>
@@ -566,16 +509,16 @@ export default function ActiveLoanPage() {
                 <h3 className="text-base font-semibold text-gray-900 mb-4">Debit Order Information</h3>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-sm text-gray-500">Monthly Payment</p>
-                    <p className="text-xl font-bold text-gray-900">R353,046</p>
+                    <p className="text-sm text-gray-500">Final Payment</p>
+                    <p className="text-xl font-bold text-gray-900">R2,200,000</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">First Debit Date</p>
                     <p className="text-base font-medium text-gray-900">15 November 2023</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Last Debit Date</p>
-                    <p className="text-base font-medium text-gray-900">15 October 2024</p>
+                    <p className="text-sm text-gray-500">Final Debit Date</p>
+                    <p className="text-base font-medium text-gray-900">15 April 2024</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Debit Order Reference</p>
@@ -629,114 +572,114 @@ export default function ActiveLoanPage() {
 
         {/* Audit Trail Section */}
         <div className="mb-10">
-          <h2 className="text-lg font-semibold text-gray-900 mb-6">Audit Trail</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Audit Trail</h2>
           
           <div className="relative">
             {/* Timeline line - connects through all icons */}
-            <div className="absolute left-6 top-6 bottom-6 w-0.5 bg-gray-300"></div>
+            <div className="absolute top-4 bottom-4 w-0.5 bg-gray-300" style={{left: '15.5px'}}></div>
             
-            <div className="space-y-8">
+            <div className="space-y-4">
               {/* Bid Application Submitted */}
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
-                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center mr-4 relative z-10">
+                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <div className="pt-2">
-                  <p className="text-lg font-semibold text-gray-900">Bid Application Submitted</p>
-                  <p className="text-gray-500 mt-1">October 1, 2023</p>
+                <div className="pt-1">
+                  <p className="text-base font-semibold text-gray-900">Bid Application Submitted</p>
+                  <p className="text-gray-500 text-sm">October 1, 2023</p>
                 </div>
               </div>
 
               {/* Bid Approved */}
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
-                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center mr-4 relative z-10">
+                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <div className="pt-2">
-                  <p className="text-lg font-semibold text-gray-900">Bid Approved</p>
-                  <p className="text-gray-500 mt-1">October 15, 2023</p>
+                <div className="pt-1">
+                  <p className="text-base font-semibold text-gray-900">Bid Approved</p>
+                  <p className="text-gray-500 text-sm">October 15, 2023</p>
                 </div>
               </div>
 
               {/* Borrower Contract Signed */}
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
-                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center mr-4 relative z-10">
+                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
                 </div>
-                <div className="pt-2">
-                  <p className="text-lg font-semibold text-gray-900">Borrower Contract Signed</p>
-                  <p className="text-gray-500 mt-1">October 16, 2023</p>
+                <div className="pt-1">
+                  <p className="text-base font-semibold text-gray-900">Borrower Contract Signed</p>
+                  <p className="text-gray-500 text-sm">October 16, 2023</p>
                 </div>
               </div>
 
               {/* Lender Contract Signed */}
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
-                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center mr-4 relative z-10">
+                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
                 </div>
-                <div className="pt-2">
-                  <p className="text-lg font-semibold text-gray-900">Lender Contract Signed</p>
-                  <p className="text-gray-500 mt-1">October 17, 2023</p>
+                <div className="pt-1">
+                  <p className="text-base font-semibold text-gray-900">Lender Contract Signed</p>
+                  <p className="text-gray-500 text-sm">October 17, 2023</p>
                 </div>
               </div>
 
               {/* Debit Order Authorization */}
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
-                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center mr-4 relative z-10">
+                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
-                <div className="pt-2">
-                  <p className="text-lg font-semibold text-gray-900">Debit Order Authorization</p>
-                  <p className="text-gray-500 mt-1">October 18, 2023</p>
+                <div className="pt-1">
+                  <p className="text-base font-semibold text-gray-900">Debit Order Authorization</p>
+                  <p className="text-gray-500 text-sm">October 18, 2023</p>
                 </div>
               </div>
 
-              {/* Loan Dispersed */}
+              {/* Loan Dispersed - Completed for active loan */}
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
-                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center mr-4 relative z-10">
+                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <div className="pt-2">
-                  <p className="text-lg font-semibold text-gray-900">Loan Dispersed</p>
-                  <p className="text-gray-500 mt-1">October 20, 2023</p>
+                <div className="pt-1">
+                  <p className="text-base font-semibold text-gray-900">Loan Dispersed</p>
+                  <p className="text-gray-500 text-sm">October 20, 2023</p>
                 </div>
               </div>
 
-              {/* Current - Loan in Progress */}
+              {/* Loan in Progress - Current */}
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
-                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center mr-4 relative z-10">
+                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <div className="pt-2">
-                  <p className="text-lg font-semibold text-gray-900">Loan in Progress</p>
-                  <p className="text-gray-500 mt-1">Current Status</p>
+                <div className="pt-1">
+                  <p className="text-base font-semibold text-gray-900">Loan in Progress</p>
+                  <p className="text-gray-500 text-sm">Current Status</p>
                 </div>
               </div>
 
               {/* Future - Loan Complete */}
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-6 relative z-10">
-                  <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center mr-4 relative z-10">
+                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <div className="pt-2">
-                  <p className="text-lg font-semibold text-gray-400">Loan Complete</p>
-                  <p className="text-gray-400 mt-1">Pending</p>
+                <div className="pt-1">
+                  <p className="text-base font-semibold text-gray-400">Loan Complete</p>
+                  <p className="text-gray-400 text-sm">Pending</p>
                 </div>
               </div>
             </div>
@@ -756,7 +699,12 @@ export default function ActiveLoanPage() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">Loan Contract - LN-2023-00123.pdf</p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-medium text-gray-900">Loan Contract - LN-2023-00123.pdf</p>
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                      Signed
+                    </span>
+                  </div>
                   <p className="text-sm text-gray-500">PDF</p>
                 </div>
               </div>
@@ -776,7 +724,7 @@ export default function ActiveLoanPage() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-7xl w-full max-h-[90vh] overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900">Full Amortization Breakdown</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Full Repayment Breakdown</h2>
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="text-gray-400 hover:text-gray-600"

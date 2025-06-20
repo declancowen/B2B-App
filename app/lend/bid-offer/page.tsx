@@ -2,29 +2,38 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 
 export default function ApprovedBidPage() {
   const router = useRouter()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [activeTab, setActiveTab] = useState('bid')
+  const [isCreateBidModalOpen, setIsCreateBidModalOpen] = useState(false)
+  const [bidFormData, setBidFormData] = useState({
+    interestRate: '',
+    securityTypes: [] as string[],
+    requiredDocuments: '• Please provide a signed personal guarantee agreement from the company director\n• Submit updated financial statements for the guarantor (not older than 3 months)\n• Include proof of the guarantor\'s assets and liabilities statement\n• Provide confirmation of the guarantor\'s employment and income verification'
+  })
+  const [submittedBids, setSubmittedBids] = useState<typeof bidFormData[]>([])
+  const [editingBidIndex, setEditingBidIndex] = useState<number | null>(null)
+  const [activeGraphTab, setActiveGraphTab] = useState('payments')
 
-  // Actual amortization schedule data for R10M, 12 months, 18.50% APR
+  // Interest-only loan structure for R10M, 12 months, 18.50% APR (matching the image data)
   const loanAmount = 10000000; // R10M
   const actualSchedule = [
     { month: 0, monthlyPayment: 0.0, principalPaid: 0.0, interestPaid: 0.0, remainingBalance: 10000000.0, cumulativeInterest: 0.0, cumulativePrincipal: 0.0 },
-    { month: 1, monthlyPayment: 919181.18, principalPaid: 765014.51, interestPaid: 154166.67, remainingBalance: 9234985.49, cumulativeInterest: 154166.67, cumulativePrincipal: 765014.51 },
-    { month: 2, monthlyPayment: 919181.18, principalPaid: 776808.48, interestPaid: 142372.69, remainingBalance: 8458177.01, cumulativeInterest: 296539.36, cumulativePrincipal: 1541822.99 },
-    { month: 3, monthlyPayment: 919181.18, principalPaid: 788784.28, interestPaid: 130396.9, remainingBalance: 7669392.73, cumulativeInterest: 426936.26, cumulativePrincipal: 2330607.27 },
-    { month: 4, monthlyPayment: 919181.18, principalPaid: 800944.71, interestPaid: 118236.47, remainingBalance: 6868448.02, cumulativeInterest: 545172.73, cumulativePrincipal: 3131551.98 },
-    { month: 5, monthlyPayment: 919181.18, principalPaid: 813292.6, interestPaid: 105888.57, remainingBalance: 6055155.42, cumulativeInterest: 651061.3, cumulativePrincipal: 3944844.58 },
-    { month: 6, monthlyPayment: 919181.18, principalPaid: 825830.86, interestPaid: 93350.31, remainingBalance: 5229324.55, cumulativeInterest: 744411.61, cumulativePrincipal: 4770675.45 },
-    { month: 7, monthlyPayment: 919181.18, principalPaid: 838562.42, interestPaid: 80618.75, remainingBalance: 4390762.13, cumulativeInterest: 825030.37, cumulativePrincipal: 5609237.87 },
-    { month: 8, monthlyPayment: 919181.18, principalPaid: 851490.26, interestPaid: 67690.92, remainingBalance: 3539271.87, cumulativeInterest: 892721.28, cumulativePrincipal: 6460728.13 },
-    { month: 9, monthlyPayment: 919181.18, principalPaid: 864617.4, interestPaid: 54563.77, remainingBalance: 2674654.47, cumulativeInterest: 947285.06, cumulativePrincipal: 7325345.53 },
-    { month: 10, monthlyPayment: 919181.18, principalPaid: 877946.92, interestPaid: 41234.26, remainingBalance: 1796707.55, cumulativeInterest: 988519.31, cumulativePrincipal: 8203292.45 },
-    { month: 11, monthlyPayment: 919181.18, principalPaid: 891481.93, interestPaid: 27699.24, remainingBalance: 905225.61, cumulativeInterest: 1016218.55, cumulativePrincipal: 9094774.39 },
-    { month: 12, monthlyPayment: 919181.18, principalPaid: 905225.61, interestPaid: 13955.56, remainingBalance: 0.0, cumulativeInterest: 1030174.12, cumulativePrincipal: 10000000.0 }
+    { month: 1, monthlyPayment: 154166.67, principalPaid: 0.0, interestPaid: 154166.67, remainingBalance: 10000000.0, cumulativeInterest: 154166.67, cumulativePrincipal: 0.0 },
+    { month: 2, monthlyPayment: 154166.67, principalPaid: 0.0, interestPaid: 154166.67, remainingBalance: 10000000.0, cumulativeInterest: 308333.33, cumulativePrincipal: 0.0 },
+    { month: 3, monthlyPayment: 154166.67, principalPaid: 0.0, interestPaid: 154166.67, remainingBalance: 10000000.0, cumulativeInterest: 462500.0, cumulativePrincipal: 0.0 },
+    { month: 4, monthlyPayment: 154166.67, principalPaid: 0.0, interestPaid: 154166.67, remainingBalance: 10000000.0, cumulativeInterest: 616666.67, cumulativePrincipal: 0.0 },
+    { month: 5, monthlyPayment: 154166.67, principalPaid: 0.0, interestPaid: 154166.67, remainingBalance: 10000000.0, cumulativeInterest: 770833.33, cumulativePrincipal: 0.0 },
+    { month: 6, monthlyPayment: 154166.67, principalPaid: 0.0, interestPaid: 154166.67, remainingBalance: 10000000.0, cumulativeInterest: 925000.0, cumulativePrincipal: 0.0 },
+    { month: 7, monthlyPayment: 154166.67, principalPaid: 0.0, interestPaid: 154166.67, remainingBalance: 10000000.0, cumulativeInterest: 1079166.67, cumulativePrincipal: 0.0 },
+    { month: 8, monthlyPayment: 154166.67, principalPaid: 0.0, interestPaid: 154166.67, remainingBalance: 10000000.0, cumulativeInterest: 1233333.33, cumulativePrincipal: 0.0 },
+    { month: 9, monthlyPayment: 154166.67, principalPaid: 0.0, interestPaid: 154166.67, remainingBalance: 10000000.0, cumulativeInterest: 1387500.0, cumulativePrincipal: 0.0 },
+    { month: 10, monthlyPayment: 154166.67, principalPaid: 0.0, interestPaid: 154166.67, remainingBalance: 10000000.0, cumulativeInterest: 1541666.67, cumulativePrincipal: 0.0 },
+    { month: 11, monthlyPayment: 154166.67, principalPaid: 0.0, interestPaid: 154166.67, remainingBalance: 10000000.0, cumulativeInterest: 1695833.33, cumulativePrincipal: 0.0 },
+    { month: 12, monthlyPayment: 10154166.67, principalPaid: 10000000.0, interestPaid: 154166.67, remainingBalance: 0.0, cumulativeInterest: 1850000.0, cumulativePrincipal: 10000000.0 }
   ];
 
   // Prepare data for Recharts (convert to millions)
@@ -34,6 +43,13 @@ export default function ApprovedBidPage() {
     interest: item.cumulativeInterest / 1000000, // Cumulative Interest Paid
     principal: item.cumulativePrincipal / 1000000 // Cumulative Principal Paid
   }));
+
+  // Pie chart data for total balance breakdown
+  const pieData = [
+    { name: 'Capital Received', value: loanAmount * 0.98, color: '#d1d5db' },
+    { name: 'Service Fee', value: loanAmount * 0.02, color: '#000000' },
+    { name: 'Total Interest', value: actualSchedule[actualSchedule.length - 1].cumulativeInterest, color: '#6b7280' }
+  ];
 
   // Calculate schedule for summary statistics (using actual data)
   const schedule = actualSchedule.slice(1); // Remove month 0 for calculations
@@ -47,6 +63,182 @@ export default function ApprovedBidPage() {
     console.log('Submitting bid...')
     // Add submit bid logic here
     router.push('/lend/submission')
+  }
+
+  const handleCreateBid = () => {
+    setIsCreateBidModalOpen(true)
+  }
+
+  const handleCloseBidModal = () => {
+    setIsCreateBidModalOpen(false)
+    setEditingBidIndex(null)
+    setBidFormData({
+      interestRate: '',
+      securityTypes: [],
+      requiredDocuments: '• Please provide a signed personal guarantee agreement from the company director\n• Submit updated financial statements for the guarantor (not older than 3 months)\n• Include proof of the guarantor\'s assets and liabilities statement\n• Provide confirmation of the guarantor\'s employment and income verification'
+    })
+  }
+
+  const handleBidFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    // Validate that at least one security type is selected
+    if (bidFormData.securityTypes.length === 0) {
+      alert('Please select at least one security type')
+      return
+    }
+    
+    // Validate that interest rate is provided
+    if (!bidFormData.interestRate || parseFloat(bidFormData.interestRate) <= 0) {
+      alert('Please provide a valid interest rate')
+      return
+    }
+    
+    console.log('Submitting bid with data:', bidFormData)
+    
+    if (editingBidIndex !== null) {
+      // Update existing bid
+      setSubmittedBids(prev => {
+        const updated = [...prev]
+        updated[editingBidIndex] = { ...bidFormData }
+        return updated
+      })
+      setEditingBidIndex(null)
+    } else {
+      // Add new bid
+      setSubmittedBids(prev => [...prev, { ...bidFormData }])
+    }
+    
+    handleCloseBidModal()
+  }
+
+  const handleEditBid = (index: number) => {
+    const bidToEdit = submittedBids[index]
+    setBidFormData({ ...bidToEdit })
+    setEditingBidIndex(index)
+    setIsCreateBidModalOpen(true)
+  }
+
+  const handleDeleteBid = (index: number) => {
+    if (confirm('Are you sure you want to delete this bid?')) {
+      setSubmittedBids(prev => prev.filter((_, i) => i !== index))
+    }
+  }
+
+  const getSecurityTypeDisplayName = (type: string) => {
+    switch (type) {
+      case 'unsecured': return 'Unsecured'
+      case 'securitisation': return 'Securitisation'
+      case 'cession-of-debt': return 'Cession of Debt'
+      case 'personal-suretyship': return 'Personal Suretyship'
+      default: return type
+    }
+  }
+
+  const handleInputChange = (field: string, value: string) => {
+    setBidFormData(prev => ({
+      ...prev,
+      [field]: value
+    }))
+  }
+
+  const handleSecurityTypeChange = (type: string, checked: boolean) => {
+    setBidFormData(prev => {
+      let newSecurityTypes = [...prev.securityTypes]
+      
+      if (checked) {
+        // Logic for adding security types based on ranking rules
+        if (type === 'unsecured') {
+          // If unsecured is selected, clear all others and only allow this one
+          newSecurityTypes = [type]
+        } else if (type === 'cession-of-debt' || type === 'securitisation') {
+          // If cession or securitisation is selected
+          if (newSecurityTypes.includes('unsecured')) {
+            // Can't add if unsecured is already selected
+            return prev
+          }
+          if (newSecurityTypes.includes('personal-suretyship')) {
+            // Can't add if personal suretyship is already selected
+            return prev
+          }
+          // Add to the list if not already present
+          if (!newSecurityTypes.includes(type)) {
+            newSecurityTypes.push(type)
+          }
+        } else if (type === 'personal-suretyship') {
+          // Personal suretyship can be selected as first choice, or after cession/securitisation
+          if (newSecurityTypes.includes('unsecured')) {
+            // Can't add if unsecured is already selected
+            return prev
+          }
+          // If it's the first selection, clear all others
+          if (newSecurityTypes.length === 0) {
+            newSecurityTypes = [type]
+          } else {
+            // Can only be added if only cession-of-debt and/or securitisation are selected
+            const validPrevious = newSecurityTypes.every(t => 
+              t === 'cession-of-debt' || t === 'securitisation'
+            )
+            if (validPrevious) {
+              newSecurityTypes.push(type)
+            } else {
+              return prev
+            }
+          }
+        }
+      } else {
+        // Remove the type if unchecked
+        newSecurityTypes = newSecurityTypes.filter(t => t !== type)
+      }
+      
+      return {
+        ...prev,
+        securityTypes: newSecurityTypes
+      }
+    })
+  }
+
+  const isSecurityTypeDisabled = (type: string) => {
+    const { securityTypes } = bidFormData
+    
+    if (type === 'unsecured') {
+      // Unsecured can only be selected if no other types are selected
+      return securityTypes.length > 0 && !securityTypes.includes('unsecured')
+    }
+    
+    if (type === 'personal-suretyship') {
+      // Personal suretyship can be selected if:
+      // 1. Nothing is selected, OR
+      // 2. Only cession-of-debt and/or securitisation are selected, OR
+      // 3. It's already selected
+      if (securityTypes.includes('unsecured')) {
+        return true
+      }
+      if (securityTypes.includes('personal-suretyship')) {
+        return false // Already selected, so not disabled
+      }
+      // Check if only valid previous selections exist
+      const hasInvalidPrevious = securityTypes.some(t => 
+        t !== 'cession-of-debt' && t !== 'securitisation'
+      )
+      return hasInvalidPrevious
+    }
+    
+    if (type === 'cession-of-debt' || type === 'securitisation') {
+      // These can't be selected if unsecured or personal-suretyship is already selected
+      return securityTypes.includes('unsecured') || securityTypes.includes('personal-suretyship')
+    }
+    
+    return false
+  }
+
+  const getSecurityTypeRank = (type: string) => {
+    const { securityTypes } = bidFormData
+    const index = securityTypes.indexOf(type)
+    if (index === -1) return null
+    
+    const ranks = ['First choice', 'Second choice', 'Third choice']
+    return ranks[index] || `${index + 1}th choice`
   }
 
   // Function to generate payment dates starting from due date
@@ -84,15 +276,25 @@ export default function ApprovedBidPage() {
         <div className="mb-8">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Bridge Finance Details</h1>
+              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Trade Finance Details</h1>
               <p className="text-gray-600">Review and submit your bid for this loan request.</p>
             </div>
-            <button
-              onClick={handleSubmitBid}
-              className="px-4 py-2 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
-            >
-              Submit Bid
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={handleCreateBid}
+                className="px-4 py-2 bg-gray-200 text-black text-sm font-medium rounded-lg hover:bg-gray-300 transition-colors"
+              >
+                Create Bid
+              </button>
+              {submittedBids.length > 0 && (
+                <button
+                  onClick={handleSubmitBid}
+                  className="px-4 py-2 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
+                >
+                  Submit Bid
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
@@ -158,6 +360,80 @@ export default function ApprovedBidPage() {
         {/* Tab Content */}
         {activeTab === 'bid' && (
           <>
+            {/* Submitted Bids Section */}
+            {submittedBids.length > 0 && (
+              <div className="mb-10">
+                <h2 className="text-base font-semibold text-gray-900 mb-6">Your Bids</h2>
+                <div className="space-y-4">
+                  {submittedBids.map((bid, index) => (
+                    <div key={index} className="bg-white border border-gray-200 rounded-lg p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900">Bid #{index + 1}</h3>
+                          <p className="text-sm text-gray-500">Created just now</p>
+                        </div>
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={() => handleEditBid(index)}
+                            className="p-2 bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-700 rounded-lg transition-colors"
+                            title="Edit bid"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                          </button>
+                          <button
+                            onClick={() => handleDeleteBid(index)}
+                            className="p-2 bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 rounded-lg transition-colors"
+                            title="Delete bid"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                          <p className="text-sm font-medium text-gray-500 mb-1">Interest Rate</p>
+                          <p className="text-lg font-semibold text-gray-900">{bid.interestRate}%</p>
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-500 mb-1">Security Type</p>
+                          <div className="space-y-1">
+                            {bid.securityTypes.map((type, typeIndex) => (
+                              <div key={type} className="text-sm text-gray-900">
+                                <span className="font-medium">
+                                  {typeIndex === 0 ? 'First choice: ' : typeIndex === 1 ? 'Second choice: ' : 'Third choice: '}
+                                </span>
+                                {getSecurityTypeDisplayName(type)}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-500 mb-1">Status</p>
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-medium bg-yellow-100 text-yellow-800">
+                            Pending Review
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div className="mt-4">
+                        <p className="text-sm font-medium text-gray-500 mb-2">Required Documents</p>
+                        <div className="text-xs text-gray-600 bg-gray-50 p-3 rounded">
+                          {bid.requiredDocuments.split('\n').map((doc, docIndex) => (
+                            <div key={docIndex}>{doc}</div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Bid Overview Section */}
         <div className="mb-10">
           <h2 className="text-base font-semibold text-gray-900 mb-6">Bid Overview</h2>
@@ -259,7 +535,7 @@ export default function ApprovedBidPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Loan Type</p>
-                    <p className="text-base font-medium text-gray-900">Bridging Finance</p>
+                    <p className="text-base font-medium text-gray-900">Trade Finance</p>
                   </div>
                 </div>
               </div>
@@ -270,15 +546,15 @@ export default function ApprovedBidPage() {
                 <div className="space-y-3">
                   <div>
                     <p className="text-sm text-gray-500">Monthly Payment</p>
-                    <p className="text-lg font-bold text-gray-900">R919,181</p>
+                    <p className="text-lg font-bold text-gray-900">R{actualSchedule[1].monthlyPayment.toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Total Interest</p>
-                    <p className="text-lg font-bold text-gray-900">R1,030,172</p>
+                    <p className="text-lg font-bold text-gray-900">R{actualSchedule[actualSchedule.length - 1].cumulativeInterest.toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Total Repayment</p>
-                    <p className="text-lg font-bold text-gray-900">R11,030,172</p>
+                    <p className="text-lg font-bold text-gray-900">R{(loanAmount + actualSchedule[actualSchedule.length - 1].cumulativeInterest).toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Payment Frequency</p>
@@ -292,7 +568,7 @@ export default function ApprovedBidPage() {
 
         {/* Fee Summary Section */}
         <div className="mb-10">
-          <h2 className="text-base font-semibold text-gray-900 mb-6">Fee Summary</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">Fee Summary</h2>
           
           <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
             {/* Main Fee Display */}
@@ -300,11 +576,11 @@ export default function ApprovedBidPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Service Fee</h3>
-                  <p className="text-sm text-gray-600">2% of total interest charged</p>
+                  <p className="text-sm text-gray-600">2% of loan principal</p>
                 </div>
                 <div className="text-right">
                   <p className="text-3xl font-bold text-gray-900">
-                    R{(actualSchedule[actualSchedule.length - 1].cumulativeInterest * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                    R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}
                   </p>
                   <p className="text-sm text-gray-500">Total Fee</p>
                 </div>
@@ -319,38 +595,58 @@ export default function ApprovedBidPage() {
                   <p className="text-sm text-gray-500">Fee Rate</p>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-lg font-bold text-gray-900 mb-1">R{actualSchedule[actualSchedule.length - 1].cumulativeInterest.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
-                  <p className="text-sm text-gray-500">Total Interest</p>
+                  <div className="text-lg font-bold text-gray-900 mb-1">R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                  <p className="text-sm text-gray-500">Loan Principal</p>
                 </div>
                 <div className="text-center p-4 bg-black text-white rounded-lg">
-                  <div className="text-lg font-bold mb-1">R{(actualSchedule[actualSchedule.length - 1].cumulativeInterest * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
+                  <div className="text-lg font-bold mb-1">R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
                   <p className="text-sm text-gray-300">Service Fee</p>
                 </div>
               </div>
 
               {/* Calculation Display */}
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
                 <div className="flex items-center justify-center text-gray-700">
-                  <span className="font-medium">R{actualSchedule[actualSchedule.length - 1].cumulativeInterest.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+                  <span className="font-medium">R{loanAmount.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
                   <span className="mx-3 text-gray-400">×</span>
                   <span className="font-medium">2%</span>
                   <span className="mx-3 text-gray-400">=</span>
-                  <span className="font-bold text-black">R{(actualSchedule[actualSchedule.length - 1].cumulativeInterest * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+                  <span className="font-bold text-black">R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+                </div>
+              </div>
+
+              {/* Important Notice */}
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5">
+                    <svg fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-sm font-semibold text-yellow-900 mb-1">Important Fee Information</h4>
+                    <div className="space-y-1 text-sm text-yellow-800">
+                      <p>• The lender will pay and advance this fee on behalf of the borrower</p>
+                      <p>• This fee will be deducted from the capital (98% of loan will be dispersed, 100% will be paid back to lender)</p>
+                      <p>• Debit authorization and contract issuing will only be done after the fee is paid</p>
+                      <p>• Once fee is paid, the loan can be dispersed on the due date</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Loan Amortization Section */}
+        {/* Repayment Structure Section */}
         <div className="mb-10">
-          <h2 className="text-base font-semibold text-gray-900 mb-6">Loan Amortization</h2>
+          <h2 className="text-base font-semibold text-gray-900 mb-6">Repayment Structure</h2>
           
           <div className="bg-white border border-gray-200 rounded-lg">
             <div className="p-6 pb-0">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="text-base font-semibold text-gray-900">Amortization for R10,000,000 Loan</h3>
+                  <h3 className="text-base font-semibold text-gray-900">Repayment for R10,000,000 Loan</h3>
                   <p className="text-sm text-gray-600">With 12-Month Term and 18.50% Interest Rate</p>
                 </div>
                 <button 
@@ -360,9 +656,36 @@ export default function ApprovedBidPage() {
                   Full Breakdown
                 </button>
               </div>
+
+              {/* Tab Navigation */}
+              <div className="border-b border-gray-200 mb-6">
+                <nav className="-mb-px flex space-x-8">
+                  <button
+                    onClick={() => setActiveGraphTab('payments')}
+                    className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                      activeGraphTab === 'payments'
+                        ? 'border-black text-black'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    }`}
+                  >
+                    Payment Schedule
+                  </button>
+                  <button
+                    onClick={() => setActiveGraphTab('balances')}
+                    className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                      activeGraphTab === 'balances'
+                        ? 'border-black text-black'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    }`}
+                  >
+                    Loan Structure
+                  </button>
+                </nav>
+              </div>
             </div>
               
-            {/* Recharts Chart Container - Full Width */}
+            {/* Tab Content */}
+            {activeGraphTab === 'payments' && (
             <div className="h-96 w-full px-6">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
@@ -374,6 +697,7 @@ export default function ApprovedBidPage() {
                     bottom: 40,
                   }}
                 >
+                      <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
                     <XAxis 
                       dataKey="month" 
                       domain={[0, 12]}
@@ -516,10 +840,92 @@ export default function ApprovedBidPage() {
                   </LineChart>
                 </ResponsiveContainer>
               </div>
+            )}
+
+            {activeGraphTab === 'balances' && (
+              <div className="h-96 w-full px-6">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={pieData}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={(props) => {
+                        const { name, value } = props;
+                        return (
+                          <text 
+                            x={props.x} 
+                            y={props.y} 
+                            fill="#000000" 
+                            textAnchor={props.x > props.cx ? 'start' : 'end'} 
+                            dominantBaseline="central"
+                            fontSize="14"
+                            fontWeight="500"
+                          >
+                            {`${name}: R${value.toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
+                          </text>
+                        );
+                      }}
+                      outerRadius={120}
+                      innerRadius={60}
+                      fill="#8884d8"
+                      dataKey="value"
+                    >
+                      {pieData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} stroke="#ffffff" strokeWidth={4} />
+                      ))}
+                    </Pie>
+
+                    <Legend 
+                      verticalAlign="bottom" 
+                      height={60}
+                      content={(props) => {
+                        const { payload } = props;
+                        return (
+                          <div style={{ 
+                            display: 'flex', 
+                            justifyContent: 'center', 
+                            paddingTop: '20px',
+                            gap: '24px',
+                            flexWrap: 'wrap'
+                          }}>
+                            {payload?.map((entry, index) => {
+                              const data = pieData[index];
+                              return (
+                                <div key={index} style={{ 
+                                  display: 'flex', 
+                                  alignItems: 'center', 
+                                  gap: '8px' 
+                                }}>
+                                  <div style={{
+                                    width: '12px',
+                                    height: '12px',
+                                    backgroundColor: data.color,
+                                    borderRadius: '3px'
+                                  }} />
+                                  <span style={{ 
+                                    fontSize: '14px', 
+                                    color: '#000000',
+                                    fontWeight: '400'
+                                  }}>
+                                    {data.name}
+                                  </span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        );
+                      }}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            )}
               
-            
             {/* Summary Statistics */}
             <div className="p-6 pt-4">
+              {activeGraphTab === 'payments' && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
                   <p className="text-sm text-gray-500 mb-1">Total Interest</p>
@@ -538,6 +944,28 @@ export default function ApprovedBidPage() {
                   </p>
                 </div>
               </div>
+              )}
+
+              {activeGraphTab === 'balances' && (
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <div className="text-center p-4 bg-gray-50 rounded-lg">
+                    <p className="text-sm text-gray-500 mb-1">Capital Received</p>
+                    <p className="text-lg font-bold text-gray-900">R{(loanAmount * 0.98).toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
+                  </div>
+                  <div className="text-center p-4 bg-gray-50 rounded-lg">
+                    <p className="text-sm text-gray-500 mb-1">Service Fee</p>
+                    <p className="text-lg font-bold text-gray-900">R{(loanAmount * 0.02).toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
+                  </div>
+                  <div className="text-center p-4 bg-gray-50 rounded-lg">
+                    <p className="text-sm text-gray-500 mb-1">Total Interest</p>
+                    <p className="text-lg font-bold text-gray-900">R{actualSchedule[actualSchedule.length - 1].cumulativeInterest.toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
+                  </div>
+                  <div className="text-center p-4 bg-gray-50 rounded-lg">
+                    <p className="text-sm text-gray-500 mb-1">Total Payments</p>
+                    <p className="text-lg font-bold text-gray-900">R{(actualSchedule[actualSchedule.length - 1].cumulativeInterest + loanAmount).toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -580,8 +1008,10 @@ export default function ApprovedBidPage() {
                 <div className="font-semibold text-gray-700 cursor-pointer hover:text-gray-900">View Full Schedule</div>
               </div>
             </div>
-                     </div>
-         </div>
+          </div>
+        </div>
+
+
 
         {/* Lender Bank Details Section */}
         <div className="mb-10">
@@ -936,12 +1366,182 @@ export default function ApprovedBidPage() {
 
       </div>
 
+      {/* Create Bid Modal */}
+      {isCreateBidModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-hidden">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <h2 className="text-xl font-semibold text-gray-900">
+                {editingBidIndex !== null ? 'Edit Bid' : 'Create New Bid'}
+              </h2>
+              <button
+                onClick={handleCloseBidModal}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="p-6 overflow-auto max-h-[calc(90vh-180px)]">
+              <form onSubmit={handleBidFormSubmit} className="space-y-6">
+                {/* Interest Rate */}
+                <div>
+                  <label htmlFor="interestRate" className="block text-sm font-medium text-gray-700 mb-2">
+                    Interest Rate (%)
+                  </label>
+                  <input
+                    type="number"
+                    id="interestRate"
+                    step="0.01"
+                    min="0"
+                    max="100"
+                    value={bidFormData.interestRate}
+                    onChange={(e) => handleInputChange('interestRate', e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-black"
+                    placeholder="e.g., 18.50"
+                    required
+                  />
+                </div>
+
+                                 {/* Security Type Summary */}
+                 {bidFormData.securityTypes.length > 0 && (
+                   <div className="mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                     <h4 className="text-sm font-medium text-gray-900 mb-2">Selected Security Types</h4>
+                     <div className="space-y-1">
+                       {bidFormData.securityTypes.map((type, index) => (
+                         <div key={type} className="flex items-center text-sm text-gray-800">
+                           <span className="font-medium mr-2">
+                             {index === 0 ? 'First choice:' : index === 1 ? 'Second choice:' : 'Third choice:'}
+                           </span>
+                           <span>
+                             {type === 'unsecured' && 'Unsecured'}
+                             {type === 'securitisation' && 'Securitisation'}
+                             {type === 'cession-of-debt' && 'Cession of Debt'}
+                             {type === 'personal-suretyship' && 'Personal Suretyship'}
+                           </span>
+                         </div>
+                       ))}
+                     </div>
+                   </div>
+                 )}
+
+                 {/* Security Type */}
+                 <div>
+                   <label className="block text-sm font-medium text-gray-700 mb-3">
+                     Security Type
+                   </label>
+                                        <div className="grid grid-cols-2 gap-4">
+                       <div className="flex items-start">
+                         <input
+                           type="checkbox"
+                           id="unsecured"
+                           checked={bidFormData.securityTypes.includes('unsecured')}
+                           onChange={(e) => handleSecurityTypeChange('unsecured', e.target.checked)}
+                           disabled={isSecurityTypeDisabled('unsecured')}
+                           className="h-4 w-4 mt-0.5 accent-black focus:ring-black border-gray-300 rounded disabled:opacity-50"
+                         />
+                         <label htmlFor="unsecured" className="ml-2 text-sm text-gray-700">
+                           Unsecured
+                           <span className="text-xs text-gray-500 block">No collateral required</span>
+                         </label>
+                       </div>
+                       
+                       <div className="flex items-start">
+                         <input
+                           type="checkbox"
+                           id="securitisation"
+                           checked={bidFormData.securityTypes.includes('securitisation')}
+                           onChange={(e) => handleSecurityTypeChange('securitisation', e.target.checked)}
+                           disabled={isSecurityTypeDisabled('securitisation')}
+                           className="h-4 w-4 mt-0.5 accent-black focus:ring-black border-gray-300 rounded disabled:opacity-50"
+                         />
+                         <label htmlFor="securitisation" className="ml-2 text-sm text-gray-700">
+                           Securitisation
+                           <span className="text-xs text-gray-500 block">Asset-backed security</span>
+                         </label>
+                       </div>
+                       
+                       <div className="flex items-start">
+                         <input
+                           type="checkbox"
+                           id="cession-of-debt"
+                           checked={bidFormData.securityTypes.includes('cession-of-debt')}
+                           onChange={(e) => handleSecurityTypeChange('cession-of-debt', e.target.checked)}
+                           disabled={isSecurityTypeDisabled('cession-of-debt')}
+                           className="h-4 w-4 mt-0.5 accent-black focus:ring-black border-gray-300 rounded disabled:opacity-50"
+                         />
+                         <label htmlFor="cession-of-debt" className="ml-2 text-sm text-gray-700">
+                           Cession of Debt
+                           <span className="text-xs text-gray-500 block">Transfer of debt obligations</span>
+                         </label>
+                       </div>
+                       
+                       <div className="flex items-start">
+                         <input
+                           type="checkbox"
+                           id="personal-suretyship"
+                           checked={bidFormData.securityTypes.includes('personal-suretyship')}
+                           onChange={(e) => handleSecurityTypeChange('personal-suretyship', e.target.checked)}
+                           disabled={isSecurityTypeDisabled('personal-suretyship')}
+                           className="h-4 w-4 mt-0.5 accent-black focus:ring-black border-gray-300 rounded disabled:opacity-50"
+                         />
+                         <label htmlFor="personal-suretyship" className="ml-2 text-sm text-gray-700">
+                           Personal Suretyship
+                           <span className="text-xs text-gray-500 block">Personal guarantee from directors</span>
+                         </label>
+                       </div>
+                     </div>
+                   
+                   {bidFormData.securityTypes.length === 0 && (
+                     <p className="text-sm text-red-600 mt-2">Please select at least one security type</p>
+                   )}
+                 </div>
+
+                                 {/* Required Documents */}
+                 <div>
+                   <label htmlFor="requiredDocuments" className="block text-sm font-medium text-gray-700 mb-2">
+                     Required Documents
+                   </label>
+                   <textarea
+                     id="requiredDocuments"
+                     rows={5}
+                     value={bidFormData.requiredDocuments}
+                     readOnly
+                     className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 text-sm resize-none cursor-not-allowed"
+                   />
+                   <p className="text-xs text-gray-500 mt-1">These are the standard required documents for all bids</p>
+                 </div>
+
+                {/* Form Actions */}
+                <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+                  <button
+                    type="button"
+                    onClick={handleCloseBidModal}
+                    className="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                  >
+                    {editingBidIndex !== null ? 'Update Bid' : 'Create Bid'}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Modal for Full Breakdown */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-7xl w-full max-h-[90vh] overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900">Full Amortization Breakdown</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Full Repayment Breakdown</h2>
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="text-gray-400 hover:text-gray-600"

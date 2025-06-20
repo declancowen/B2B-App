@@ -153,6 +153,10 @@ export default function BidDashboardPage() {
                       <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
                       <p className="text-sm font-semibold text-gray-900">Standard Bank</p>
                     </div>
+                    <div className="min-w-[90px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Security</p>
+                      <p className="text-sm font-semibold text-gray-900">Unsecured</p>
+                    </div>
                   </div>
                   <div className="flex items-center">
                     <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
@@ -163,7 +167,7 @@ export default function BidDashboardPage() {
             </div>
           ) : activeTab === 'pending' ? (
             <div className="space-y-4">
-              {/* Trade Finance Loan */}
+              {/* Trade Finance Loan - FNB */}
               <div 
                 onClick={() => router.push('/borrow/approved-bid-2')}
                 className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer"
@@ -201,10 +205,64 @@ export default function BidDashboardPage() {
                       <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
                       <p className="text-sm font-semibold text-gray-900">First National Bank</p>
                     </div>
+                    <div className="min-w-[120px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Security</p>
+                      <p className="text-sm font-semibold text-gray-900">Personal Suretyship</p>
+                    </div>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-2 h-2 bg-yellow-400 rounded-full mr-2"></div>
-                    <span className="text-sm font-medium text-yellow-600">Awaiting Bid Acceptance</span>
+                    <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                    <span className="text-sm font-medium text-green-600">Awaiting Loan Acceptance</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Trade Finance Loan - ABSA */}
+              <div 
+                onClick={() => router.push('/borrow/approved-bid-3')}
+                className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer"
+              >
+                <div className="flex justify-between items-center mb-6">
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m16 3 4 4-4 4"/>
+                        <path d="M20 7H4"/>
+                        <path d="m8 21-4-4 4-4"/>
+                        <path d="M4 17h16"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-1">Trade Finance</p>
+                      <p className="text-3xl font-bold text-gray-900">R5,000,000</p>
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center shadow-sm">
+                    <span className="text-white text-base font-bold">AB</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                  <div className="flex items-center space-x-8">
+                    <div className="min-w-[80px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Term</p>
+                      <p className="text-sm font-semibold text-gray-900">12 months</p>
+                    </div>
+                    <div className="min-w-[60px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">APR</p>
+                      <p className="text-sm font-semibold text-gray-900">14.00%</p>
+                    </div>
+                    <div className="min-w-[100px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Provider</p>
+                      <p className="text-sm font-semibold text-gray-900">ABSA Bank</p>
+                    </div>
+                    <div className="min-w-[120px]">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">Security</p>
+                      <p className="text-sm font-semibold text-gray-900">Personal Suretyship</p>
+                    </div>
+                                    </div>
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mr-2"></div>
+                    <span className="text-sm font-medium text-orange-600">Under Review</span>
                   </div>
                 </div>
               </div>
