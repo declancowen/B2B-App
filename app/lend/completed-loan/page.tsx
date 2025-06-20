@@ -9,6 +9,7 @@ export default function CompletedLoanPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [activeTab, setActiveTab] = useState('bid')
   const [activeGraphTab, setActiveGraphTab] = useState('payments')
+  const [activeBankTab, setActiveBankTab] = useState('lender')
 
   // Actual amortization schedule data for R20M, 12 months, 12.00% APR (Interest-only structure)
   const loanAmount = 20000000; // R20M
@@ -741,62 +742,147 @@ export default function CompletedLoanPage() {
                      </div>
          </div>
 
-        {/* Lender Bank Details Section */}
+        {/* Bank Details Section */}
         <div className="mb-10">
-          <h2 className="text-base font-semibold text-gray-900 mb-6">Lender Bank Details</h2>
+          <h2 className="text-base font-semibold text-gray-900 mb-6">Bank Details</h2>
           
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Bank Information */}
-              <div>
-                <h3 className="text-base font-semibold text-gray-900 mb-4">Bank Information</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-sm text-gray-500">Bank Name</p>
-                    <p className="text-base font-medium text-gray-900">Standard Bank</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Branch Code</p>
-                    <p className="text-base font-medium text-gray-900">051001</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Account Holder</p>
-                    <p className="text-base font-medium text-gray-900">Standard Bank Corporate Finance</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Account Type</p>
-                    <p className="text-base font-medium text-gray-900">Corporate Current Account</p>
+          {/* Bank Details Tabs */}
+          <div className="border-b border-gray-200 mb-6">
+            <nav className="-mb-px flex space-x-8">
+              <button
+                onClick={() => setActiveBankTab('lender')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  activeBankTab === 'lender'
+                    ? 'border-black text-gray-900'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Lender
+              </button>
+              <button
+                onClick={() => setActiveBankTab('borrower')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  activeBankTab === 'borrower'
+                    ? 'border-black text-gray-900'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Borrower
+              </button>
+            </nav>
+          </div>
+
+          {/* Lender Bank Details */}
+          {activeBankTab === 'lender' && (
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Bank Information */}
+                <div>
+                  <h3 className="text-base font-semibold text-gray-900 mb-4">Bank Information</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-sm text-gray-500">Bank Name</p>
+                      <p className="text-base font-medium text-gray-900">Standard Bank</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Branch Code</p>
+                      <p className="text-base font-medium text-gray-900">051001</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Account Holder</p>
+                      <p className="text-base font-medium text-gray-900">Standard Bank Corporate Finance</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Account Type</p>
+                      <p className="text-base font-medium text-gray-900">Corporate Current Account</p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Account Details */}
-              <div>
-                <h3 className="text-base font-semibold text-gray-900 mb-4">Account Details</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-sm text-gray-500">Account Number</p>
-                    <p className="text-base font-medium text-gray-900">••••••••••5678</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Swift Code</p>
-                    <p className="text-base font-medium text-gray-900">SBZAZAJJ</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Reference</p>
-                    <p className="text-base font-medium text-gray-900">LN-2023-00123-TECH</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Status</p>
-                    <div className="flex items-center">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                      <p className="text-base font-medium text-green-700">Verified</p>
+                {/* Account Details */}
+                <div>
+                  <h3 className="text-base font-semibold text-gray-900 mb-4">Account Details</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-sm text-gray-500">Account Number</p>
+                      <p className="text-base font-medium text-gray-900">••••••••••5678</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Swift Code</p>
+                      <p className="text-base font-medium text-gray-900">SBZAZAJJ</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Reference</p>
+                      <p className="text-base font-medium text-gray-900">LN-2023-00123-TECH</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Status</p>
+                      <div className="flex items-center">
+                        <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                        <p className="text-base font-medium text-green-700">Verified</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
+
+          {/* Borrower Bank Details */}
+          {activeBankTab === 'borrower' && (
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Bank Information */}
+                <div>
+                  <h3 className="text-base font-semibold text-gray-900 mb-4">Bank Information</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-sm text-gray-500">Bank Name</p>
+                      <p className="text-base font-medium text-gray-900">FNB Business</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Branch Code</p>
+                      <p className="text-base font-medium text-gray-900">250655</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Account Holder</p>
+                      <p className="text-base font-medium text-gray-900">TechCorp Solutions (Pty) Ltd</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Account Type</p>
+                      <p className="text-base font-medium text-gray-900">Business Current Account</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Account Details */}
+                <div>
+                  <h3 className="text-base font-semibold text-gray-900 mb-4">Account Details</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-sm text-gray-500">Account Number</p>
+                      <p className="text-base font-medium text-gray-900">••••••••••1234</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Swift Code</p>
+                      <p className="text-base font-medium text-gray-900">FIRNZAJJ</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Reference</p>
+                      <p className="text-base font-medium text-gray-900">TECH-CORP-001</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Status</p>
+                      <div className="flex items-center">
+                        <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                        <p className="text-base font-medium text-green-700">Verified</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
           </>
@@ -897,6 +983,29 @@ export default function CompletedLoanPage() {
         {/* Documents Tab Content */}
         {activeTab === 'documents' && (
           <div className="mb-10">
+            {/* Requested Documents */}
+            <div className="mb-6">
+              <h3 className="text-base font-semibold text-gray-900 mb-4">Requested Documents</h3>
+              <div className="space-y-3">
+                <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                      <svg className="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                        <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-900">Credit Report</p>
+                      <p className="text-sm text-gray-600">Comprehensive credit history and scoring</p>
+                    </div>
+                  </div>
+                  <button className="px-3 py-1 bg-black text-white text-sm rounded hover:bg-gray-800">
+                    View
+                  </button>
+                </div>
+              </div>
+            </div>
+
             {/* Financial Documents */}
             <div className="mb-6">
               <h3 className="text-base font-semibold text-gray-900 mb-4">Financial Documents</h3>

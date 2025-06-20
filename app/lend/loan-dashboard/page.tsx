@@ -258,6 +258,17 @@ export default function LenderBidDashboardPage() {
           <h1 className="text-xl font-semibold text-gray-900 mb-8">MoMoola</h1>
           
           <nav className="space-y-2">
+            <div 
+              className="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer"
+              onClick={() => router.push('/lend/dashboard')}
+            >
+              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <path d="M9 9h6v6H9z"/>
+              </svg>
+              <span>Dashboard</span>
+            </div>
+            
             <div className="flex items-center px-3 py-2 bg-gray-200 rounded-md">
               <svg className="w-5 h-5 mr-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />

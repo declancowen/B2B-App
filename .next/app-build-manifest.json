@@ -195,6 +195,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/lend/active-loan/page.js"
+    ],
+    "/lend/dashboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/lend/dashboard/page.js"
     ]
   }
 }

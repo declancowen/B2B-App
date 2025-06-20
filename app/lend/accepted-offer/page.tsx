@@ -1108,6 +1108,29 @@ export default function ApprovedBidPage() {
         {/* Documents Tab Content */}
         {activeTab === 'documents' && (
           <div className="mb-10">
+            {/* Requested Documents */}
+            <div className="mb-6">
+              <h3 className="text-base font-semibold text-gray-900 mb-4">Requested Documents</h3>
+              <div className="space-y-3">
+                <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                      <svg className="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                        <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-900">Credit Report</p>
+                      <p className="text-sm text-gray-600">Comprehensive credit history and scoring</p>
+                    </div>
+                  </div>
+                  <button className="px-3 py-1 bg-black text-white text-sm rounded hover:bg-gray-800">
+                    View
+                  </button>
+                </div>
+              </div>
+            </div>
+
             {/* Financial Documents */}
             <div className="mb-6">
               <h3 className="text-base font-semibold text-gray-900 mb-4">Financial Documents</h3>
